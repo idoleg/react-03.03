@@ -15,12 +15,19 @@ module.exports = {
                 include: path.resolve(__dirname, 'src'),
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/env', '@babel/react']
+                    presets: ['@babel/env', '@babel/react'],
+                    plugins: ['@babel/plugin-proposal-class-properties'],
                 }
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")})
-    ]
+        new HtmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")}),
+    ],
+    resolve: {
+        extensions: ['.jsx', '.js'],
+        alias: {
+            Components: path.resolve(__dirname, 'src/components')
+        },
+    },
 };
