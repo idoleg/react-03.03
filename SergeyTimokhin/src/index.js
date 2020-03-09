@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from "./components/App";
+import { MessageList } from "./components/MessageList/MessageList";
 
 
 // const messages = [
@@ -27,4 +27,4 @@ import { App } from "./components/App";
 // }
 
 
-ReactDOM.render( < App / > , document.getElementById("root"));
+ReactDOM.render( < MessageList / > , document.getElementById("root"));
