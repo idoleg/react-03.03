@@ -2,9 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./components/App";
 
-// setTimeout(() => {
-//     console.log(Test)
-// }, 2000)
 
 // const messages = [
 //     {name: "Boby", content: "Hello, World!"},
@@ -30,4 +27,4 @@ import { App } from "./components/App";
 // }
 
 
-ReactDOM.render( <App /> , document.getElementById("root"));
+ReactDOM.render( < App / > , document.getElementById("root"));

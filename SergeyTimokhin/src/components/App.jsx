@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Counter} from './Counter';
+import { CounterFunc } from './Counter';
 
 export class App extends Component {
 
@@ -20,7 +20,7 @@ export class App extends Component {
         const {isShowCounter, counter} = this.state;
         return (
             <>
-                {isShowCounter && <Counter counter={counter} handleCounter={this.handleCounter} />}
+                {isShowCounter && <CounterFunc counter={counter} handleCounter={this.handleCounter} />}
                 <p><button onClick={this.handleShowCounter} >
                     {isShowCounter ? 'Hide counter' : 'Show counter'}
                 </button></p>
