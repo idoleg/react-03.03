@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Message.css';
 
 
@@ -9,4 +10,9 @@ export const Message = ({ name, content }) => {
       <div className="message__content">{ content }</div>
     </div>
   )
+}
+
+Message.propTypes = {
+  name: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 }
