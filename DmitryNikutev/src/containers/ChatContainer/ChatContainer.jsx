@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import {MessageList} from "./MessageList";
-import {Input} from "./Input";
+import {MessageList} from "../../components/MessageList/MessageList";
+import {Input} from "../../components/Input/Input";
 
 
-export class MessagingContainer extends Component {
+export class ChatContainer extends Component {
 
    state = {
       messages: INITIAL_MESSAGES,

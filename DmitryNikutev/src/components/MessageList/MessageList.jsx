@@ -1,5 +1,5 @@
 import React from "react"
-import {Message} from "./Message";
+import {Message} from "../Message/Message";
 
 
 //MessageList instead of MessageField for wrapping messages as it seems more logical
