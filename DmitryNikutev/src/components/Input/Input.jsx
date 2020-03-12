@@ -1,34 +1,51 @@
-import React, {Component} from "react";
+import React, {useRef, useEffect} from "react";
+import {useInput, enterKeyToSubmit} from "../../utils/InputUtils";
+
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+
+import "./Input.css";
 
 
-export class Input extends Component {
-
-   state = {
-      message: "",
+export const Input = ({addMessage}) => {
+   const [message, setMessage, resetMessage] = useInput("");
+   
+   //focus
+   const textfield = useRef();
+   useEffect(() => {
+      textfield.current.focus();
+   }, []);
+   
+   const submitForm = () => {
+      const trimmedInput = message.trim();
+      if (trimmedInput)
+         addMessage(trimmedInput);
+      resetMessage();
+      textfield.current.focus();
    };
-
-   submitForm = (event) => {
-      event.preventDefault();
-      const message = this.state.message.trim();
-      if (message)
-         this.props.addMessage(message);
-      this.setState((state) => ({message: ""}));
-   };
-
-   handleChange = (event) => {
-      const value = event.target.value;
-      this.setState((state) => ({message: value}));
-   };
-
-   render() {
-      return (
-         <form onSubmit={this.submitForm}>
-            <input type="text"
-                   placeholder="Type something to bot here"
-                   value={this.state.message}
-                   onChange={this.handleChange}/>
-            <input type="submit" value="Send"/>
-         </form>
-      )
-   }
-}
+   
+   return (
+      <form className="InputForm">
+         <TextField
+            className="InputField"
+            label="Type something to bot here"
+            multiline
+            rows="2"
+            variant="outlined"
+            inputRef={textfield}
+            value={message}
+            onChange={setMessage}
+            onKeyPress={(ev) => enterKeyToSubmit(ev, submitForm)}/>
+         
+         <Button
+            variant="contained"
+            color="primary"
+            className="InputButton"
+            onClick={submitForm}
+            endIcon={<SendIcon/>}>
+            Send
+         </Button>
+      </form>
+   )
+};

@@ -1,10 +1,11 @@
 import React from "react"
-import {MessengerContainer} from "./containers/MessengerContainer/MessengerContainer";
+import {Messenger} from "./components/Messenger/Messenger";
+
+import "./main.css";
 
 
 export const App = () => {
-   
    return (
-      <MessengerContainer/>
+      <Messenger/>
    );
 };

@@ -1,51 +1,68 @@
-import React, {Component} from "react";
+import React, {useState, useEffect} from "react";
 import {MessageList} from "../../components/MessageList/MessageList";
 import {Input} from "../../components/Input/Input";
 
+import {Card} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
-export class ChatContainer extends Component {
 
-   state = {
-      messages: INITIAL_MESSAGES,
+export const ChatContainer = ({username}) => {
+   const [messages, setMessages] = useState(INITIAL_MESSAGES);
+   const [botTimer, setBotTimer] = useState(null);
+   
+   const classes = useStyles();
+   
+   const addMessage = (message) => {
+      setMessages([...messages, message]);
    };
-
-   addMessage = (message, name = this.props.username, automatic) => {
-      this.setState((state) => ({
-         messages: [
-            ...state.messages,
-            {name: name, text: message, automatic: automatic}
-         ]
-      }));
+   
+   const buildMessage = (text, name = username, automatic) => {
+      addMessage({
+         name: name,
+         text: text,
+         automatic: automatic
+      })
    };
-
-   componentDidUpdate() {
-      if (!this.state.messages[this.state.messages.length - 1].automatic ) {
-         const answer = this.props.username === BOT_NAME ?
-            "You can`t be bot! You are just a bag of bones." :
-            BOT_MESSAGE + ", " + this.props.username;
-         // delayed response so it feels more natural
-         // bot will answer each message even if there were two of them passed within the delay time
-         // it can be fixed using prevState, but this will be kind of awkward logic
-         setTimeout(() => this.addMessage(answer, BOT_NAME, true), 300)
+   
+   //respond to user after messages updated
+   useEffect(() => {
+      if (messages.last() && !messages.last().automatic) {
+         if (botTimer)
+            clearTimeout(botTimer);
+         
+         setBotTimer(setTimeout(
+            () => buildMessage(BOT_MESSAGE + ", " + username, BOT_NAME, true),
+            500
+         ));
       }
-   }
-
-   render() {
-      return (
-         <>
-            <MessageList messages={this.state.messages}/>
-            <Input addMessage={this.addMessage}/>
-         </>
-      )
-   }
-}
+   }, [messages]);
+   
+   return (
+      <Card className={classes.root}>
+         <MessageList messages={messages}/>
+         <Input addMessage={buildMessage}/>
+      </Card>
+   );
+};
 
 const BOT_NAME = "Bot";
 
-const BOT_MESSAGE = "Thank you for your message";
+const BOT_MESSAGE = "Thank you";
 
 const INITIAL_MESSAGES = [{
    name: BOT_NAME,
    text: "Hello, I`m polite bot, send me something",
    automatic: true
 }];
+
+//using makeStyles to set card root style
+// avoiding the use of !important in css file
+const useStyles = makeStyles(theme => ({
+   root: {
+      backgroundColor: "#FCFCFC",
+      marginLeft: "20px",
+      marginRight: "20px",
+      width:"75%",
+      minWidth: "400px",
+   },
+}));
