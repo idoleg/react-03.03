@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import './Message.css'
+import classname from 'classname'
 
 // export class Message extends Component {
 //     // static propTypes = {
@@ -13,7 +15,8 @@ import PropTypes from 'prop-types';
 //  }
  
 export const Message = ({name, content}) => {
-    return <li><strong>{name}:</strong> {content}</li>
+    const className = classname("Message", {"Message--robot": name == 'Robot'})
+    return <li className={className}><strong>{name}:</strong> {content}</li>
 }
 
 Message.propTypes = {

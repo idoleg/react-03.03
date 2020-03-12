@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Message } from '../Message/Message';
 
+import './MessageList.css'
+
 // export class MessageList extends Component {
 //     state = {
 //         messages: [
@@ -51,7 +53,7 @@ import { Message } from '../Message/Message';
 
 export const MessageList = ({messages}) => {
     return  <div>
-                <ul>
+                <ul className="MessageList">
                     {messages.map((item, index) => <Message {...item} key={index} />)}
                 </ul>
             </div>
