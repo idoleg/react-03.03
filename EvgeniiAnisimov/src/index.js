@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Counter } from './components/Counter';
+import { App } from './components/App'
 
 //const element = React.createElement ("a", {href: "https://ya.ru"}, "Yandex.ru")
 
@@ -51,4 +52,4 @@ import { Counter } from './components/Counter';
 //
 // renderApp();
 
-ReactDOM.render(<Counter />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
