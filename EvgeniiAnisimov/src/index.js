@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Counter } from './components/Counter';
-import { App } from './components/App'
+import App from './components/MessageList';
+
+// import { Counter } from './components/Counter';
+// import { App } from './components/App'
 
 //const element = React.createElement ("a", {href: "https://ya.ru"}, "Yandex.ru")
 
@@ -53,3 +55,4 @@ import { App } from './components/App'
 // renderApp();
 
 ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<Messenger messages={messages}/>, document.getElementById('root'));
