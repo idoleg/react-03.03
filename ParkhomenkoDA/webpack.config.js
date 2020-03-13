@@ -11,7 +11,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx)$/i,
                 include: path.resolve(__dirname, "src"),
                 loader: 'babel-loader',
                 /*exclude: /node_modules/,*/
@@ -20,6 +20,10 @@ module.exports = {
                     plugins: ['@babel/plugin-proposal-class-properties']
                 },
             },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            }
         ],
     },
     plugins: [

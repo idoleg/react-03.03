@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import {CounterFunc} from './Counter';
+import {ChatContainer} from './containers/ChatContainer';
 
-export class App extends Component {
+export const App = () => {
+    return (
+        <ChatContainer />
+    )
+}
+
+//import {CounterFunc} from './Counter';
+/* export class App extends Component {
 
     state = {
         isShowCounter: true,
@@ -27,4 +34,4 @@ export class App extends Component {
             </>
         )
     }
-}
+} */

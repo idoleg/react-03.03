@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classname from 'classname';
+import './Message.css';
 
-export default class Message extends React.Component {
-    static propTypes = {
-        name: PropTypes.string.isRequired,
-        content: PropTypes.string.isRequired,
-    };
+export const Message = ({name, content}) => {
+    const className = classname("Message", {'Message--robot': name === 'Robot'});
+    return <li className={className} ><strong>{name}:</strong> {content}</li>
+}
 
-    render() {
-        return <div> {this.props.name} : {this.props.content} </div>
-    }
+Message.propTypes = {
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
 }
