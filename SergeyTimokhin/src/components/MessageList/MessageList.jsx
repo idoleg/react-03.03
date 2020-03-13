@@ -9,9 +9,9 @@ export const MessageList = ({ messages }) => {
     </ul>)
 }
 
-MessageList.propTypes = {
-    messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes))
-};
+// MessageList.propTypes = {
+//     messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes))
+// };
 
 
 

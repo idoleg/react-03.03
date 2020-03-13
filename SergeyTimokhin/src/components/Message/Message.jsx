@@ -6,10 +6,10 @@ export const Message = ({ name, content }) => {
     return <li><strong>{name}:</strong> {content}</li>
 }
 
-Message.propTypes = {
-    name: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-};
+// Message.propTypes = {
+//     name: PropTypes.string.isRequired,
+//     text: PropTypes.string.isRequired,
+// };
 
 
 

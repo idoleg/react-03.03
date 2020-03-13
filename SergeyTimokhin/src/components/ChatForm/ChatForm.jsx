@@ -26,6 +26,6 @@ export const ChatForm = ({ onSendMessage }) => {
 }
 
 
-ChatForm.propTypes = {
-    onSendMessage: PropTypes.func.isRequired,
-}
+// ChatForm.propTypes = {
+//     onSendMessage: PropTypes.func.isRequired,
+// }
