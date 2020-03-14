@@ -16,13 +16,6 @@ export default class MessegeField extends Component {
         e.preventDefault();
         const { name, message } = e.target;
         
-        
-
-        //  /*Правильно! Объект state остается иммутабельным*/
-        // handleClick = () => {
-        //     this.setState({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] });
-        //  };
-        //  /*Неправильно. Мутируем объект state*/
         this.setState(
             (state) => ({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] })
         )
@@ -35,8 +28,8 @@ export default class MessegeField extends Component {
     }
 
     addRobotAnswer(name) {
-        this.setState(
-            (state) => (state.messages.push({ name: 'Robot', content: `Уважаемый ${name}! Ваше сообщение принято.` }))
+          this.setState(
+            (state) => ({ messages: [ ...this.state.messages, { name: 'Robot', content: `Уважаемый ${name}! Ваше сообщение принято.` } ] })
         )
     }
 
