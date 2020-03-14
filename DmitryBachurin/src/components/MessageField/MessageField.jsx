@@ -19,11 +19,12 @@ export default class MessegeField extends Component {
         this.setState(
             (state) => ({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] })
         )
+        
     }
     componentDidUpdate() {
         const name = this.state.messages[this.state.messages.length - 1].name;
         if (name !== "Robot") {
-            this.addRobotAnswer(name);
+           setTimeout (() => this.addRobotAnswer(name), 1000) ;
         }
     }
 
