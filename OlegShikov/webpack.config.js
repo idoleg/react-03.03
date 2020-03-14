@@ -11,16 +11,24 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/,
+                test: /\.(js|jsx)$/i,
                 include: path.resolve(__dirname, "src"),
                 loader: 'babel-loader',
                 options: {
-                    presets: ['@babel/env', '@babel/react']
+                    presets: ['@babel/env', '@babel/react'],
+                    plugins: ['@babel/plugin-proposal-class-properties']
                 }
             },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html")})
-    ]
+    ],
+    resolve: {
+        extensions: [".jsx", ".js"],
+    }
 }

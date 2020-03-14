@@ -1,0 +1,6 @@
+.MessageList {
+    background-color: lightblue;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
