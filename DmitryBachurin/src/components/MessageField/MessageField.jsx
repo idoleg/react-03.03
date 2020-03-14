@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Message } from './Message/Message'
+import { Message } from './Message/Message';
+import "./MessageField.scss";
 
 export default class MessegeField extends Component {
     state = {
@@ -14,8 +15,16 @@ export default class MessegeField extends Component {
     handleClick = (e) => {
         e.preventDefault();
         const { name, message } = e.target;
+        
+        
+
+        //  /*Правильно! Объект state остается иммутабельным*/
+        // handleClick = () => {
+        //     this.setState({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] });
+        //  };
+        //  /*Неправильно. Мутируем объект state*/
         this.setState(
-            (state) => (state.messages.push({ name: name.value, content: message.value }))
+            (state) => ({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] })
         )
     }
     componentDidUpdate() {
@@ -35,7 +44,7 @@ export default class MessegeField extends Component {
         const { state: { messages }, handleClick } = this;
         return (
             <>
-                <ul>
+                <ul className='messages'>
                     {messages.map((item, index) => <Message {...item} key={index} />)}
                 </ul>
 
