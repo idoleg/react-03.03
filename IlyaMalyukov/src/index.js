@@ -1,45 +1,32 @@
 import React from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
+import { App } from './components/App';
 
-const messages = [{
-        name: "Ilya",
-        content: "Hello"
-    },
-    {
-        name: "Alyona",
-        content: "Hello, how are you?"
-    },
-    {
-        name: "Egor",
-        content: "..."
-    },
-]
 
-const Message = (props) => {
-    return <li > {
-        props.name
-    } {
-        props.content
-    } < /li>
-}
+//const messages = [
+//    { name: "Egor", content: "Hello" },
+//    { name: "Ilya", content: "Hello, bro" },
+//    { name: "Egor", content: "Ilya are not my friend" }
+//]
 
-const MessageList = (props) => {
-        return ( < ul > {
-                props.messages.map(item => Message(item))
-            } <
-            /ul>)
-        }
+//const Message = ({ name, content }) => {
+//    return <li><strong>{name}:</strong> {content}</li>
+//}
 
-        function Link(props) {
+//const MessageList = ({ messages }) => {
+//    return (<ul>
+//        {messages.map((item, index) => <Message {...item} key={index} />)}
+//    </ul>);
+//}
 
-            return <a href = {
-                "https://" + props.to
-            } > {
-                props.to
-            } < /a>
-        }
+//const Messenger = ({ messages }) => {
 
-        ReactDOM.render(MessageList messages = {
-                    messages
-                }
-                / > , document.getElementById("root"))
+//    return (
+//        <div>
+//            <MessageList messages={messages} />
+//            <button onClick={() =>}>Send Message</button>
+//       </div >
+//    )
+//}
+
+ReactDOM.render(<App />, document.getElementById("root"))
