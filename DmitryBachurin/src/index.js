@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import MessageField from './components/MessageField/MessageField'
+import {Layout} from '~/contaners/Layout'
 
 
-ReactDOM.render(<MessageField />, document.getElementById("root"))
+ReactDOM.render(<Layout />, document.getElementById("root"))

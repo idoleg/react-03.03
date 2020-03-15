@@ -1,0 +1,12 @@
+#root {
+    .main {
+        display: flex;
+        height: 80vh;
+        .chatList {
+            flex-grow: 1;
+        }
+        .messageField {
+            flex-grow: 2;
+        }
+    }
+}
