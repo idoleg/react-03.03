@@ -13,15 +13,6 @@ export class MessageField extends Component {
     }
 
 
-    // handleClick = (e) => {
-    //     e.preventDefault();
-    //     const { name, message } = e.target;
-        
-    //     this.setState(
-    //         (state) => ({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] })
-    //     )
-        
-    // }
     onSendMessage = ({name, content}) => {
         this.setState(
             (state) => ({ messages: [ ...this.state.messages, { name: name, content: content } ] })
@@ -49,24 +40,7 @@ export class MessageField extends Component {
                     {messages.map((item, index) => <Message {...item} key={index} />)}
                 </ul>
                 <ChatForm onSendMessage={onSendMessage}/>
-                {/* <form className='chatForm' onSubmit={handleClick}>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Введите имя"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="message"
-                        placeholder="Введите сообщение"
-                        required
-                    />
- 
-                    <button>Отправить сообщение</button>
-                </form> */}
-
-
+  
             </div>
         )
     }
