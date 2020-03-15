@@ -12,10 +12,7 @@ export class Layout extends React.Component {
             { name: 'Олег' },
             { name: 'Дмитрий' },
             { name: 'Михаил' },
-            { name: 'Анастасия'},
-            { name: 'Олег' },
-            { name: 'Дмитрий' },
-            { name: 'Михаил' },
+            { name: 'Анастасия' },
         ]
     }
 
