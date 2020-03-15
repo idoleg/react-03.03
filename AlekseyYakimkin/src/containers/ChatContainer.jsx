@@ -30,6 +30,6 @@ export class ChatContainer extends Component {
     }
 
     render() {
-        return <Chat messages={this.state.messages} onSendMessage={this.handleSendMessage}/>
+        return  <Chat messages={this.state.messages} onSendMessage={this.handleSendMessage}/>
     }
 }

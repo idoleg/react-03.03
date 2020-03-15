@@ -63,11 +63,16 @@ export const ChatForm = ({onSendMessage}) => {
         event.preventDefault()
         //if(content)
         onSendMessage({name, content})
+         
     }
-
+    const handleKeyUp = (event) => {
+        if (event.keyCode === 13) { // Enter
+            onSendMessage({name, content})
+        }
+     };
     return  <form >
                 <TextField name="name" label="Имя" placeholder="Введите имя" value={name} onChange={setName}/>
-                <TextField autoFocus multiline variant="outlined" label="Сообщение" required name="content" placeholder="Текст" value={content} onChange={setContent}/>
+                <TextField autoFocus multiline variant="outlined" label="Сообщение" required name="content" placeholder="Текст" value={content} onChange={setContent} onKeyUp={ (event) => handleKeyUp(event) }/>
                 <Button variant="contained" color="primary"  endIcon={<Icon>send</Icon>} onClick={onSubmit}>Send</Button>
             </form>
 }

@@ -8,6 +8,7 @@
 
 .Message--robot {
     align-self: flex-start;
+    background-color: #b9e6ad;
 }
 
 .Message:not(:last-child){
