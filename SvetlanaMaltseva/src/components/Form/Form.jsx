@@ -1,55 +1,51 @@
 import React, { Component } from 'react';
-import { concat } from 'async';
+import './Form.css';
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
-      name: ''
+      name: 'Brad'
     };
     this.addMessage = this.props.addMessage;
-    this.sendForm = this.sendForm.bind(this);
   }
   handleChange = e => {
-    this.setState({ text: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
-  handleNameChange = e => {
-    this.setState({ name: e.target.value });
-  };
-  sendForm(e) {
+  sendForm = e => {
     e.preventDefault();
     const { name, text } = this.state;
     this.addMessage({ name: name, text: text });
-    this.setState({ name: '', text: '' });
-  }
+    this.setState({ name: 'Brad', text: '' });
+  };
 
   render() {
     return (
-      <form className='mt-auto mb-4' onSubmit={this.sendForm}>
-        <div className='form-row'>
-          <div className='col-3'>
+      <form onSubmit={this.sendForm}>
+        <div className='row'>
+          <div className='name-block'>
             <input
-              className='form-control form-control-lg'
+              className='form-control-lg'
               type='text'
-              name='userName'
+              name='name'
               value={this.state.name}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
             />
           </div>
-          <div className='input-group col-9'>
+          <div className='message-block'>
             <input
-              className='form-control form-control-lg'
+              className='form-control-lg'
               type='text'
-              name='newMessage'
+              name='text'
               value={this.state.text}
               onChange={this.handleChange}
             />
-            <div className='input-group-append'>
-              <button type='submit' className='btn btn-lg btn-info'>
-                Send
-              </button>
-            </div>
+          </div>
+          <div className='button-block'>
+            <button type='submit' className='btn-primary'>
+              Send
+            </button>
           </div>
         </div>
       </form>
