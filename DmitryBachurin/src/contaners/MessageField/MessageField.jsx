@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Message } from './Message/Message';
+import { Message } from '~/components/Message/Message';
+import {ChatForm} from '~/components/ChatForm/ChatForm';
 import "./MessageField.scss";
 
-export default class MessegeField extends Component {
+export class MessageField extends Component {
     state = {
         messages: [
             { name: "Ivan", content: "Hello, world!" },
@@ -12,15 +13,21 @@ export default class MessegeField extends Component {
     }
 
 
-    handleClick = (e) => {
-        e.preventDefault();
-        const { name, message } = e.target;
+    // handleClick = (e) => {
+    //     e.preventDefault();
+    //     const { name, message } = e.target;
         
+    //     this.setState(
+    //         (state) => ({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] })
+    //     )
+        
+    // }
+    onSendMessage = ({name, content}) => {
         this.setState(
-            (state) => ({ messages: [ ...this.state.messages, { name: name.value, content: message.value } ] })
+            (state) => ({ messages: [ ...this.state.messages, { name: name, content: content } ] })
         )
-        
     }
+
     componentDidUpdate() {
         const name = this.state.messages[this.state.messages.length - 1].name;
         if (name !== "Robot") {
@@ -35,14 +42,14 @@ export default class MessegeField extends Component {
     }
 
     render() {
-        const { state: { messages }, handleClick } = this;
+        const { state: { messages }, onSendMessage } = this;
         return (
-            <>
+            <div className='messageField'>
                 <ul className='messages'>
                     {messages.map((item, index) => <Message {...item} key={index} />)}
                 </ul>
-
-                <form onSubmit={handleClick}>
+                <ChatForm onSendMessage={onSendMessage}/>
+                {/* <form className='chatForm' onSubmit={handleClick}>
                     <input
                         type="text"
                         name="name"
@@ -55,9 +62,12 @@ export default class MessegeField extends Component {
                         placeholder="Введите сообщение"
                         required
                     />
-                    <button type="submit">Отправить сообщение</button>
-                </form>
-            </>
+ 
+                    <button>Отправить сообщение</button>
+                </form> */}
+
+
+            </div>
         )
     }
 }

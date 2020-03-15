@@ -51,7 +51,10 @@ module.exports = {
     ],
     /*Указываем расширения для обрабатываемых файлов, чтобы можно было не указывать расширение при импорте компонентов*/
     resolve: {
-        extensions: [".jsx", ".js"]
+        extensions: [".jsx", ".js"],
+        alias: {
+            '~': path.resolve(__dirname, 'src'),
+        }
     }
-    
+
 }
