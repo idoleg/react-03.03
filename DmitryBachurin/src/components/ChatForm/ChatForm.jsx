@@ -6,22 +6,13 @@ import Button from '@material-ui/core/Button';
 import './chatForm.scss'
 
 
-function useInput(initialState) {
-    const [state, setState] = useState(initialState);
-
-    const setInput = (event) => {
-        setState(event.currentTarget.value)
-    }
-
-    return [state, setInput];
-}
-
 export const ChatForm = ({ onSendMessage }) => {
-    const [name, setName] = useInput('User');
-    const [content, setContent] = useInput('');
+    const [name, setName] = useState('User');
+    const [content, setContent] = useState('');
 
 
     const handleKeyUp = (event) => {
+        event.preventDefault();
         if (event.keyCode === 13) { // Enter
             
             onSubmit();
@@ -29,9 +20,10 @@ export const ChatForm = ({ onSendMessage }) => {
     };
 
     const onSubmit = () => {
-
-        if (content) {      
-        onSendMessage( {name, content });
+     
+        if ((content.trim() != '')) {
+            onSendMessage({ name, content });
+            setContent('');
         }
     }
 
@@ -41,7 +33,7 @@ export const ChatForm = ({ onSendMessage }) => {
             label="Имя"
             name="name"
             value={name}
-            onChange={setName} />
+            onChange={({ currentTarget: { value } }) => setName(value)} />
         <TextField
             className='my-contentField'
             variant="standard"
@@ -53,7 +45,7 @@ export const ChatForm = ({ onSendMessage }) => {
             placeholder="Введите наше сообщение..."
             value={content}
             onKeyUp={handleKeyUp}
-            onChange={setContent} />
+            onChange={({ currentTarget: { value } }) => setContent(value)} />
         <Button
             className='my-btn'
             variant="contained"
