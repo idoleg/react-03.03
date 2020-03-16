@@ -1,31 +1,61 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes, { func } from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
 
-export const ChatForm = ({ onSendMessage }) => {
-    const [name, setName] = useState('User');
-    const [content, setContent] = useState('');
 
+function useInput(initialState) {
+    const [state, setState] = useState(initialState);
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        // onSendMessage({name, content});
-        console.log(onSendMessage)
+    const setInput = (event) => {
+        setState(event.currentTarget.value);
     }
 
-    return (<form onSubmit={onSubmit}>
-        <input name='name'
+    return [state, setInput];
+}
+
+export const ChatForm = ({ onSendMessage }) => {
+    const [name, setName] = useInput('User');
+    const [content, setContent] = useInput('');
+
+    // const textarea =useRef();
+
+    // useEffect(()=> {
+    //     textarea.current.focus()
+    // }, [])
+
+    const onSubmit = (event) => {
+        // event.preventDefault();
+        onSendMessage({name, content});
+    }
+
+    return (<form>
+        <TextField name='name'
         value={name}
-        onChange={({currentTarget: {value}}) => setName(value)} />
-        <textarea name='content'
-         placeholder='Your message'
+        onChange={setName}
+        label="Name" />
+        <TextField name='content'
+        //  ref={textarea}
+         autoFocus
+         multiline
+         label="Message"
+         required
+         placeholder='Your message...'
          value={content}
-         onChange={({currentTarget: {value}}) => setContent(value)} />
-        <button>Send</button>
+         onChange={setContent} />
+        <Button
+        variant="contained"
+        color="primary"
+        onClick={onSubmit}
+        // endIcon={<Icon>send</Icon>}
+        >
+        Send</Button>
     </form>)
 }
 
 
-// ChatForm.propTypes = {
-//     onSendMessage: PropTypes.func.isRequired,
-// }
+ChatForm.propTypes = {
+    onSendMessage: PropTypes.func.isRequired,
+}

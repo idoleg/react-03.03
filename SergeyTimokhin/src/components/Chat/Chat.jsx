@@ -11,7 +11,7 @@ export const Chat = ({messages, onSendMessage}) => {
     </div>);
 }
 
-// Chat.propTypes = {
-//     messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
-//     onSendMessage: PropTypes.func.isRequired,
-// }
+Chat.propTypes = {
+    messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
+    onSendMessage: PropTypes.func.isRequired,
+}
