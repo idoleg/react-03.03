@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
+import './ChatForm.css'
+
 
 
 function useInput(initialState) {
@@ -33,11 +35,13 @@ export const ChatForm = ({ onSendMessage }) => {
 
     return (<form>
         <TextField name='name'
+        className="Chatform--name"
         value={name}
         onChange={setName}
         label="Name" />
         <TextField name='content'
         //  ref={textarea}
+        className="Chatform--content"
          autoFocus
          multiline
          label="Message"
@@ -46,6 +50,7 @@ export const ChatForm = ({ onSendMessage }) => {
          value={content}
          onChange={setContent} />
         <Button
+        className="Chatform--btn"
         variant="contained"
         color="primary"
         onClick={onSubmit}

@@ -1,0 +1,19 @@
+form {
+    margin: right auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.Chatform--name {
+    width: 30%;
+}
+
+.Chatform--content {
+    width: 100%;
+}
+
+form .Chatform--btn {
+    width: 20%;
+    margin: 10px auto;
+}

@@ -5,7 +5,7 @@ import {MessageList} from '../MessageList/MessageList';
 import {ChatForm} from '../ChatForm/ChatForm';
 
 export const Chat = ({messages, onSendMessage}) => {
-    return (<div>
+    return (<div style={ { width: '70%' } }>
         <MessageList messages={messages}/>
         <ChatForm onSendMessage={onSendMessage}/>
     </div>);

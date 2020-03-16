@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Chat} from '../components/Chat/Chat';
 
+
 export const bot = 'Bot'
 
 export class ChatContainer extends Component {
