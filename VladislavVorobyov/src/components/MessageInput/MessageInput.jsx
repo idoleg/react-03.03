@@ -1,46 +1,40 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
-export class MessageInput extends Component {
 
-    static  propTypes = {
-        author: PropTypes.string,
-        handleNewMessage: PropTypes.func.isRequired,
+export const MessageInput = ({handleNewMessage}) => {
+    const [content, setContent] = useState('');
+    const textarea = useRef();
+    const sendMessage = () =>{
+        handleNewMessage(content);
+        setContent('');
     };
-
-    static defaultProps = {
-        author: 'Anonimous',
+    const onSubmit = (event) => {
+        event.preventDefault();
+        sendMessage();
     };
-
-    state = {
-        message: '',
+    const onKeyUp = (event) => {
+        if (event.keyCode === 13 && !event.shiftKey) sendMessage();
     };
+    const onChange = (event) => {
+        setContent(event.currentTarget.value)
+    };
+    useEffect(()=> {
+        textarea.current.focus();
+    });
 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="message">Сообщение: </label>
-                <input
-                    onChange={this.handleChange}
-                    value={this.state.message}
+    return (<form onSubmit={onSubmit}>
+                <textarea ref={textarea}
+                          value={content}
+                          onChange={onChange}
+                          onKeyUp={onKeyUp}
+                          placeholder="Введите ваше сообщение..."
                 />
-            </form>
-        )
-    };
+                <button>Отправить</button>
+    </form> )
+};
 
-    handleChange = (e) => {
-        this.setState({message: e.target.value});
-    };
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const {author, handleNewMessage} = this.props;
-        const message = this.state.message;
-        if (!message.length) {
-            return;
-        }
-        handleNewMessage(message, author);
-        this.setState({message: ''});
-    }
-
-}
+MessageInput.propTypes = {
+    handleNewMessage: PropTypes.func.isRequired,
+};

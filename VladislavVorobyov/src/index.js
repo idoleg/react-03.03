@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {MessengerApp} from "Components/MessangerApp";
+import {ChatContainer} from "Containers/ChatContainer";
 
 ReactDom.render(
-    <MessengerApp />,
+    <ChatContainer />,
     document.getElementById('root'),
 );
