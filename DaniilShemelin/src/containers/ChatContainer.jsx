@@ -15,11 +15,24 @@ export class ChatContainer extends Component {
     this.handleSendMessage = this.handleSendMessage.bind(this);
   }
 
-  handleSendMessage(message) {
+  componentDidUpdate() {
+    const lastMessage = this.state.messages[this.state.messages.length - 1];
 
+    if(lastMessage.name != 'Robot') {
+      setTimeout(() => this.handleSendMessage({
+          name: 'Robot',
+          content: `Hello ${lastMessage.name}, I'm Robot!`,
+      }), 1000);
+    }
+  }
+
+  handleSendMessage(message) {
+    this.setState({
+      messages: [...this.state.messages, message]
+    })
   }
 
   render() {
-    return <Chat messages={ this.state.messages } onSendMessage={ this.handleSendMessage }/>;
+    return (<><Chat messages={ this.state.messages } onSendMessage={ this.handleSendMessage }/></>);
   }
 }
