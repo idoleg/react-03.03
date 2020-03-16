@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SendButton from "./submitbuttun"
+import SendButton from "../Buttons/Submitbutton"
 
 export default class SendForm extends React.Component {
   constructor(props) {

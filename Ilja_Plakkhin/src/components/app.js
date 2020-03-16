@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SendForm from "./sendform";
-import MessageList from './messageslist';
+import SendForm from "./SendForm/sendform";
+import MessageList from './MessageList/MessagesList';
 
 export default class App extends React.Component {
 
