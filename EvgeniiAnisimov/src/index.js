@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from './components/MessageList';
+// import App from './components/MessageList/MessageList';
+import { App } from './App';
 
 // import { Counter } from './components/Counter';
 // import { App } from './components/App'
@@ -54,5 +55,5 @@ import App from './components/MessageList';
 //
 // renderApp();
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 // ReactDOM.render(<Messenger messages={messages}/>, document.getElementById('root'));
