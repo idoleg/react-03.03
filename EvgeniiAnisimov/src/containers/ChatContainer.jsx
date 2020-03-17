@@ -6,7 +6,7 @@ export const ROBOT = 'Robot';
 export class ChatContainer extends Component {
   state = {
     messages: [
-      {name: "Ivan", content: "Hello, world"},
+      {name: "Ivan", content: "Hello, Petr"},
       {name: "Petr", content: "Hello, how are you?"},
       {name: "Ivan", content: "I'm well"}
     ],
@@ -14,28 +14,14 @@ export class ChatContainer extends Component {
   }
 
   componentDidUpdate() {
-    // const lastMessage = this.state.messages[this.state.messages.length - 1];
-    // console.log("componentDidUpdate->" + lastMessage.name);
+    const lastMessage = this.state.messages[this.state.messages.length - 1];
 
-    this.handleRobot()
-    // if(lastMessage.name !== ROBOT) {
-    //   setTimeout(() => this.handleSendMessage({
-    //     name: ROBOT,
-    //     content: `Hello, ${lastMessage.name}, I'm Robot!`,
-    //   }), 3000)
-    // }
-  }
-
-  handleRobot = () => {
-    this.setState((state) => ({lastMessage: state.messages[state.messages.length - 1]}))
-
-    console.log("handleRobot->" + this.state.lastMessage.name)
-    // if(this.state.lastMessage.name !== 'Robot') {
-    //   setTimeout(() => this.handleSendMessage({
-    //     name: 'Robot',
-    //     content: `Hello, ${lastMessage.name}, I'm Robot!`,
-    //   }), 3000)
-    // }
+    if(lastMessage.name !== ROBOT) {
+      setTimeout(() => this.handleSendMessage({
+        name: ROBOT,
+        content: `Hello, ${lastMessage.name}, I'm Robot!`,
+      }), 3000)
+    }
   }
 
   handleSendMessage = (message) => {

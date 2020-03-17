@@ -1,22 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
 function useInput(initialState) {
   const [state, setState] = useState(initialState);
   const setInput = (event) => {
     setState(event.currentTarget.value);
   }
+
   return [state, setInput];
 }
 
 export const ChatForm = ({onSendMessage}) => {
   // const [name, setName] = useState('user');
   // const [content, setContent] = useState('');
-  const [name, setName] = useInput('user');
+  const [name, setName] = useInput('');
   const [content, setContent] = useInput('');
-  const textarea = useRef();
+  // const textarea = useRef();
 
   const onSubmit = (event) => {
+
     event.preventDefault();
     if(content !== '') {
       onSendMessage({name, content});
@@ -25,25 +30,39 @@ export const ChatForm = ({onSendMessage}) => {
     }
   }
 
-  useEffect(() => {
-    // console.log("i'm updated!");
-    textarea.current.focus();
-  }, [])
+  // useEffect(() => {
+  //   // console.log("i'm updated!");
+  //   textarea.current.focus();
+  // }, [])
 
   return(
     <form onSubmit={onSubmit}>
-      <input
+      <TextField
+        label="Имя пользователя"
+        variant="outlined"
+        required
         name="name"
+        placeholder="Введите свое имя"
         value={name}
         onChange={setName}/>
-      <textarea
-        ref={textarea}
+      <TextField
+        // ref={textarea}
+        autoFocus
+        multiline
+        label="Сообщение"
+        variant="outlined"
         required
         name="content"
-        placeholder="Input message"
+        placeholder="Введите сообщение"
         value={content}
         onChange={setContent}/>
-      <button>Send message</button>
+      <Button
+        onClick = {onSubmit}
+        variant="contained"
+        color="primary"
+        endIcon={<Icon>send</Icon>}
+        >Send
+        </Button>
     </form>
   )
 }
