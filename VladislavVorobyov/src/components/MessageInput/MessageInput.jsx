@@ -1,10 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 
 
 export const MessageInput = ({handleNewMessage}) => {
     const [content, setContent] = useState('');
-    const textarea = useRef();
     const sendMessage = () =>{
         handleNewMessage(content);
         setContent('');
@@ -19,18 +21,26 @@ export const MessageInput = ({handleNewMessage}) => {
     const onChange = (event) => {
         setContent(event.currentTarget.value)
     };
-    useEffect(()=> {
-        textarea.current.focus();
-    });
+
 
     return (<form onSubmit={onSubmit}>
-                <textarea ref={textarea}
-                          value={content}
-                          onChange={onChange}
-                          onKeyUp={onKeyUp}
-                          placeholder="Введите ваше сообщение..."
+                <TextField
+                    id="message-input"
+                    placeholder="Введите ваше сообщение..."
+                    value={content}
+                    onChange={onChange}
+                    onKeyUp={onKeyUp}
+                    multiline
+                    autoFocus
                 />
-                <button>Отправить</button>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    endIcon={<Icon>send</Icon>}
+                >
+                    Send
+                </Button>
     </form> )
 };
 
