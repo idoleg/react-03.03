@@ -33,7 +33,6 @@ export const MessageList = ({ messages }) => {
       <div className="message__wrapper">
         { messages.map((message, index) => <Message key={index} {...message} />) }
       </div>
-      {/* <button className="message__btn" onClick={ handleClick }>Send Message</button> */}
     </>
   )
 }

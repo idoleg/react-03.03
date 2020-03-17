@@ -16,12 +16,16 @@ export class ChatContainer extends Component {
   }
 
   componentDidUpdate() {
-    const lastMessage = this.state.messages[this.state.messages.length - 1];
+    const lastUserIdx = this.state.messages.length - 1;
+    const lastUserName = this.state.messages[lastUserIdx].name;
 
-    if(lastMessage.name != 'Robot') {
+    const robotName = "Mr. Robot";
+    const robotMessage = `What's wrong with you, ${ lastUserName }? I'm Robot, don't talk to me.`;
+
+    if(lastUserName !== robotName) {
       setTimeout(() => this.handleSendMessage({
-          name: 'Robot',
-          content: `Hello ${lastMessage.name}, I'm Robot!`,
+          name: robotName,
+          content: robotMessage,
       }), 1000);
     }
   }
