@@ -2,11 +2,12 @@ import React from 'react';
 import { Message } from './../Message/Message.jsx';
 import { MessageList } from './../MessageList/MessageList.jsx';
 import { ChatForm } from './../ChatForm/ChatForm.jsx';
+import './Chat.css';
 import PropTypes from 'prop-types';
 
 export const Chat = ({ messages, onSendMessage }) => {
   return (
-    <div>
+    <div className="chat__wrapper">
       <MessageList messages={ messages } />
       <ChatForm onSendMessage={ onSendMessage } />
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import "./ChatForm.css";
+import { TextField, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import "./ChatForm.css";
 
 function useInput(initialState) {
   const [state, setState] = useState(initialState);
@@ -13,44 +14,48 @@ function useInput(initialState) {
 }
 
 export const ChatForm = ({ onSendMessage }) => {
-  const [name, setName] = useInput('Test');
+  const [name, setName] = useInput('Daniil');
   const [content, setContent] = useInput('');
-  const textarea = useRef();
-
-  useEffect(() => {
-    textarea.current.focus();
-  }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if(content) onSendMessage({name, content});
+    if(content && name) onSendMessage({name, content});
     else {
-      console.log(new Error("Заполните поле \"Сообщение\""))
+      console.error(new Error("Заполните обязательные поля"))
       return;
     }
   }
 
   return (
-    <form onSubmit={ onSubmit } class="chat-form__form">
-      <input
-        class="chat-form__input"
+    <form className="chat-form__form">
+      <TextField
+        className="chat-form__input"
         type="text"
         required
         name="name"
-        placeholder="Введите имя"
+        label="Введите имя"
+        variant="outlined"
         value={ name }
         onChange={ setName }
       />
-      <textarea
-        class="chat-form__textarea"
-        ref={ textarea }
+      <TextField
+        autoFocus
+        className="chat-form__textarea"
         required
+        multiline
         name="content"
-        placeholder="Введите сообщение"
+        label="Введите сообщение"
+        variant="outlined"
         value={ content }
         onChange={ setContent }
       />
-      <button className="message__btn">Отправить сообщение</button>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={ onSubmit }
+      >
+        Отправить сообщение
+      </Button>
     </form>
   )
 }
