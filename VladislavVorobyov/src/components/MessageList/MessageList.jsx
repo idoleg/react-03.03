@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Message} from "Components/Message/Message";
+import { makeStyles } from '@material-ui/core/styles';
 
-// export class MessageList extends React.Component {
-//     render() {
-//         return (
-//             <ul>
-//                 { this.props.messages.map(message => <Message {...message} key={message.id}/>) }
-//             </ul>
-//         );
-//     }
-// }
+
+const useStyles = makeStyles(theme => ({
+    messageList: {
+        display: 'flex',
+        overflow: 'auto',
+        padding: 20,
+        flexDirection: 'column',
+    },
+}));
 
 
 export const MessageList = ({messages, currentUser}) => {
+    const classes = useStyles();
     return (
-        <ul className="message-list">
+        <ul className={classes.messageList}>
             {
                 messages.map(message => (<Message {...message}
                                                   currentUser={currentUser}

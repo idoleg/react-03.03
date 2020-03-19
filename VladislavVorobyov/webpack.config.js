@@ -31,4 +31,8 @@ module.exports = {
             Containers: path.resolve(__dirname, 'src/containers'),
         },
     },
+    devServer: {
+        historyApiFallback: true,
+    },
+    devtool: 'inline-source-map'
 };

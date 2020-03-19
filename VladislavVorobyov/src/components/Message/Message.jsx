@@ -1,14 +1,32 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import classname from 'classname';
+
+const useStyles = makeStyles(theme => ({
+    message: {
+        backgroundColor: 'lightskyblue',
+        padding: 10,
+        margin: 10,
+        listStyle: 'none',
+        width: '30%',
+        borderRadius: 5,
+        alignSelf: 'flex-start',
+
+    },
+    messageCurrentUser: {
+        alignSelf: 'flex-end',
+    },
+}));
+
 
 export const Message = ({author, content, currentUser}) => {
+    const classes = useStyles();
     const name = author === currentUser ? 'Me': author;
-    const className = classname('message', {'message_current-user': name === 'Me'});
+    const className = `${classes.message} ${name === 'Me'?classes.messageCurrentUser:''}`;
     return (
         <li className={className}>
-            <span className="message__author">{name}</span>
-            <pre className="message__content">{content}</pre>
+            <strong>{name}</strong>
+            <pre>{content}</pre>
         </li>
     )
 };

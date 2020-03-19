@@ -13,10 +13,9 @@ import {ChatContainer} from "Containers/ChatContainer";
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        height: '100vh',
     },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
+
     drawer: {
         width: 240,
         flexShrink: 0,
@@ -26,7 +25,6 @@ const useStyles = makeStyles(theme => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
     },
     toolbar: theme.mixins.toolbar,
 }));
@@ -38,13 +36,6 @@ export const Messenger = ({chats, config}) => {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap>
-                        {currentChat.title}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
@@ -52,13 +43,11 @@ export const Messenger = ({chats, config}) => {
                     paper: classes.drawerPaper,
                 }}
             >
-                <div className={classes.toolbar}/>
                 <ChatsList chats={chats} />
             </Drawer>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <ChatContainer messages={chats[0].messages} author={config.userName}/>
-            </main>
+            <div className={classes.content}>
+                <ChatContainer chat={chats[0]} author={config.userName}/>
+            </div>
         </div>
     )
 

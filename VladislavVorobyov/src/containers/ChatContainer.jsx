@@ -5,7 +5,7 @@ const botMessages = ['Да, что ты говоришь...', 'Хмм, как и
 const ROBOT = 'Bot';
 
 class Sequence {
-    static _last_id = 0;
+    static _last_id = 2;
     static get next() {
         this._last_id++;
         return this._last_id;
@@ -17,12 +17,11 @@ export class ChatContainer extends Component {
     timeout = undefined;
 
     state = {
-        messages: [],
-        author: "Vladislav",
+        chat: {...this.props.chat},
     };
 
     componentDidUpdate() {
-        const {messages} = this.state;
+        const {messages} = this.state.chat;
         const lastMessage = messages[messages.length - 1];
         if (lastMessage.author === ROBOT) return;
         clearTimeout(this.timeout);
@@ -36,16 +35,21 @@ export class ChatContainer extends Component {
     }
 
     handleNewMessage = (content, author) => {
-        author = !author ? this.state.author : author;
-        this.setState(state => (
-            {messages: [...state.messages, {id: Sequence.next, content: content, author: author}]}
-        ));
+        author = !author ? this.props.author : author;
+        this.setState(state => ({
+            chat: {
+              ...state.chat,
+              messages: [
+                  ...state.chat.messages,
+                  {id: Sequence.next, content: content, author: author}]
+            }
+        }))
     };
 
     render() {
-        const {messages} = this.state;
+        const {chat} = this.state;
         return (
-            <Chat messages={messages} handleNewMessage={this.handleNewMessage}/>
+            <Chat chat={chat} handleNewMessage={this.handleNewMessage}/>
         )
     }
 }

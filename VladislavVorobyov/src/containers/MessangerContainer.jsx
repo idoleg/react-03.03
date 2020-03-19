@@ -7,7 +7,11 @@ export class MessengerContainer extends Component {
             {
                 id: 1,
                 title: 'Chat1',
-                messages: [],
+                messages: [
+                    {id: 1, author: 'Vladislav', content: 'Hello, world'},
+                    {id: 2, author: 'World', content: 'Hello, Vladislav'},
+
+                ],
             },
             {
                 id: 2,
