@@ -21,10 +21,10 @@ export const ChatForm = ({onSendMessage}) => {
   // const textarea = useRef();
 
   const onSubmit = (event) => {
-
-    event.preventDefault();
+    // event.preventDefault();
     if(content !== '') {
       onSendMessage({name, content});
+      setName('');
     } else {
       alert("Введите текст сообщения!")
     }
