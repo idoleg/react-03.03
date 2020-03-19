@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Message } from '~/components/Message/Message';
-import {ChatForm} from '~/components/ChatForm/ChatForm';
+import { ChatForm } from '~/components/ChatForm/ChatForm';
 import "./MessageField.scss";
 
 export class MessageField extends Component {
@@ -12,23 +12,25 @@ export class MessageField extends Component {
         ]
     }
 
+    timeoutId = null;
 
-    onSendMessage = ({name, content}) => {
+    onSendMessage = ({ name, content }) => {
         this.setState(
-            (state) => ({ messages: [ ...this.state.messages, { name: name, content: content } ] })
+            (state) => ({ messages: [...this.state.messages, { name: name, content: content }] })
         )
     }
 
     componentDidUpdate() {
         const name = this.state.messages[this.state.messages.length - 1].name;
         if (name !== "Robot") {
-           setTimeout (() => this.addRobotAnswer(name), 1000) ;
+            clearTimeout(this.timeoutId);
+            this.timeoutId = setTimeout(() => this.addRobotAnswer(name), 1000);
         }
     }
 
     addRobotAnswer(name) {
-          this.setState(
-            (state) => ({ messages: [ ...this.state.messages, { name: 'Robot', content: `Уважаемый ${name}! Ваше сообщение принято.` } ] })
+        this.setState(
+            (state) => ({ messages: [...this.state.messages, { name: 'Robot', content: `Уважаемый ${name}! Ваше сообщение принято.` }] })
         )
     }
 
@@ -39,8 +41,8 @@ export class MessageField extends Component {
                 <ul className='messages'>
                     {messages.map((item, index) => <Message {...item} key={index} />)}
                 </ul>
-                <ChatForm onSendMessage={onSendMessage}/>
-  
+                <ChatForm onSendMessage={onSendMessage} />
+
             </div>
         )
     }
