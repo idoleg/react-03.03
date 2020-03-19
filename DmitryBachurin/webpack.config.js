@@ -55,6 +55,10 @@ module.exports = {
         alias: {
             '~': path.resolve(__dirname, 'src'),
         }
-    }
+    },
+    devServer: {
+        historyApiFallback: true,
+    },
+    devtool: 'inline-source-map'
 
 }
