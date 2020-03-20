@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-   entry: path.resolve(__dirname, "src", "index.js"),
+   entry: path.resolve(__dirname, "src", "index.jsx"),
    output: {
       path : path.resolve(__dirname, "build"),
       filename : "index.js",
@@ -10,11 +10,12 @@ module.exports = {
    module: {
       rules: [
          {
-            test: /\.(js)$/,
+            test: /\.(js|jsx)$/,
             include: path.resolve(__dirname, "src"),
             loader: "babel-loader",
             options: {
-               presets: ["@babel/env", "@babel/react"]
+               presets: ["@babel/env", "@babel/react"],
+               plugins:["@babel/plugin-proposal-class-properties"],
             }
          }
       ]
@@ -22,4 +23,7 @@ module.exports = {
    plugins: [
       new HtmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")}),
    ],
+   resolve: {
+      extensions: [".jsx", ".js"],
+   },
 };
