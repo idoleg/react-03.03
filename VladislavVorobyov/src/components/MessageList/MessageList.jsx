@@ -19,9 +19,9 @@ export const MessageList = ({messages, currentUser}) => {
     return (
         <ul className={classes.messageList}>
             {
-                messages.map(message => (<Message {...message}
+                Object.entries(messages).map(([id,message]) => (<Message {...message}
                                                   currentUser={currentUser}
-                                                  key={message.id} />)
+                                                  key={id} />)
                 )
             }
         </ul>

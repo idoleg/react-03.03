@@ -1,60 +1,92 @@
 import React from 'react';
+import Link from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import {Profile} from 'Components/Profile/Profile';
 import Drawer from '@material-ui/core/Drawer';
 import PropTypes from 'prop-types';
 import {ChatsList} from 'Components/ChatsList/ChatsList';
-import {ChatContainer} from "Containers/ChatContainer";
+import {Chat} from "Components/Chat/Chat";
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
+        display: 'grid',
         height: '100vh',
+        maxHeight: '100vh',
+        gridTemplateColumns: '240px 1fr',
+        gridTemplateRows: '64px 1fr',
+        gridTemplateAreas: "'chatList chatTitle ' "+
+                            "'chatList chat'",
+    },
+    chatList: {
+        gridArea: 'chatList',
     },
 
-    drawer: {
-        width: 240,
-        flexShrink: 0,
-    },
-    drawerPaper: {
+    chatListPaper: {
         width: 240,
     },
-    content: {
-        flexGrow: 1,
+
+    chatTitle: {
+        gridArea: 'chatTitle',
+        position: 'static',
+    },
+
+    chat: {
+        gridArea: 'chat',
+        overflow: 'auto',
     },
     toolbar: theme.mixins.toolbar,
 }));
 
 
-export const Messenger = ({chats, config}) => {
+export const Messenger = ({showProfile, chats, currentChatId,
+                              config ,handleNewMessage, handleUpdateConfig}) => {
     const classes = useStyles();
-    const currentChat = chats[0];
+    const currentChat = chats[currentChatId];
+    let profileElement;
+    if (showProfile) {
+        profileElement = <Profile config={config} handleConfigUpdate={handleUpdateConfig} />
+    }
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <ChatsList chats={chats} />
-            </Drawer>
-            <div className={classes.content}>
-                <ChatContainer chat={chats[0]} author={config.userName}/>
+        <>
+            {profileElement}
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar className={classes.chatTitle}>
+                    <Toolbar>
+                        <Typography variant="h6" noWrap>
+                            {currentChat.title}
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    className={classes.chatList}
+                    variant="permanent"
+                    classes={{
+                        paper: classes.chatListPaper,
+                    }}
+                >
+                    <ChatsList chats={chats} />
+                </Drawer>
+                <div className={classes.chat}>
+                    <Chat
+                        messages={currentChat.messages}
+                        currentUser={config.userName}
+                        handleNewMessage={handleNewMessage}
+                    />
+                </div>
             </div>
-        </div>
+        </>
     )
 
 };
 
 Messenger.propTypes = {
-    chats: PropTypes.arrayOf(PropTypes.shape({
+    chats: PropTypes.shape(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         messages: PropTypes.array.isRequired,

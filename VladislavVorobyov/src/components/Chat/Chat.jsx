@@ -11,29 +11,19 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'grid',
-        gridTemplateRows: '64px 1fr auto',
+        gridTemplateRows: '1fr auto',
         height: '100%',
         maxHeight: '100%',
-    },
-    appBar: {
-        position: 'static',
     },
     toolbar: theme.mixins.toolbar,
 }));
 
 
-export const Chat = ({chat: {messages, title}, handleNewMessage}) => {
+export const Chat = ({messages, currentUser, handleNewMessage}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap>
-                        {title}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <MessageList messages={messages}/>
+            <MessageList messages={messages} currentUser={currentUser}/>
             <MessageInput handleNewMessage={handleNewMessage}/>
         </div>
     )

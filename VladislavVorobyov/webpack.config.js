@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
     entry: path.resolve(__dirname, "src","index.js"),
     output: {
+        publicPath: "/",
         path: path.resolve(__dirname, "dist"),
         filename: "index.js",
     },
@@ -32,7 +33,9 @@ module.exports = {
         },
     },
     devServer: {
-        historyApiFallback: true,
+        historyApiFallback: {
+            disableDotRule: true,
+        },
     },
     devtool: 'inline-source-map'
 };
