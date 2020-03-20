@@ -34,7 +34,7 @@ export default class App extends React.Component {
     const { messages } = this.state;
 
     return (
-      <div className="app">
+      <div className="layout">
         <h1 className="app-title">Ку Чатланин!</h1>
         <div className="content">
           <MessageList messages={messages} />

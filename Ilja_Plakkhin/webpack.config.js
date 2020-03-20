@@ -10,26 +10,25 @@ module.exports = {
    },
    module: {
       rules: [
-              {
-                test:  /(\.jsx|\.js)$/,
-                loader: "babel-loader",
-                include: path.resolve(__dirname, "src"),
-                  options:
-                  {
-                    presets: ['@babel/env', '@babel/react'],
-                  }
-              },
-              {
-     test: /\.css$/, 
-     loader: "style-loader!css-loader"
-   },
-            ]
+          {
+            test:  /(\.jsx|\.js)$/,
+            loader: "babel-loader",
+            include: path.resolve(__dirname, "src"),
+            options: {
+                presets: ['@babel/env', '@babel/react'],
+            }
           },
+          {
+            test: /\.css$/,
+            loader: "style-loader!css-loader"
+          },
+        ]
+      },
 
    plugins: [
     new HtmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")})
   ],
    resolve: {
-     extensions: [".jsx",".js"],
+     extensions: [".jsx",".js",".css"],
    }
 };

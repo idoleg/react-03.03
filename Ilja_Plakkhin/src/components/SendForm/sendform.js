@@ -19,6 +19,7 @@ export default class SendForm extends React.Component {
   }
 render() {
     return (
+    <div className="layout">
       <form className="chat-form" onSubmit={this.sendMessage}>
         <input
           type="text"
@@ -36,6 +37,7 @@ render() {
         />
         <SendButton />
       </form>
+    </div>
     );
   }
 }
