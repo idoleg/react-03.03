@@ -1,0 +1,5 @@
+.ChatListItem {
+    text-decoration: none;
+    display: flex;
+    color: black;
+}

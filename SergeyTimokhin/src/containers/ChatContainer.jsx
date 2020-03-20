@@ -13,18 +13,22 @@ export class ChatContainer extends Component {
             ]
     }
 
+    timerId = null;
+
     componentDidUpdate() {
         const lastMessage = this.state.messages[this.state.messages.length - 1];
 
         if (lastMessage.name !== bot) {
-            setTimeout(()=> {
+            clearTimeout(this.timerId);
+            this.timerId = setTimeout(() => {
                 this.handleSendMessage({
                     name: 'Bot',
                     content: `Hello ${lastMessage.name}, it's bot`
                 })
-            }, 700)
+            }, 2000);
         }
     }
+
 
     handleSendMessage = (message) => {
         this.setState((state) => ({
