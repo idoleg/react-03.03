@@ -1,0 +1,12 @@
+.chat-list {
+	width: 25%;
+	background-color: #CFD8DC;
+	border: 1px solid #B0BEC5;
+    border-radius: 5px;
+	color: #303F9F;
+}
+
+span.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
+	font-weight: 600;
+	cursor: pointer;
+}
