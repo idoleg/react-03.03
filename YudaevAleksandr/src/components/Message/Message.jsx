@@ -6,7 +6,7 @@ export const Message = ({name, content, i}) => {
     const useStyles = makeStyles(theme => ({
         message: {
             display: `flex`,
-            justifyContent: () => name === 'RobotAlex' ? 'flex-start': 'flex-end',
+            justifyContent: () => name === 'Me' ? 'flex-end' : 'flex-start',
             fontSize: '16px',
             marginBottom: '10px',
         },

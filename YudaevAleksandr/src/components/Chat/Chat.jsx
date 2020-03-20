@@ -5,7 +5,7 @@ import {Message} from "../Message/Message";
 import {makeStyles} from "@material-ui/core/styles";
 import {ChatForm} from "../ChatForm/ChatForm"
 
-export const Chat = ({messages, active, onSendMessage, onKeyDown}) => {
+export const Chat = ({messages, onSendMessage, onKeyDown}) => {
     const useStyles = makeStyles(theme => ({
         toolbar: theme.mixins.toolbar,
         content: {
@@ -19,17 +19,25 @@ export const Chat = ({messages, active, onSendMessage, onKeyDown}) => {
     }));
     const classes = useStyles();
 
-    return (
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <MessageField messages={messages} />
-            <ChatForm
-                onSendMessage={onSendMessage}
-                active = {active}
-                onKeyDown = {onKeyDown}
-            />
-        </main>
-    )
+    if (messages) {
+        return (
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                {messages.length ? <MessageField messages={messages} /> : "Нет сообщений"}
+                <ChatForm
+                    onSendMessage={onSendMessage}
+                    onKeyDown = {onKeyDown}
+                />
+            </main>
+        )
+    } else {
+        return (
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                Чат не существует
+            </main>
+        )
+    }
 };
 
 Chat.propTypes = {

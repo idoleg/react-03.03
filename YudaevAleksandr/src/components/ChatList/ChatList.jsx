@@ -8,6 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import {Link} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -37,12 +38,36 @@ export const ChatList = () => {
             <div className={classes.toolbar} />
             <Divider />
             <List>
-                {['RobotAlex', 'Sarah', 'Michael'].map((text, index) => (
-                    <ListItem button key={index}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
+                {/*{['RobotAlex', 'Sarah', 'Michael'].map((text, index) => (*/}
+                {/*    <ListItem button key={index}>*/}
+                {/*        <ListItemIcon>{<MailIcon />}</ListItemIcon>*/}
+                {/*        <ListItemText primary={text} />*/}
+                {/*    </ListItem>*/}
+                {/*))}*/}
+                <Link to="1">
+                    <ListItem button>
+                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                        <ListItemText primary="RobotAlex" />
                     </ListItem>
-                ))}
+                </Link>
+                <Link to="2">
+                    <ListItem button>
+                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                        <ListItemText primary="Sarah" />
+                    </ListItem>
+                </Link>
+                <Link to="3">
+                    <ListItem button>
+                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                        <ListItemText primary="Michael" />
+                    </ListItem>
+                </Link>
+                <Link to="4">
+                    <ListItem button>
+                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                        <ListItemText primary="no chat" />
+                    </ListItem>
+                </Link>
             </List>
         </Drawer>
     )
