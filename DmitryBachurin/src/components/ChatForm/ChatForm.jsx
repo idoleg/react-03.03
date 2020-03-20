@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import './chatForm.scss'
 
 
-export const ChatForm = ({ onSendMessage }) => {
+export const ChatForm = ({chatId, onSendMessage }) => {
     const [name, setName] = useState('User');
     const [content, setContent] = useState('');
 
@@ -22,7 +22,7 @@ export const ChatForm = ({ onSendMessage }) => {
     const onSubmit = () => {
      
         if ((content.trim() != '')) {
-            onSendMessage({ name, content });
+            onSendMessage({chatId, name, content });
             setContent('');
         }
     }

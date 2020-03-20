@@ -5,6 +5,7 @@ import { MessageField } from '~/contaners/MessageField/MessageField';
 import './Layout.scss';
 
 
+
 export class Layout extends React.Component {
     // state = {
     //     title: 'Чат на React',
@@ -29,7 +30,7 @@ export class Layout extends React.Component {
             { id: 2, name: "Petr", content: "И тебе привет в чате 1" },
             { id: 3, name: "Ivan", content: "Отлично!" },
             { id: 4, name: "Ivan", content: "Привет в чате 2" },
-            { id: 5, name: "Petr", content: "И тебе привет в чате 3" },
+            { id: 5, name: "Petr", content: "И тебе привет в чате 2" },
             { id: 6, name: "Ivan", content: "Отлично!" },
             { id: 7, name: "Ivan", content: "Привет в чате 3" },
             { id: 8, name: "Petr", content: "И тебе привет в чате 3" },
@@ -38,7 +39,7 @@ export class Layout extends React.Component {
     }
     title = 'Выберите чат';
     chatId = undefined;
-    
+
     getChatById = (id) => {
         return this.state.chats.find((elem) => {
             if (elem.id == id) {
@@ -62,31 +63,69 @@ export class Layout extends React.Component {
         return chat.messagesArray.map((item) => this.getMessageById(item));
     }
 
-     
-render() {
-    let {chatId, title} = this;
-    const {getChatById} = this;
-    const {chats} = this.state;
 
-    if (chatId === undefined) {
-        chatId = this.props.match.params.id;
-     }
- 
-     if (!(getChatById(chatId) === undefined)) {
-         title = getChatById(chatId).title;
-     }
+    // timeoutId = null;
 
-    return (
-        <>
-            <Header title={title} />
-            <div className="main">
-                <ChatList chats={chats} />
-                <MessageField />
-            </div>
+    onSendMessage = ({ chatId, name, content }) => {
+        this.setState(
+            (state) => {
+                const messageId = this.state.messages.length+1;
+                
+                const filteredChats = this.state.chats.filter((el) => {
+                    return el.id !== +chatId;
+                });
+                
+                const updatedChat = this.getChatById(chatId);
+                updatedChat.messagesArray.push(messageId);
+                filteredChats.push(updatedChat);
+                filteredChats.sort((a, b) => a.id > b.id ? 1 : -1);
+                
+                return  {chats: filteredChats, messages: [...this.state.messages, { id: messageId, name: name, content: content }] }
+            }
+           
+        )
+        console.log(this.state)
+    }
 
-        </>
-    )
-}
-    
+    // componentDidUpdate() {
+    //     const name = this.state.messages[this.state.messages.length - 1].name;
+    //     if (name !== "Robot") {
+    //         clearTimeout(this.timeoutId);
+    //         this.timeoutId = setTimeout(() => this.addRobotAnswer(name), 1000);
+    //     }
+    // }
+
+    // addRobotAnswer(name) {
+    //     this.setState(
+    //         (state) => ({ messages: [...this.state.messages, { name: 'Robot', content: `Уважаемый ${name}! Ваше сообщение принято.` }] })
+    //     )
+    // }
+
+
+    render() {
+        let { chatId, title } = this;
+        const { getChatById, getMessagesList, onSendMessage } = this;
+        const { chats } = this.state;
+
+        if (chatId === undefined) {
+            chatId = this.props.match.params.id;
+        }
+
+        if (!(getChatById(chatId) === undefined)) {
+            title = getChatById(chatId).title;
+        }
+
+        return (
+            <>
+                <Header title={title} />
+                <div className="main">
+                    <ChatList chats={chats} />
+                    <MessageField chatId={chatId} messages={getMessagesList(chatId)} onSendMessage={onSendMessage} />
+                </div>
+
+            </>
+        )
+    }
+
 
 }
