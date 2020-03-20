@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { ChatContainer } from './containers/ChatContainer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ChatList } from './components/ChatList/ChatList';
+import Layout from './components/Layout';
 
 export const App = () => {
   return(
     <BrowserRouter>
-      <ChatList />
       <Switch>
         <Route path="/" exact>It's idex page</Route>
-        <Route path="/chats/" exact component={ChatContainer} />
-        <Route path="/chats/:id" exact component={ChatContainer} />
+        <Route path="/chats">
+          <ChatList />
+          <Switch>
+            <Route path="/chats/" exact component={ChatContainer} />
+            <Route path="/chats/:id" exact component={ChatContainer} />
+          </Switch>
+        </Route>
         <Route path="/about">It's about page</Route>
         <Route path="/contacts">It's contacts page</Route>
         <Route path="/">It's 404 page. Not found.</Route>

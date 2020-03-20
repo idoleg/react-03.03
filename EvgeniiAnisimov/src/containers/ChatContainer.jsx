@@ -32,17 +32,21 @@ export class ChatContainer extends Component {
 
   timeoutId = null;
 
-  // componentDidUpdate() {
-  //   const lastMessage = this.state.messages[this.state.messages.length - 1];
-  //
-  //   if(lastMessage.name !== ROBOT) {
-  //     clearTimeout(this.timeoutId);
-  //     this.timeoutId = setTimeout(() => this.handleSendMessage({
-  //       name: ROBOT,
-  //       content: `Hello, ${lastMessage.name}, I'm Robot!`,
-  //     }), 3000)
-  //   }
-  // }
+  handleRobotAnswer = () => {
+    const {id} = this.props.match.params;
+    if(id && this.state.chats[id]) {
+      const currentMessages = this.state.chats[id].messages;
+      const lastMessage = currentMessages[currentMessages.length - 1];
+
+      if(lastMessage && lastMessage.name !== ROBOT) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = setTimeout(() => this.handleSendMessage(id)({
+          name: ROBOT,
+          content: `Hello, ${lastMessage.name}, I'm Robot!`,
+        }), 3000)
+      }
+    }
+  }
 
   handleSendMessage = (id) => (message) => {
     this.setState((state) => ({
@@ -53,7 +57,7 @@ export class ChatContainer extends Component {
           messages: [...state.chats[id].messages, message]
         }
       }
-  }));
+  }), this.handleRobotAnswer);
 }
 
   render() {

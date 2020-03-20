@@ -24,7 +24,6 @@ export const ChatForm = ({onSendMessage}) => {
     // event.preventDefault();
     if(content !== '') {
       onSendMessage({name, content});
-      setName('');
     } else {
       alert("Введите текст сообщения!")
     }
