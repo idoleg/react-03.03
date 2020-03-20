@@ -70,7 +70,6 @@ render() {
 
     if (chatId === undefined) {
         chatId = this.props.match.params.id;
-
      }
  
      if (!(getChatById(chatId) === undefined)) {
