@@ -5,15 +5,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import './ChatList.scss'
 
-const ChatList = ({ contacts }) => {
+export const ChatList = ({ chats }) => {
 
     return (
         <div className='chatList'>            
                 <List component="nav" aria-label="contacts">
-                    {contacts.map(item => (<ListItem button><ListItemText primary={item.name} /></ListItem>))}
+                    {chats.map(item => (<ListItem button><ListItemText primary={item.title} /></ListItem>))}
                 </List>            
         </div>
     )
 };
 
-export { ChatList };
+// export { ChatList };
