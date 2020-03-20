@@ -1,15 +1,8 @@
 import React from "react"
-import {MessageList} from './MessageList/MessageList'
+import {Layout} from './Layout/Layout'
 
-export class App extends React.Component {
+export const App = () => {
 
-  render() {
-    return (
-		<>
-        <h3>Messenger</h3>
-        <MessageList />
-		</>
-    )
-  }
+	return <Layout />
 }
 

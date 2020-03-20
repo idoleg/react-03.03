@@ -1,0 +1,22 @@
+.message {
+	padding: 5px 15px;
+	width: 45%;
+	background-color: #CFD8DC;
+	border: 1px solid #B0BEC5;
+    border-radius: 5px;
+	align-self: flex-end;
+}
+
+.message:not(:last-child) {
+	margin-bottom: 15px;
+}
+
+.message--robot {
+	width: 35%;
+	align-self: flex-start;
+}
+
+.user-name {
+	font-size: 19px;
+	font-weight: 600;
+}
