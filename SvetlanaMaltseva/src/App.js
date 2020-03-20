@@ -21,13 +21,44 @@ class App extends Component {
           name: 'John',
           text: 'Hey, Brandon. Long time no see.'
         }
+      ],
+      robot: [
+        'How can I help you?',
+        'What can I do for you?',
+        "I'm not listening",
+        'Stay away from me'
       ]
     };
     this.addMessage = this.addMessage.bind(this);
   }
+
   addMessage(message) {
     const newMessageList = [...this.state.messages, message];
     this.setState({ messages: newMessageList });
+  }
+  componentDidUpdate() {
+    const { messages } = this.state;
+    const { robot } = this.state;
+    let rand = Math.floor(Math.random() * robot.length);
+    if (messages[messages.length - 1].name != 'Robot') {
+      setTimeout(
+        () =>
+          this.setState({
+            messages: [
+              ...this.state.messages,
+              {
+                name: 'Robot',
+                text:
+                  'Hey, ' +
+                  messages[messages.length - 1].name +
+                  '! ' +
+                  robot[rand]
+              }
+            ]
+          }),
+        1000
+      );
+    }
   }
 
   render() {

@@ -5,10 +5,17 @@ import {MessageList} from '../MessageList/MessageList';
 import {ChatForm} from '../ChatForm/ChatForm';
 
 export const Chat = ({messages, onSendMessage}) => {
-    return (<div>
-        <MessageList messages={messages}/>
-        <ChatForm onSendMessage={onSendMessage}/>
-    </div>);
+    if(messages){
+        return (<div>
+            {messages.length ? <MessageList messages={messages}/> : "Нет сообщений" }
+            <ChatForm onSendMessage={onSendMessage}/>
+        </div>);
+    } else {
+        return (
+            <strong>Выберите чат в списке.</strong>
+        )
+    }
+    
 }
 
 Chat.propTypes = {

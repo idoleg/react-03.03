@@ -1,34 +1,69 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import isFunction from 'lodash/isFunction';
+
+const useInput = (initialState) => {
+  const [state, setState] = useState(initialState);
+  const setInput = ({ currentTarget: { value }}) => setState(value);
+  return [state, setInput];
+};
 
 export const MessageForm = ({ setMessage }) => {
-  const [trigger, updateForm] = useState(false);
+  const [name, setName] = useInput('');
+  const [content, setContent] = useInput('');
+  const [nameSaved, setNameSaved] = useState(false);
 
-  const nameInput = useRef();
-  const messageInput = useRef();
+  const messageField = useRef();
 
   useEffect(() => {
-    const name = nameInput.current.value;
-    const content = messageInput.current.value;
+    messageField.current.focus();
+  }, []);
 
-    if(name && content) {
+  const sendForm = (e) => {
+    e.preventDefault();
+    if(name && content && isFunction(setMessage)) {
       setMessage({ name, content });
-      messageInput.current.value = '';
+      setContent({ currentTarget: { value: '' } });
+      setNameSaved(true);
+      messageField.current.focus();
     }
-  }, [trigger]);
+  };
 
   return (
     <form
       className='message-form'
-      onSubmit={e => {
-        e.preventDefault();
-        updateForm(!trigger);
-      }}
+      onSubmit={sendForm}
     >
-      <input type="text" placeholder='Имя' ref={nameInput}/>
-      <input type="text" placeholder='Сообщение' ref={messageInput} />
+      {nameSaved
+        ? (
+          <div>
+            <strong>{name}</strong>
+            <span style={{
+              display: 'inline-block',
+              color: 'red',
+              cursor: 'pointer',
+              marginLeft: '10px',
+            }} onClick={() => setNameSaved(false)}>x</span>
+          </div>
+        ) : (
+          <input
+            name='name'
+            type="text"
+            value={name}
+            onChange={setName}
+            placeholder='Имя'
+          />
+        )
+      }
+      <input
+        name='message'
+        ref={messageField}
+        value={content}
+        onChange={setContent}
+        placeholder='Сообщение'
+      />
       <input type="submit" value='Отправить' />
     </form>
-  );
+  )
 };
 
 export default MessageForm;

@@ -6,7 +6,7 @@ export const ChatList = () => {
     return (
         <Nav variant="pills" className="flex-column">
             <Nav.Item>
-                <Nav.Link active eventKey="first">Alex</Nav.Link>
+                <Nav.Link active eventKey="first">RobotAlex</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link disabled eventKey="second">Helen</Nav.Link>
