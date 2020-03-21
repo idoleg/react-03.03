@@ -36,19 +36,20 @@ export class ChatContainer extends Component {
 
     timerId = null;
 
-    componentDidUpdate() {
+    handleRobotAnswer = () => {
         const {id} = this.props.match.params;
-        const currentMessages = this.state.chats[id].messages;
-        const lastMessage = currentMessages[currentMessages.length - 1];
 
-        if (lastMessage.name !== bot) {
-            clearTimeout(this.timerId);
-            this.timerId = setTimeout(() => {
-                this.handleSendMessage(id)({
-                    name: 'Bot',
-                    content: `Hello ${lastMessage.name}, it's bot`
-                })
-            }, 2000);
+        if(id && this.state.chats[id]) {
+            const currentMessages = this.state.chats[id].messages;
+            const lastMessage = currentMessages[currentMessages.length - 1];
+
+            if(lastMessage && lastMessage.name != bot) {
+                clearTimeout(this.timeoutId);
+                this.timeoutId = setTimeout(() => this.handleSendMessage(id)({
+                    name: bot,
+                    content: `Hello ${lastMessage.name}, I'm bot!`,
+                }), 1000);
+            }
         }
     }
 
@@ -62,7 +63,7 @@ export class ChatContainer extends Component {
                     messages: [...state.chats[id].messages, message]
                 }
             }
-        }));
+        }), this.handleRobotAnswer);
     }
 
     render() {
