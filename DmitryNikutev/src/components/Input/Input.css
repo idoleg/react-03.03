@@ -1,0 +1,18 @@
+.InputForm{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.InputForm > *:not(:first-child){
+    margin-left: 16px;
+}
+
+.InputField {
+    width: 100%;
+}
+
+.InputButton {
+    align-self: center;
+    width: auto;
+}
