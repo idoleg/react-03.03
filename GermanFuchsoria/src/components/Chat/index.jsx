@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Message } from '../Message';
 import { MessageList } from '../MessageList';
 import ChatForm from '../ChatForm';
-import './index.scss';
+import './styles.scss';
 
 export const Chat = ({ messages, onSendMessage }) => {
   return (
