@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react"
+import React, {useState, useRef} from "react"
 import PropTypes from "prop-types"
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -22,19 +22,23 @@ export const ChatForm = ({onSendMessage}) => {
 	const [name, setName] = useInput('user')
 	const [text, setText] = useInput('')
 
+	const inputText = useRef()
+	const inputName = useRef()
+
+
 	function checkFields () {
 		if(text && name) {
 			onSendMessage({name, text})
 			setText({currentTarget: { value: ''}})
-			document.getElementById('text-field').focus()
+			inputText.current.focus()
 
 		}
 		if(text && !name) {
-			document.getElementById('name-field').focus()
+			inputName.current.focus()
 			return false
 		}
 		else {
-			document.getElementById('text-field').focus()
+			inputText.current.focus()
 			return false
 		}
 	}
@@ -57,21 +61,19 @@ export const ChatForm = ({onSendMessage}) => {
 	return (
 		<form>
 		 	<TextField
-		 	id="name-field"
+		 	inputRef={inputName}
 		 	label="Name"
 		 	variant="outlined"
-			name="name"
 			value={name}
 			onChange={setName}
 			onKeyDown = {onKeyDown}/>
 
 			<TextField
-			id="text-field"
+			inputRef={inputText}
 			autoFocus
 			multiline
 		 	label="Type your message"
 		 	variant="outlined"
-			name="text"
 			value={text}
 		 	onChange={setText}
 			onKeyDown = {onKeyDown}/>
