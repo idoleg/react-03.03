@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
-import Router from '../components/Router/Router';
+import Router from '../../components/Router';
 
 export default class LayoutContainer extends Component {
   render() {

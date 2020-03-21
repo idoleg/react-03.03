@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Message } from '../Message/Message';
+import { Message } from '../Message';
 
 export const MessageList = ({ messages }) => {
   const listRef = useRef(null);

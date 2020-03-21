@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import { connect } from 'react-redux';
 
-export default class ChatForm extends Component {
+class ChatForm extends Component {
   static propTypes = {
     onSendMessage: PropTypes.func.isRequired
   };
@@ -15,23 +16,16 @@ export default class ChatForm extends Component {
 
   sendMessage = e => {
     e.preventDefault();
-    const { name, message } = e.target;
+    const { message } = e.target;
+    const { name, accountAccess } = this.props.profile;
 
-    this.props.onSendMessage({ author: name.value, text: message.value, authorAccess: 'user' });
+    this.props.onSendMessage({ author: name, text: message.value, authorAccess: accountAccess });
     this.clearInput(message);
   };
 
   render() {
     return (
       <form className="chat__form" onSubmit={this.sendMessage}>
-        <TextField
-          type="text"
-          name="name"
-          className="chat__input chat__input_name"
-          placeholder="Write your Name"
-          label="Name"
-          required
-        />
         <TextField
           type="text"
           name="message"
@@ -47,3 +41,11 @@ export default class ChatForm extends Component {
     );
   }
 }
+
+const mapStateToProps = (store, props) => {
+  const { profile } = store;
+
+  return { profile };
+};
+
+export default connect(mapStateToProps)(ChatForm);

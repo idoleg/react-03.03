@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { textCapitalize } from '../common/textUtils';
-import './Message.scss';
+import './styles.scss';
 
 const normalMessageStyles = classNames('message');
 const botMessageStyles = classNames('message', 'message_access_bot');
