@@ -6,22 +6,45 @@ export const bot = 'Bot'
 
 export class ChatContainer extends Component {
     state = {
-        messages: [
-            {name: "Boby", content: "Hello, World!"},
-            {name: "Dilan", content: "Hello, how are you?"},
-            {name: "Boby", content: "I'm good, thanks"},
-            ]
+        chats: {
+            1:{
+                name: 'Family',
+                messages:[
+                    {name: "Alex", content: "Hello fam!"},
+                    {name: "Dad", content: "Hello, how are you?"},
+                    {name: "Mom", content: " Don't forget about the dinner tonight!"},
+                ],
+            },
+            2:{
+                name: 'Work',
+                messages:[
+                    {name: "Dilan", content: "Hello, World!"},
+                    {name: "Andrew", content: "Hello, are you coming?"},
+                    {name: "Dilan", content: " Of course! See ya on Sunday"},
+                ],
+            },
+            3:{
+                name: 'Friends',
+                messages:[
+                    // {name: "Boby", content: "Hello, World!"},
+                    // {name: "Scott", content: "Hello, are you coming?"},
+                    // {name: "Jennifer", content: " Wish I could come, but I'm out of town this weekend"},
+                ],
+            },
+        }
     }
 
     timerId = null;
 
     componentDidUpdate() {
-        const lastMessage = this.state.messages[this.state.messages.length - 1];
+        const {id} = this.props.match.params;
+        const currentMessages = this.state.chats[id].messages;
+        const lastMessage = currentMessages[currentMessages.length - 1];
 
         if (lastMessage.name !== bot) {
             clearTimeout(this.timerId);
             this.timerId = setTimeout(() => {
-                this.handleSendMessage({
+                this.handleSendMessage(id)({
                     name: 'Bot',
                     content: `Hello ${lastMessage.name}, it's bot`
                 })
@@ -30,13 +53,24 @@ export class ChatContainer extends Component {
     }
 
 
-    handleSendMessage = (message) => {
+    handleSendMessage = (id) => (message) => {
         this.setState((state) => ({
-            messages: [...state.messages, message]
+            chats: {
+                ...state.chats,
+                [id]: {
+                    name: state.chats[id].name,
+                    messages: [...state.chats[id].messages, message]
+                }
+            }
         }));
     }
 
     render() {
-        return <Chat messages={this.state.messages} onSendMessage={this.handleSendMessage}/>;
+        const {id} = this.props.match.params;
+        // const {messages} = this.state.chats[id];
+        const messages = id && this.state.chats[id] ? this.state.chats[id].messages : undefined;
+
+
+        return <Chat messages={messages} onSendMessage={this.handleSendMessage(id)}/>;
     }
 }

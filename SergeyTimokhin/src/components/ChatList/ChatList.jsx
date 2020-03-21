@@ -6,15 +6,16 @@ import './ChatList.css';
 
 
 export const ChatList = () => {
-    const [chats, setChats] = useState([
+    const [chatsList, setChats] = useState([
         {chatLink: "/chats/1", chatAvatar: '../../../img/ava1.jpg', chatTitle: 'Family', messageSender: 'Mom', lastMessage: " Don't forget about the dinner tonight!"},
         {chatLink: "/chats/2", chatAvatar: '../../../img/ava3.jpg', chatTitle: 'Work', messageSender: 'Dilan', lastMessage: " Of course! See ya on Sunday"},
-        {chatLink: "/chats/3", chatAvatar: '../../../img/ava2.jpg', chatTitle: 'Friends', messageSender: 'to Scott, Alex, Jennifer', lastMessage: " — Wish I could come, but I'm out of town this…"},
+        {chatLink: "/chats/3", chatAvatar: '../../../img/ava2.jpg', chatTitle: 'Friends', messageSender: 'Jennifer', lastMessage: " Wish I could come, but I'm out of town this…"},
+        {chatLink: "/chats/4", chatAvatar: '', chatTitle: 'T', messageSender: 'Test', lastMessage: "Last"},
     ]);
 
     return (
         <List className ="chatList">
-            {chats.map((item, index) =>
+            {chatsList.map((item, index) =>
             <ChatListItem chatLink = {item.chatLink}
             chatAvatar = {item.chatAvatar}
             chatTitle = {item.chatTitle}

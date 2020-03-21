@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
 export const App = () => {
     return (<div style={ { display: 'flex', flexWrap: 'wrap' } }>
+    <Header />
       <BrowserRouter>
         <ChatList/>
         <Switch>
