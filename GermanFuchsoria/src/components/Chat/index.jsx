@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Message } from '../Message/Message';
-import { MessageList } from '../MessageList/MessageList';
-import ChatForm from '../ChatForm/ChatForm';
-import './Chat.scss';
+import { Message } from '../Message';
+import { MessageList } from '../MessageList';
+import ChatForm from '../ChatForm';
+import './index.scss';
 
 export const Chat = ({ messages, onSendMessage }) => {
   return (

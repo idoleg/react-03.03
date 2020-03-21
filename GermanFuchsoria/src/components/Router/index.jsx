@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Profile from '../Profile/Profile';
+import ProfileContainer from '../../containers/ProfileContainer';
 import ChatContainer from '../../containers/ChatContainer';
-import Header from '../Header/Header';
+import HeaderContainer from '../../containers/HeaderContainer';
 
 export default class Router extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Header />
+        <HeaderContainer />
         <Switch>
           <Route path="/" exact>
             It's index page
@@ -19,7 +19,7 @@ export default class Router extends Component {
               <Route path="/chats/:id" exact component={ChatContainer} />
             </Switch>
           </Route>
-          <Route path="/profile" component={Profile}></Route>
+          <Route path="/profile" component={ProfileContainer}></Route>
           <Route path="/">It's 404 page. Not found.</Route>
         </Switch>
       </BrowserRouter>
