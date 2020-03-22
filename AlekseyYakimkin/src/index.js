@@ -1,16 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MessageList } from "./component/MessageList/MessageList";
-import { Message } from "./component/Message/Message";
+import { App } from './App'
 
-const messages = [
-    { name: "Ivan", content: "Hello, world!" },
-    { name: "Petr", content: "Helo, how are you?" },
-    { name: "Ivan", content: "I'm well" },
-]
-
-ReactDOM.render(<MessageList messages={messages}/> , document.getElementById("root"))
-//ReactDOM.render(<Message name={"test"} content={"test"} /> , document.getElementById("root"))
+ReactDOM.render(<App/> , document.getElementById("root"))
 
 // const messages = [
 //     { name: "Ivan", content: "Hello, world!" },
@@ -33,6 +25,7 @@ ReactDOM.render(<MessageList messages={messages}/> , document.getElementById("ro
 //     return (
 //         <div>
 //             <ul>
+                
 //                 {messages.map((item, index) => <Message {...item} key={index} />)}
 //             </ul>
 //             <button id="newmessage" name="newmessage" val="newmessage" onClick={pushNewMessage}>Новое сообщение</button>
