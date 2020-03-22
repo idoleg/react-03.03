@@ -21,7 +21,14 @@ export default class App extends React.Component {
     const array = [...this.state.messages, message];
     this.setState({ messages: array });
   }
-
+  componentDidUpdate() {
+    if (this.state.messages.length % 2 === 1) {
+      setTimeout(() =>
+          this.setState(
+              { messages: [ ...this.state.messages, {author: 'Robot', text: 'Не приставай ко мне, я робот!'} ] }),
+            1000);
+        }
+    }
   render() {
 
     const { messages } = this.state;

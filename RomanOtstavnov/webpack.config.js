@@ -3,7 +3,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin  = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "src", "index.js"),
+  entry: [
+    '@babel/polyfill',
+    path.resolve(__dirname, "src", "index.js"),
+  ],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "boundle.js",
@@ -15,7 +18,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env', '@babel/react']
+          presets: ['@babel/env', '@babel/react'],
+          plugins: [
+            [
+              "@babel/plugin-proposal-class-properties",
+              { "loose": true }
+            ]
+          ]
         }
       },
       {
@@ -48,5 +57,13 @@ module.exports = {
   devServer: {
     contentBase: 'src',
     port: 7000,
+    proxy: {
+      '/aiproject/api/': {
+        target: 'https://aiproject.ru/api/',
+        pathRewrite: { '/aiproject/api/': '' },
+        secure: false,
+        changeOrigin: true,
+      }
+    }
   }
 };
