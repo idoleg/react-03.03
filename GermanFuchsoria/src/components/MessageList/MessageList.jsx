@@ -6,14 +6,14 @@ export const MessageList = ({ messages }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
-    listRef.current.lastChild.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (listRef.current.lastChild) {
+      listRef.current.lastChild.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
   });
 
   return (
     <ul className="chat__messages" ref={listRef}>
-      {messages.map((message, i) => (
-        <Message {...message} key={i} />
-      ))}
+      {messages && messages.map((message, i) => <Message {...message} key={i} />)}
     </ul>
   );
 };

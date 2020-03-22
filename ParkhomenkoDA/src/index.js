@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/MessageField/MessageField';
+import {App} from './App';
 
 /*const messages = [
     { name: "Ivan", content: "Hello, world!" },

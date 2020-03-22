@@ -14,8 +14,7 @@ module.exports = {
         include: path.resolve(__dirname, "src"),
         loader: 'babel-loader',
         options: {
-            presets: ['@babel/env', '@babel/react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
+            presets: ['@babel/env', '@babel/react']
         }
       },
       {

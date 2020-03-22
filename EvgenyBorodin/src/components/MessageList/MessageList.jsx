@@ -1,5 +1,7 @@
 import React from "react";
-import { Message } from './../Message/Message.jsx'
+import { Message } from './../Message/Message.jsx';
+
+import './MessageList.css';
 
 export const MessageList = ({messages}) => {
     return (<ul>

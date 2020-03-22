@@ -1,27 +1,9 @@
 .message__wrapper {
-  padding: 0 0 30px;
-  width: 500px;
-  margin: 0 auto;
-}
-
-.message__btn {
-  background: transparent;
-  border: 1px solid #000000;
+  padding: 30px 15px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto 20px auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 50px;
-  margin: 0 auto;
-  cursor: pointer;
-  transition: background 0.3s ease-in, color 0.3s ease-in;
-}
-
-.message__btn:focus {
-  outline: none;
-}
-
-.message__btn:hover, .message__btn:active {
-  background: #000000;
-  color: #ffffff;
+  background: #fafafa;
+  flex-direction: column;
 }
