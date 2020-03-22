@@ -1,12 +1,23 @@
 .chat-list {
-	width: 25%;
-	background-color: #CFD8DC;
+	width: 30%;
+	height: 500px;
+	background-color: #ECEFF1;
 	border: 1px solid #B0BEC5;
-    border-radius: 5px;
+/*    border-radius: 5px;*/
 	color: #303F9F;
 }
 
 span.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
 	font-weight: 600;
 	cursor: pointer;
+	color: #00796B;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
+	text-decoration-color: #009688;
 }

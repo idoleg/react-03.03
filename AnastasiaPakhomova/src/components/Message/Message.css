@@ -1,10 +1,11 @@
 .message {
 	padding: 5px 15px;
 	width: 45%;
-	background-color: #CFD8DC;
+	background-color: #ECEFF1;
 	border: 1px solid #B0BEC5;
     border-radius: 5px;
 	align-self: flex-end;
+	font-family: sans-serif;
 }
 
 .message:not(:last-child) {
@@ -17,6 +18,7 @@
 }
 
 .user-name {
-	font-size: 19px;
+	font-size: 18px;
 	font-weight: 600;
+	color: #00695C;
 }
