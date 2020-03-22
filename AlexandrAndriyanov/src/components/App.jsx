@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 
-import {MessageField} from "./MessageField";
+import {ChatContainer} from '../containers/ChatContainer.jsx'
+
+export const App = () => {
+    return (
+      <ChatContainer/>
+    )
+  
+}
+
+
+/*import {MessageField} from "./MessageField";
 
 
 
@@ -40,4 +50,4 @@ render(){
         </>
     )
 }
-}
+}*/
