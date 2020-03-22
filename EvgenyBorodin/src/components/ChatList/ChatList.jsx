@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChatListItem } from '../ChatListItem/ChatListItem.jsx'
+import { ChatListItem } from '../ChatListItem/ChatListItem.jsx';
 
-import './Chatlist.css'
+import './Chatlist.css';
 
-export const ChatList = ({chats}) => {
+export const ChatList = ({chats, selectedId, onNewChat}) => {
     return <form className="chatlist__form">
-        {chats.map((item, index) => <ChatListItem item={item} index={index} key={index}/>)}
+        {Object.entries(chats).map((item, index) => <ChatListItem item={item[1]} index={item[0]} selectedId={selectedId} key={item[0]}/>)}
+        <span className="chatlist__btn" onClick={onNewChat}>New chat</span>
     </form> 
 }
 
 ChatList.propTypes = {
-    chats: PropTypes.arrayOf(PropTypes.object).isRequired
+    chats: PropTypes.object.isRequired,
+    selectedId: PropTypes.string,
+    onNewChat: PropTypes.func.isRequired
 }

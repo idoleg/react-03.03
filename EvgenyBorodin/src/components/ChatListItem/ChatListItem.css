@@ -1,4 +1,4 @@
-input {
+input[type:radio] {
     display: none;
 }
 
@@ -8,7 +8,24 @@ label {
     cursor: pointer;
 }
 
-input:checked ~ label {
+input[type:radio]:checked ~ label {
+    color: white;
+    background-color: blue;
+}
+
+.link {
+    display: block;
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.link:last-child {
+    margin-bottom: 10px;
+}
+
+.selected {
     color: white;
     background-color: blue;
 }

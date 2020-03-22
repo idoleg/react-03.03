@@ -10,3 +10,17 @@
     max-width: 150px;
     min-width: 100px;
 }
+
+.chatlist__form > span {
+    padding: 0 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px 20px;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.chatlist__form > span:active {
+    background-color: #aaa;
+}

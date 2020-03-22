@@ -1,31 +1,48 @@
 import React from "react";
-import ReactDom from "react-dom";
+import ReactDOM from "react-dom";
+import {App} from './App';
 
-//const element = React.createElement("a", {href: "http://ya.ru"}, "Yandex.ru")
+// console.log(JS, Test, Content);
 
-// function Link(props) { 
-//     return React.createElement("a", {href: "http://" + props.to}, props.to.toUpperCase());
+// const messages = [
+//     { name: "Ivan", content: "Hello, world!" },
+//     { name: "Petr", content: "Helo, how are you?" },
+//     { name: "Ivan", content: "I'm well" },
+// ]
+
+
+// const Message = ({name, content}) => {
+//     return <li><strong>{name}:</strong> {content}</li>
 // }
-// function Link(props) {
-//     return <a href= {"https://" + props.to}>{props.to.toLocaleUpperCase()}</a>
+
+// const MessageList = ({messages}) => {
+//     return (<ul>
+//         {messages.map((item, index) => <Message {...item} key={index} />)}
+//     </ul>);
 // }
 
-const messages = [
-    {name: "Ivan: ", content: "Hello world!"},
-    {name: "Alexandr: ", content: "Hi!"},
-    {name: "Dmitry: ", content: "Hi, how are you?"},
-    {name: "Victor: ", content: "I'm fine, thanks"},
-]
+// const Messenger = ({messages}) => {
+    
+//     const sendMessage = () => {
+//         messages.push({name: "Test", content: "It's wrong way"});
+//         renderApp();
+//     }
 
-const Message = ({name, content}) => {
-return <li><strong>{name}</strong>{content}</li>
-}
+//     return (
+//         <div>
+//             <MessageList messages={messages} />
+//             <button onClick={sendMessage}>Send message</button>
+//         </div>
+//     )
+// }
 
-const MessageList = ({messages}) => {
-    return (<ul>
-        {/* {props.messages.map(item => <Message name = {item.name} content = {item.content} />)} */}
-        {messages.map(item => <Message {...item} />)}
-        </ul>);
-}
+/// декларативный подход - onclick
+/// императивный подход - addEnentListenet
 
-ReactDom.render(<MessageList messages = {messages}/>, document.getElementById("root"))
+// function renderApp() {
+//     ReactDOM.render(<Messenger messages={messages} />, document.getElementById("root"))
+// }
+
+// renderApp();
+
+ReactDOM.render(<App/>, document.getElementById("root"))
