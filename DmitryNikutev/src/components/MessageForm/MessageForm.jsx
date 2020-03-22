@@ -1,35 +1,35 @@
 import React, {useRef, useEffect} from "react";
-import {useInput, enterKeyToSubmit} from "../../utils/InputUtils";
+import {useInput, enterKeyToSubmit} from "../../utils/InputUtil";
 
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 
-import "./Input.css";
+import "./MessageForm.css";
 
 
-export const Input = ({addMessage}) => {
-   const [message, setMessage, resetMessage] = useInput("");
-   
+export const MessageForm = ({sendMessage}) => {
+   const [message, setMessage] = useInput("");
+
    //focus
    const textfield = useRef();
    useEffect(() => {
       textfield.current.focus();
    }, []);
-   
+
    const submitForm = () => {
       const trimmedInput = message.trim();
       if (trimmedInput)
-         addMessage(trimmedInput);
-      resetMessage();
+         sendMessage(trimmedInput);
+      setMessage(null);
       textfield.current.focus();
    };
-   
+
    return (
       <form className="InputForm">
          <TextField
             className="InputField"
-            label="Type something to bot here"
+            label="Type something here"
             multiline
             rows="2"
             variant="outlined"
@@ -37,15 +37,13 @@ export const Input = ({addMessage}) => {
             value={message}
             onChange={setMessage}
             onKeyPress={(ev) => enterKeyToSubmit(ev, submitForm)}/>
-         
-         <Button
-            variant="contained"
+
+         <Fab
             color="primary"
-            className="InputButton"
-            onClick={submitForm}
-            endIcon={<SendIcon/>}>
-            Send
-         </Button>
+            className="SendButton"
+            onClick={submitForm}>
+            <SendIcon />
+         </Fab>
       </form>
    )
 };
