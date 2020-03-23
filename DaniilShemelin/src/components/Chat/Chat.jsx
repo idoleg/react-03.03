@@ -6,12 +6,16 @@ import './Chat.css';
 import PropTypes from 'prop-types';
 
 export const Chat = ({ messages, onSendMessage }) => {
+  if(messages) {
   return (
     <div className="chat__wrapper">
-      <MessageList messages={ messages } />
+      { messages.length ? <MessageList messages={ messages } /> : 'Нет сообщений' }
       <ChatForm onSendMessage={ onSendMessage } />
     </div>
   )
+  } else {
+    return <div>Выбери чат из списка</div>
+  }
 }
 
 Chat.propTypes = {
