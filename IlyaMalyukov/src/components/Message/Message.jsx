@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import PropTypes from 'prop-types';
 import classname from 'classname';
 
@@ -12,4 +13,9 @@ export const Message = ({ name, content }) => {
 Message.propTypes = {
     name: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
+=======
+
+export const Message = ({name, content}) => {
+    return <li><strong>{name}:</strong> {content}</li>
+>>>>>>> master
 }

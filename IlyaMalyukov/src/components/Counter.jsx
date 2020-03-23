@@ -62,7 +62,11 @@ import React from 'react';
 //     }
 // }
 
+<<<<<<< HEAD
 export const CounterFunc = ({ counter, handleCounter }) => {
+=======
+export const CounterFunc = ({counter, handleCounter}) => {
+>>>>>>> master
 
     const handleClick = (event) => {
         const action = Number(event.currentTarget.dataset.action);

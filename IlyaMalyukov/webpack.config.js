@@ -9,6 +9,7 @@ module.exports = {
         filename: "index.js",
     },
     module: {
+<<<<<<< HEAD
         rules: [{
             test: /\.(js|jsx)$/,
             include: path.resolve(__dirname, "src"),
@@ -26,6 +27,22 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") })
+=======
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                include: path.resolve(__dirname, "src"),
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/env', '@babel/react'],
+                    plugins: ['@babel/plugin-proposal-class-properties']
+                }
+            },
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html")})
+>>>>>>> master
     ],
     resolve: {
         extensions: [".jsx", ".js"],
