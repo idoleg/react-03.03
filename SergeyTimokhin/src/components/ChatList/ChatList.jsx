@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 
 import './ChatList.css';
 
-
 export const ChatList = () => {
     const [chatsList, setChats] = useState([
         {chatLink: "/chats/1", chatAvatar: '../../../img/ava1.jpg', chatTitle: 'Family', messageSender: 'Mom', lastMessage: " Don't forget about the dinner tonight!"},

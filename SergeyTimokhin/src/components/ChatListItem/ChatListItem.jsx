@@ -14,7 +14,8 @@ import './ChatListItem.css';
 export const ChatListItem = ({chatLink, chatAvatar, chatTitle, messageSender, lastMessage}) => {
     return (
         <>
-        <ListItem alignItems="flex-start"><Link className="ChatListItem" to={chatLink}>
+        <Link className="ChatListItem" to={chatLink}>
+        <ListItem alignItems="flex-start">
             <ListItemAvatar>
                  <Avatar alt="Remy Sharp" src={chatAvatar} />
              </ListItemAvatar>
@@ -26,8 +27,9 @@ export const ChatListItem = ({chatLink, chatAvatar, chatTitle, messageSender, la
                 </Typography>
                 { lastMessage }
                 </React.Fragment>
-            }/></Link>
+            }/>
         </ListItem>
+        </Link>
         <Divider variant="inset" component="li" />
         </>
     )

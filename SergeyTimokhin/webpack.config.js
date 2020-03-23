@@ -30,7 +30,11 @@ module.exports = {
         extensions: [".jsx", ".js"],
     },
     devServer: {
-        historyApiFallback: true,
+        // historyApiFallback: true,
+        port: 8080,
+        historyApiFallback: {
+            index: 'index.html'
+        }
     },
     devtool: 'inline-source-map'
 }

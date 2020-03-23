@@ -3,31 +3,28 @@ import {ChatContainer} from './containers/ChatContainer';
 import {Header} from './components/Header/Header';
 import {ChatList} from './components/ChatList/ChatList';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Profile} from './components/Profile/Profile';
 
 
 export const App = () => {
     return (<div style={ { display: 'flex', flexWrap: 'wrap' } }>
-    <Header />
       <BrowserRouter>
-        <ChatList/>
+      <Header />
         <Switch>
-            <Route path="/" exact>It's Index Page</Route>
-            <Route path="/chats/" exact component={ChatContainer} />
-            <Route path="/chats/:id" exact component={ChatContainer} />
-            <Route path="/about">It's about Page</Route>
-            <Route path="/contacts">It's contacts Page</Route>
-            <Route path="/">It's 404 Page. Not found</Route>
+            <Route path="/" exact>It's index page</Route>
+            <Route path="/profile" exact component={Profile} />
+            <Route path="/chats">
+                <ChatList/>
+                <Switch>
+                    <Route path="/chats" exact component={ChatContainer} />
+                    <Route path="/chats/:id" exact component={ChatContainer} />
+                </Switch>
+            </Route>
+            <Route path="/about">It's about page</Route>
+            <Route path="/contacts">It's contacts page</Route>
+            <Route path="/">It's 404 page. Not found.</Route>
         </Switch>
       </BrowserRouter>
     </div>
     )
 }
-
-// export const App = () => {
-//     return (<div style={ { display: 'flex', flexWrap: 'wrap' } }>
-//         <Header />
-//         <ChatList />
-//         <ChatContainer />
-//     </div>
-//     )
-// }
