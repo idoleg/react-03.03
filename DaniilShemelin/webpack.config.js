@@ -28,5 +28,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")}),
-  ]
+  ],
+  resolve: {
+    extensions: ['.jsx', '.js'],
+  },
+  devServer: {
+    historyApiFallback: true,
+  },
+  devtool: 'inline-source-map'
 }
