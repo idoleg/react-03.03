@@ -32,38 +32,51 @@ export class ChatContainer extends Component {
       timeoutId: null
     };
     this.handleSendMessage = this.handleSendMessage.bind(this);
+    this.handleRobotAnswer = this.handleRobotAnswer.bind(this);
   }
 
-  // componentDidUpdate() {
-  //   const lastUserIdx = this.state.messages.length - 1;
-  //   const lastUserName = this.state.messages[lastUserIdx].name;
+  handleRobotAnswer () {
+    const {id} = this.props.match.params;
 
-  //   const robotName = "Mr. Robot";
-  //   const robotMessage = `What's wrong with you, ${ lastUserName }? I'm Robot, don't talk to me.`;
+    if(id && this.state.chats[id]) {
+      const currentMessage = this.state.chats[id].messages;
 
-  //   if(lastUserName !== robotName) {
-  //     clearTimeout(this.timeoutId);
-  //     this.timeoutId = setTimeout(() => this.handleSendMessage({
-  //         name: robotName,
-  //         content: robotMessage,
-  //     }), 1000);
-  //   }
-  // }
+      const lastUserIdx = currentMessage.length - 1;
+      const lastUserName = currentMessage[lastUserIdx].name;
 
-  handleSendMessage(message) {
+      const robotName = "Mr. Robot";
+      const robotMessage = `What's wrong with you, ${ lastUserName }? I'm Robot, don't talk to me.`;
+
+      if(lastUserName !== robotName) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = setTimeout(() => this.handleSendMessage(id)({
+            name: robotName,
+            content: robotMessage,
+        }), 1000);
+      }
+    }
+  }
+
+  handleSendMessage = (id) => (message) => {
     this.setState({
-      messages: [...this.state.messages, message]
-    })
+      chats: {
+        ...this.state.chats,
+        [id]: {
+          name: this.state.chats[id].name,
+          messages: [...this.state.chats[id].messages, message]
+        }
+      }
+    }, this.handleRobotAnswer)
   }
 
   render() {
     const {id} = this.props.match.params;
-    const {messages} = this.state.chats[id];
+    const {messages} = id && this.state.chats[id] ? this.state.chats[id] : undefined;
 
     return (
       <>
         <ChatList />
-        <Chat messages={ messages } onSendMessage={ this.handleSendMessage }/>
+        <Chat messages={ messages } onSendMessage={ this.handleSendMessage(id) }/>
       </>);
   }
 }
