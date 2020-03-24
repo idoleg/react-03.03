@@ -11,6 +11,9 @@ export class ChatListContainer extends Component {
             { name: "Robot", img: "https://via.placeholder.com/40" },
         ]
     }
+    componentWillUnmount(){
+        console.log("ChatListContainer unmount")
+    }
     render() {
         return  <ChatList chats={this.state.chats} />
     }
