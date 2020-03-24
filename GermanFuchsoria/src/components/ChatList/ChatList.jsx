@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import ChatListItem from '../ChatListItem/ChatListItem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,31 +17,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ChatList() {
+export default function ChatList({ chats, addNewChat }) {
+  const [title, setTitle] = useState('');
   const classes = useStyles();
 
   return (
-    <List className={classes.root}>
-      <ListItem alignItems="flex-start" className={classes.item}>
-        <ListItemAvatar>
-          <Avatar alt="Brunch this weekend?" />
-        </ListItemAvatar>
-        <ListItemText primary="Brunch this weekend?" secondary={'Do you have Paris recommendations? Have you ever…'} />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start" className={classes.item}>
-        <ListItemAvatar>
-          <Avatar alt="Summer BBQ" />
-        </ListItemAvatar>
-        <ListItemText primary="Summer BBQ" secondary={'Do you have Paris recommendations? Have you ever…'} />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start" className={classes.item}>
-        <ListItemAvatar>
-          <Avatar alt="Alex" />
-        </ListItemAvatar>
-        <ListItemText primary="Alex" secondary={'Do you have Paris recommendations? Have you ever…'} />
-      </ListItem>
-    </List>
+      <List className={classes.root}>
+        {chats.map(([id, chat]) => (
+          <ChatListItem id={id} key={id} title={chat.chatTitle} />
+        ))}
+        <form onSubmit={addNewChat(title)}>
+          <input type="text" placeholder="Chat Name" onInput={e => setTitle(e.target.value)} />
+          <button type="submit">Add new chat</button>
+        </form>
+      </List>
   );
 }

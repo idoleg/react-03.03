@@ -28,16 +28,20 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
+          process.env.NODE_ENV === 'production'
+            ? MiniCssExtractPlugin.loader
+            : 'style-loader',
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'css-loader',
             options: {
-              sourceMap: true,
-              hmr: process.env.NODE_ENV === 'development'
-            }
+              modules: {
+                localIdentName: '[name]__[local]',
+              }
+            },
           },
-          'css-loader',
+          'sass-loader',
         ],
       },
     ]
