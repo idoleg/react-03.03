@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Message } from '../Message/Message';
 import { MessageList } from '../MessageList/MessageList';
 import { ChatForm } from '../ChatForm/ChatForm';
-import { Header } from '../Header/Header';
 
 export const Chat = ({ messages, onSendMessage }) => {
     if (messages) {
