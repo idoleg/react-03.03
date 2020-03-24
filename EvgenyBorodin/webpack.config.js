@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin  = require("mini-css-extract-plugin");
 
+
 module.exports = {
     entry: path.resolve(__dirname, "src", "index.js"),
     output: {
@@ -11,7 +12,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx)$/i,
                 include: path.resolve(__dirname, "src"),
                 loader: 'babel-loader',
                 options: {
@@ -45,5 +46,9 @@ module.exports = {
     ],
     resolve: {
         extensions: [".jsx", ".js"],
-    }
+    },
+    devServer: {
+        historyApiFallback: true,
+    },
+    devtool: 'inline-source-map'
 }
