@@ -1,27 +1,23 @@
 import React, {useState, useEffect} from "react";
-import {MessageList} from "../../components/MessageList/MessageList";
-import {MessageForm} from "../../components/MessageForm/MessageForm";
+import {MessageList} from "../MessageList/MessageList";
+import {MessageForm} from "../MessageForm/MessageForm";
 import {BOT_MESSAGE} from "../../utils/Constants";
 
 import {Card} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-export const ChatView = ({messages, addMessage, chatId}) => {
+export const ChatView = ({messages, addMessage}) => {
    const [botTimer, setBotTimer] = useState(null);
 
    const classes = useStyles();
-
-   const sendMessage = (text, automated = false) => {
-      addMessage(text, chatId, automated)
-   };
 
    //respond to user after messages updated
    useEffect(() => {
       if ([...messages.values()].last() && ![...messages.values()].last().automated) {
          clearTimeout(botTimer);
          setBotTimer(setTimeout(
-            () => sendMessage(BOT_MESSAGE, true),
+            () => addMessage(BOT_MESSAGE, true),
             700
          ));
       }
@@ -30,7 +26,7 @@ export const ChatView = ({messages, addMessage, chatId}) => {
    return (
       <Card className={classes.root}>
          <MessageList messages={[...messages.values()]}/>
-         <MessageForm sendMessage={sendMessage}/>
+         <MessageForm sendMessage={addMessage}/>
       </Card>
    );
 };
