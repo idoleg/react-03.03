@@ -11,19 +11,34 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'grid',
-        gridTemplateRows: '1fr auto',
+        gridTemplateRows: '64px 1fr auto',
         height: '100%',
         maxHeight: '100%',
     },
-    toolbar: theme.mixins.toolbar,
+    chatTitle: {
+        position: 'static',
+        boxShadow: "none",
+    },
 }));
 
 
-export const Chat = ({messages, currentUser, handleNewMessage}) => {
+export const Chat = ({className="", messages, chatTitle, handleNewMessage}) => {
     const classes = useStyles();
+    if (!chatTitle) {
+        return <div className={className}>
+            <h3>Запрашиваемый чат не существует</h3>
+        </div> ;
+    }
     return (
-        <div className={classes.root}>
-            <MessageList messages={messages} currentUser={currentUser}/>
+        <div className={`${classes.root} ${className}`}>
+            <AppBar className={classes.chatTitle}>
+                <Toolbar>
+                    <Typography variant="h6" noWrap>
+                        {chatTitle}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <MessageList messages={messages}/>
             <MessageInput handleNewMessage={handleNewMessage}/>
         </div>
     )
@@ -35,7 +50,7 @@ export const chatProps = PropTypes.shape({
     messages: PropTypes.arrayOf(messageProps).isRequired,
 });
 
-Chat.propTypes = {
-    chat: chatProps,
-    handleNewMessage: PropTypes.func.isRequired,
-};
+// Chat.propTypes = {
+//     chat: chatProps,
+//     handleNewMessage: PropTypes.func.isRequired,
+// };

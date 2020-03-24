@@ -21,25 +21,28 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(2),
         flex: 1,
     },
+    link: {
+        textDecoration: 'none',
+        '&:visited': {
+            color: 'inherit',
+        }
+    },
 }));
 
 
-export const Profile = ({className, config, handleConfigUpdate}) => {
+export const ProfileDialog = ({config, open, handleClose, handleConfigUpdate}) => {
     const classes = useStyles();
     const [userName, setUserName] = useState(config.userName);
-    const [open, setOpen] = useState(true);
-    const handleClose = () => {
-        setOpen(false);
-    };
     const onSaveClick = (e) =>{
-        // e.preventDefault();
         const newConfig = {...config};
         newConfig.userName = userName;
-        handleConfigUpdate(newConfig)
+        handleConfigUpdate(newConfig);
+        handleClose();
     };
     const onChangeUserName = (e) => {
         setUserName(e.target.value)
     };
+
     return (
         <Dialog
             fullScreen
@@ -47,7 +50,7 @@ export const Profile = ({className, config, handleConfigUpdate}) => {
         >
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <Link to={'/chats/'}>
+                    <Link className={classes.link} to={'/chats/'} onClick={handleClose}>
                         <IconButton edge="start" color="inherit" aria-label="close">
                             <CloseIcon />
                         </IconButton>
@@ -55,15 +58,15 @@ export const Profile = ({className, config, handleConfigUpdate}) => {
                     <Typography variant="h6" className={classes.title}>
                         Profile
                     </Typography>
-                    <Link to={'/chats/'}>
-                        <Button autoFocus color="inherit" onClick={onSaveClick}>
+                    <Link className={classes.link} to={'/chats/'} onClick={onSaveClick}>
+                        <Button autoFocus color="inherit">
                             save
                         </Button>
                     </Link>
                 </Toolbar>
             </AppBar>
             <List>
-                <ListItem input>
+                <ListItem>
                     <TextField
                         label="User Name"
                         value={userName}
@@ -74,6 +77,5 @@ export const Profile = ({className, config, handleConfigUpdate}) => {
             </List>
 
         </Dialog>
-
     )
 };

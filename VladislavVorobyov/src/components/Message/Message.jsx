@@ -20,27 +20,27 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export const Message = ({author, content, currentUser}) => {
+export const Message = (props) => {
+    const {senderId, senderName, content, currentUser} = props
     const classes = useStyles();
     const htmlToReactParser = new Parser();
     const formatContent = content.replace(/\n/g, '<br>');
     const contentElement = htmlToReactParser.parse(`<div>${formatContent}</div>`)
-    const name = author === currentUser ? 'Me': author;
-    const className = `${classes.message} ${name === 'Me'?classes.messageCurrentUser:''}`;
+    const className = `${classes.message} ${senderId===1 ? classes.messageCurrentUser : ''}`;
     return (
         <li className={className}>
-            <strong>{name}</strong><br />
+            <strong>{senderName}</strong><br />
             {contentElement}
         </li>
     )
 };
 
-Message.propTypes = {
-    author: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    currentUser: PropTypes.string,
-};
-
-Message.defaultProps = {
-    currentUser: 'Vladislav',
-};
+// Message.propTypes = {
+//     author: PropTypes.string.isRequired,
+//     content: PropTypes.string.isRequired,
+//     currentUser: PropTypes.string,
+// };
+//
+// Message.defaultProps = {
+//     currentUser: 'Vladislav',
+// };

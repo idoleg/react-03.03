@@ -14,14 +14,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export const MessageList = ({messages, currentUser}) => {
+export const MessageList = ({messages}) => {
     const classes = useStyles();
     return (
         <ul className={classes.messageList}>
             {
-                Object.entries(messages).map(([id,message]) => (<Message {...message}
-                                                  currentUser={currentUser}
-                                                  key={id} />)
+                Object.entries(messages).map(([id,message]) => (
+                    <Message {...message}
+                             key={id} />)
                 )
             }
         </ul>
@@ -34,11 +34,11 @@ export const messageProps = PropTypes.shape({
     content: PropTypes.string.isRequired,
 });
 
-MessageList.propTypes = {
-    messages: PropTypes.arrayOf(messageProps).isRequired,
-    currentUser: PropTypes.string,
-};
-
-Message.defaultProps = {
-    currentUser: Message.defaultProps.currentUser,
-};
+// MessageList.propTypes = {
+//     messages: PropTypes.arrayOf(messageProps).isRequired,
+//     currentUser: PropTypes.string,
+// };
+//
+// Message.defaultProps = {
+//     currentUser: Message.defaultProps.currentUser,
+// };

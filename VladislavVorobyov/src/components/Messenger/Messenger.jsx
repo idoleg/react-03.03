@@ -1,15 +1,13 @@
 import React from 'react';
-import Link from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import {Profile} from 'Components/Profile/Profile';
-import Drawer from '@material-ui/core/Drawer';
-import PropTypes from 'prop-types';
-import {ChatsList} from 'Components/ChatsList/ChatsList';
-import {Chat} from "Components/Chat/Chat";
+import ChatsList from 'Containers/ChatsListContainer';
+import Settings from "Containers/ProfileContainer";
+import ChatContainer from 'Containers/ChatContainer';
+import {Route, Switch} from "react-router-dom";
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,21 +16,28 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         maxHeight: '100vh',
         gridTemplateColumns: '240px 1fr',
-        gridTemplateRows: '64px 1fr',
-        gridTemplateAreas: "'chatList chatTitle ' "+
-                            "'chatList chat'",
+        gridTemplateRows: '1fr 72px',
+        gridTemplateAreas: "'chatList chat' "+
+                           "'settings chat'",
     },
     chatList: {
         gridArea: 'chatList',
+        padding: 0,
+        background: "#ddd",
     },
 
     chatListPaper: {
         width: 240,
     },
 
+    settings: {
+        gridArea: 'settings',
+        background: "#ddd",
+    },
     chatTitle: {
         gridArea: 'chatTitle',
         position: 'static',
+        boxShadow: "none",
     },
 
     chat: {
@@ -43,55 +48,34 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export const Messenger = ({showProfile, chats, currentChatId,
-                              config ,handleNewMessage, handleUpdateConfig}) => {
+export const Messenger = (props) => {
+    const {match:{path}} = props;
     const classes = useStyles();
-    const currentChat = chats[currentChatId];
-    let profileElement;
-    if (showProfile) {
-        profileElement = <Profile config={config} handleConfigUpdate={handleUpdateConfig} />
-    }
+
     return (
-        <>
-            {profileElement}
-            <div className={classes.root}>
-                <CssBaseline />
-                <AppBar className={classes.chatTitle}>
-                    <Toolbar>
-                        <Typography variant="h6" noWrap>
-                            {currentChat.title}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    className={classes.chatList}
-                    variant="permanent"
-                    classes={{
-                        paper: classes.chatListPaper,
-                    }}
-                >
-                    <ChatsList chats={chats} />
-                </Drawer>
-                <div className={classes.chat}>
-                    <Chat
-                        messages={currentChat.messages}
-                        currentUser={config.userName}
-                        handleNewMessage={handleNewMessage}
-                    />
-                </div>
-            </div>
-        </>
+        <div className={classes.root}>
+            <CssBaseline />
+            <ChatsList className={ classes.chatList } />
+            <Settings className={ classes.settings } />
+            <Switch>
+                <Route path={path} exact>Выберите чат</Route>
+                <Route path={`${path}/:id`}
+                       render={(props)=><ChatContainer {...props} className={classes.chat} />}
+                />
+            </Switch>
+
+        </div>
     )
 
 };
 
-Messenger.propTypes = {
-    chats: PropTypes.shape(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        messages: PropTypes.array.isRequired,
-    })).isRequired,
-    config: PropTypes.shape({
-        userName: PropTypes.string.isRequired,
-    }).isRequired,
-};
+// Messenger.propTypes = {
+//     chats: PropTypes.shape(PropTypes.shape({
+//         id: PropTypes.number.isRequired,
+//         title: PropTypes.string.isRequired,
+//         messages: PropTypes.array.isRequired,
+//     })).isRequired,
+//     config: PropTypes.shape({
+//         userName: PropTypes.string.isRequired,
+//     }).isRequired,
+// };

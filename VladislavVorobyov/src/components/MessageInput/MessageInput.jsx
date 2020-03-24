@@ -60,6 +60,7 @@ export const MessageInput = ({handleNewMessage}) => {
                     className={classes.iconButton}
                     variant="contained"
                     color="primary"
+                    onClick={sendMessage}
                 >
                     <Icon>send</Icon>
                 </IconButton>
