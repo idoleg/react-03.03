@@ -5,8 +5,12 @@ header{
 }
 
 h1{
-    padding-left: 30px; 
+    width: 100%; 
+    padding-left: 50px;
     padding-top: 10px; 
     font-size: 40px; 
     color: white; 
+}
+ul{
+    padding: 0
 }
