@@ -9,6 +9,6 @@ export default class Message extends React.Component {
 
 
     render() {
-        return <div className={"message-item " + this.props.className}><b>{ this.props.name }</b> : <div className="message-item__text">{ this.props.text }</div></div>
+        return <div className={"message-item " + this.props.className}><div className="message-item__text"><b>{ this.props.name }</b> : { this.props.text }</div></div>
     }
 }
