@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { deleteMessage } from '../../store/chatActions';
+import { connect } from 'react-redux';
 import { Message } from '../Message';
 
-export const MessageList = ({ messages }) => {
+const MessageList = ({ messages, deleteMessage, chatId }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -11,9 +14,13 @@ export const MessageList = ({ messages }) => {
     }
   });
 
+  const deleteHandler = ({messageId, chatId}) => () => {
+    deleteMessage({messageId, id: chatId});
+  };
+
   return (
     <ul className="chat__messages" ref={listRef}>
-      {messages && messages.map((message, i) => <Message {...message} key={i} />)}
+      {messages && messages.map((message, i) => <Message {...message} chatId={chatId} handler={deleteHandler} key={i} />)}
     </ul>
   );
 };
@@ -21,3 +28,11 @@ export const MessageList = ({ messages }) => {
 MessageList.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes))
 };
+
+const mapStateToProps = (store, props) => {
+  return { store };
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({ deleteMessage }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList);

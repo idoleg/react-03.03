@@ -9,6 +9,7 @@ class ChatForm extends Component {
   static propTypes = {
     onSendMessage: PropTypes.func.isRequired
   };
+  textRef = React.createRef();
 
   clearInput(input) {
     input.value = '';
@@ -23,6 +24,10 @@ class ChatForm extends Component {
     this.clearInput(message);
   };
 
+  componentDidUpdate() {
+    this.textRef.focus();
+  }
+
   render() {
     return (
       <form className="chat__form" onSubmit={this.sendMessage}>
@@ -32,6 +37,8 @@ class ChatForm extends Component {
           className="chat__input chat__input_message"
           placeholder="Write your Message"
           label="Message"
+          autoFocus
+          inputRef={input => this.textRef = input}
           required
         />
         <Button className="chat__submit" type="submit" variant="contained" color="primary" endIcon={<Icon>send</Icon>}>
