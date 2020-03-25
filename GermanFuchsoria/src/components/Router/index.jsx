@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import ProfileContainer from '../../containers/ProfileContainer';
 import ChatContainer from '../../containers/ChatContainer';
 import HeaderContainer from '../../containers/HeaderContainer';
+import { history } from '../../store';
 
 export default class Router extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <HeaderContainer />
         <Switch>
           <Route path="/" exact>
@@ -22,7 +24,7 @@ export default class Router extends Component {
           <Route path="/profile" component={ProfileContainer}></Route>
           <Route path="/">It's 404 page. Not found.</Route>
         </Switch>
-      </BrowserRouter>
+      </ConnectedRouter>
     );
   }
 }

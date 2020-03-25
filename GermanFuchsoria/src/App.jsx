@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import LayoutContainer from './containers/LayoutContainer';
 import { initStore } from './store';
-import { Provider } from 'react-redux';
 import { initChats } from './store/chatActions';
 import { initProfile } from './store/profileActions';
 
@@ -43,18 +44,20 @@ const chatsArchive = {
 const profile = {
   name: 'Kokoro',
   accountAccess: 'user'
-}
+};
 
-const store = initStore();
+const { store, persistor } = initStore();
 store.dispatch(initChats(chatsArchive));
-store.dispatch(initProfile(profile))
+store.dispatch(initProfile(profile));
 
 export default class App extends Component {
   render() {
     return (
       <div className="app">
         <Provider store={store}>
-          <LayoutContainer />
+          <PersistGate loading={null} persistor={persistor}>
+            <LayoutContainer />
+          </PersistGate>
         </Provider>
       </div>
     );
