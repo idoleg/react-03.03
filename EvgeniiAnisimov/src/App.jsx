@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ChatContainer } from './containers/ChatContainer';
+import ChatContainer from './containers/ChatContainer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ChatList } from './components/ChatList/ChatList';
 import Layout from './components/Layout';
 import { initStore } from './store';
 import { Provider } from 'react-redux';
 import { sendMessage } from './store/chatActions';
+import { initChats } from './store/chatActions';
 
 const store = initStore();
 
@@ -14,7 +15,10 @@ const store = initStore();
 //   payload: "It's data"
 // });
 
-store.dispatch(sendMessage("Ivan", "message"))
+// store.dispatch(sendMessage("Ivan", "message"));
+// console.log(store.getState());
+
+store.dispatch(initChats());
 
 export const App = () => {
   return(
