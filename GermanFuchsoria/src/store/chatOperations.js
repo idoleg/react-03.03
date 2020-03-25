@@ -1,6 +1,15 @@
-import { addChat } from './chatActions';
+import { addChat, sendMessage } from './chatActions';
+import { generateId } from '../components/common/idUtils';
 
-export const createChat = name => (dispatch, getState) => {
-  const id = Date.now();
-  dispatch(addChat(id, name));
+export const createChat = title => (dispatch, getState) => {
+  const id = generateId();
+
+  dispatch(addChat({ id, title }));
+};
+
+
+export const updateMessage = ({id, message}) => (dispatch, getState) => {
+  const messageId = generateId();
+
+  dispatch(sendMessage({id, message: {...message, messageId}}));
 };

@@ -20,14 +20,17 @@ class ChatListItem extends Component {
   }
 
   render() {
-    const { classes, blinkings, handler, id } = this.props;
+    const { classes, blinkings, handler, deleteHandler, id } = this.props;
 
     return (
-      <ListItem className={blinkings && this.state.blink ? classes.itemBlink : classes.item} onClick={handler(id)}>
+      <ListItem
+        className={blinkings && this.state.blink ? classes.itemBlink : classes.item}
+        onDoubleClick={deleteHandler(id)}
+      >
         <ListItemAvatar>
-          <Avatar></Avatar>
+          <Avatar onClick={handler(id)}></Avatar>
         </ListItemAvatar>
-        <ListItemText primary={this.props.title} secondary={null} />
+        <ListItemText onClick={handler(id)} primary={this.props.title} secondary={null} />
       </ListItem>
     );
   }

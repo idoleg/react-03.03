@@ -7,9 +7,12 @@ import './styles.scss';
 const normalMessageStyles = classNames('message');
 const botMessageStyles = classNames('message', 'message_access_bot');
 
-export const Message = ({ author, text, authorAccess }) => {
+export const Message = ({ author, text, authorAccess, messageId, handler, chatId }) => {
   return (
-    <li className={authorAccess !== 'bot' ? normalMessageStyles : botMessageStyles}>
+    <li
+      className={authorAccess !== 'bot' ? normalMessageStyles : botMessageStyles}
+      onDoubleClick={authorAccess !== 'bot' && messageId ? handler({messageId, chatId}) : null}
+    >
       <span className="message__author">{textCapitalize(author)}</span>
       <span className="message__text">{text}</span>
     </li>

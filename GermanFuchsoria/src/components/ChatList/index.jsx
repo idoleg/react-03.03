@@ -5,12 +5,17 @@ import ChatListItem from '../ChatListItem';
 import useStyles from './styles.js';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { deleteChat } from '../../store/chatActions';
 
-function ChatList({ chats, addNewChat, blinkingIds = [], push }) {
+function ChatList({ chats, addNewChat, blinkingIds = [], push, deleteChat }) {
   const [title, setTitle] = useState('');
   const classes = useStyles();
   const handleNavigate = id => () => {
     push(`/chats/${id}`);
+  };
+  const handleDelete = id => (event) => {
+    event.preventDefault();
+    deleteChat(id);
   };
 
   return (
@@ -22,6 +27,7 @@ function ChatList({ chats, addNewChat, blinkingIds = [], push }) {
           key={id}
           title={chat.chatTitle}
           handler={handleNavigate}
+          deleteHandler={handleDelete}
         />
       ))}
       <form onSubmit={addNewChat(title)}>
@@ -36,6 +42,6 @@ const mapStateToProps = (store, props) => {
   return { store };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ push }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ push, deleteChat }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

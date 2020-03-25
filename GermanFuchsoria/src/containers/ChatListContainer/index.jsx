@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ChatList from '../../components/ChatList';
-import { addChat } from '../../store/chatActions';
-import { generateId } from '../../components/common/idUtils';
+import { createChat } from '../../store/chatOperations';
 
 class ChatListContainer extends Component {
   addNewChat = title => event => {
     event.preventDefault();
     event.target.name.value = '';
 
-    this.props.dispatch(addChat({ id: generateId(), title }));
+    this.props.createChat(title);
   };
 
   render() {
@@ -20,9 +20,12 @@ class ChatListContainer extends Component {
 }
 
 const mapStateToProps = (store, props) => {
-  const { chats, blink } = store;
+  const { chats, blink, createChat } = store;
 
-  return { chats, blink };
+  return { chats, blink, createChat };
 };
 
-export default connect(mapStateToProps)(ChatListContainer);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({createChat}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatListContainer);

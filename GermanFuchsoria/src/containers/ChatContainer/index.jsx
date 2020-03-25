@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import { Chat } from '../../components/Chat';
 import ChatListContainer from '../ChatListContainer';
-import { sendMessage } from '../../store/chatActions';
+import { updateMessage } from '../../store/chatOperations';
 
 class ChatContainer extends Component {
   updateMessagesList = id => message => {
-    this.props.dispatch(sendMessage({ id, message }));
+    this.props.updateMessage({ id, message });
   };
 
   render() {
@@ -22,7 +23,7 @@ class ChatContainer extends Component {
         </Grid>
         <Grid container item xs={9}>
           {messages ? (
-            <Chat messages={messages} onSendMessage={this.updateMessagesList(id)} />
+            <Chat messages={messages} chatId={id} onSendMessage={this.updateMessagesList(id)} />
           ) : (
             <h3>Select your chat</h3>
           )}
@@ -39,4 +40,7 @@ const mapStateToProps = (store, props) => {
   return { id, chats };
 };
 
-export default connect(mapStateToProps)(ChatContainer);
+const mapDispatchToProps = (dispatch) => 
+  bindActionCreators({updateMessage}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
