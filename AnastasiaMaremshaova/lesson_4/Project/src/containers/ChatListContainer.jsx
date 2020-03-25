@@ -50,7 +50,7 @@ export class ChatListContainer extends Component {
     
         this.setState(function(state, props){
             return{
-            chats: {...state.chats, [id] : {name: `Chat ${id}`, messages: [ {name: 'N', content: 'fff'} ] }}, countChats : id}
+            chats: {...state.chats, [id] : {name: `Chat ${id}`, messages: [ {name: 'User', content: ''} ] }}, countChats : id}
 
           })
 
@@ -69,7 +69,7 @@ export class ChatListContainer extends Component {
     render(){
         //const chats = this.state.chats; 
         let id = this.props.match;  
-        let chats = Object.assign(this.state.chats); 
+       // let chats = Object.assign(this.state.chats); 
         if (id === undefined)
             return(
                 <ChatList chats={this.state.chats} createNewChat={this.createNewChat}/>
@@ -79,7 +79,7 @@ export class ChatListContainer extends Component {
             let timeoutId = null; 
             id = this.props.match.params.id;
             console.log(id); 
-            const messages = chats[id].messages;  
+            const messages = this.state.chats[id].messages;  
             console.log(messages); 
             
             //console.log(this.state); 
