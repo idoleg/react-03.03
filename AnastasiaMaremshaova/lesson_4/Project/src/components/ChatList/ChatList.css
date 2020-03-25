@@ -1,7 +1,24 @@
 .ChatList{
     width: 30%; 
     background-color: #d690cd;
+    padding-bottom: 50px; 
 }
 .White{
     color: white; 
+}
+
+.chat:hover{
+    background-color: rgb(156, 106, 156);
+    transition: 0.5s;
+}
+
+.btn-addNewChat{
+    width: 80%;
+    height: 50px;  
+    margin: 50px; 
+    color: #fff;
+    cursor: not-allowed;
+    pointer-events: auto;
+
+
 }

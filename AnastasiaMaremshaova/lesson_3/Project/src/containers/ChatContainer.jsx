@@ -3,7 +3,7 @@ import { Chat } from '../components/Chat/Chat';
 
 export const ROBOT = 'Robot';
 
-export class ChatContainer extends Component {
+export class ChatContainer extends Component{
     state = {
         messages: [
             { name: "Ivan", content: "Hello, world!" },
