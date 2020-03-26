@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 import { ChatContainer } from './containers/ChatContainer.jsx';
 import { Main } from './components/Main/Main.jsx';
 import { About } from './components/About/About.jsx';
