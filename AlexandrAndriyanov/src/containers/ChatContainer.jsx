@@ -11,6 +11,7 @@ export class ChatContainer extends Component {
         ]
    
  }
+timeoutId = null;
 
 componentDidUpdate () {
     /* const chatBotMessage = {name: "Chatbot", content: "Hello! I'm Chatbot. What can i do for you?"}; 
@@ -24,7 +25,8 @@ componentDidUpdate () {
     
     const lastMessage = this.state.messages[this.state.messages.length - 1];
      if (this.state.messages[this.state.messages.length - 1].name !== Chatbot ){
-         setTimeout(() => this.handleSendMessage(
+         clearTimeout(this.timeoutId);
+         this.timeoutId = setTimeout(() => this.handleSendMessage(
              {name: Chatbot, content: `Hello ${lastMessage.name}! I'm Chatbot, what can i do for you?`,}), 1000); 
      }
     }

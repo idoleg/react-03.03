@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
-
 import {ChatContainer} from '../containers/ChatContainer.jsx'
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {ChatList} from './ChatList/ChatList'
 
 export const App = () => {
     return (
-      <ChatContainer/>
+        <BrowserRouter>
+           <ChatList />
+            <Switch>
+                <Route path="/" exact>Index page</Route>
+                <Route path="/about" exact>About page</Route>
+                <Route path="/chats" exact component={ChatContainer} />
+                <Route path="/chats/:id" exact component={ChatContainer} />
+                <Route path="/contacts" exact>Contacts page</Route>
+                <Route path="/">404 page</Route>
+            </Switch>
+            
+        </BrowserRouter>
+        
+        
+      //<ChatContainer/>
     )
   
 }
