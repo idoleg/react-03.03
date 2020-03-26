@@ -1,28 +1,40 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-import TextField from '@material-ui/core/TextField';
+import { Link } from 'react-router-dom';
+import {useInput} from '../../hooks/useInput';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
-export const ChatList = () => {
-        return (
-            <Grid container direction="row" justify="centr" alignItems="centr">
+export const ChatList = ({chats, addChat}) => {
+    const [name, setName, setNameState] = useInput('');
+
+    const handleAddChat = (event) => {
+        event.preventDefault();
+        addChat(name);
+        setNameState('');
+    }
+
+    return (
+        <ul>
+            {chats.map(({id, name}) => <li key={id}>
                 <Button className="chat__submit" type="submit" variant="contained" >
-                <li><Link to="/chats/1" style={{color: 'black'}}>Chat 1</Link></li>
-                </Button>
-                <Button className="chat__submit" type="submit" variant="contained" >
-                <li><Link to="/chats/2" style={{color: 'black'}}>Chat 2</Link></li> 
-                </Button>
-                <Button className="chat__submit" type="submit" variant="contained">
-                <li><Link to="/chats/3" style={{color: 'black'}}>Chat 3</Link></li>
-                </Button>
-                <Button className="chat__submit" type="submit" variant="contained" >
-                <li><Link to="/chats/4" style={{color: 'black'}}>Chat 4</Link></li>
-                </Button>
-                <Button className="chat__submit" type="submit" variant="contained">
-                Add new chat
-                </Button>
-            </Grid>
-        )
+                     <Link to={"/chats/" + id } style={{color: 'black'}}>{name}</Link>
+                </Button></li>)}
+            <li>
+                <form onSubmit={handleAddChat}>
+                    <TextField 
+                        variant="outlined"
+                        label="чат"
+                        name="chat" 
+                        value={name} 
+                        onChange={setName}/>
+                    <Button 
+                        className="chat__submit" 
+                        type="submit"
+                        variant="contained" > 
+                        Добавить чат
+                    </Button>
+                </form>
+            </li>
+        </ul>
+    )
 }
-
