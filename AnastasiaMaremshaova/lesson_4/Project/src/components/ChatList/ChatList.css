@@ -1,10 +1,33 @@
 .ChatList{
-    width: 30%; 
+    display: flex; 
+    flex-wrap: wrap; 
+
     background-color: #d690cd;
-    padding-bottom: 50px; 
+    height: 100%;
+
+}
+
+.ChatList-container{
+    width: 100%; 
+    height: 70%;
+    overflow-y: scroll;
+    
+    
+}
+
+.btn-container{
+    box-sizing: border-box;
+   padding-bottom: 50px;
+    vertical-align:bottom;
+    width: 100%; 
+    height: 30%; 
 }
 .White{
     color: white; 
+}
+
+.w-500{
+    width: 500px; 
 }
 
 .chat:hover{
@@ -20,5 +43,11 @@
     cursor: not-allowed;
     pointer-events: auto;
 
+}
+.horisontal-line{
+    height: 5px; 
+    width: 100%; 
+    background-color: white;
+    
 
 }

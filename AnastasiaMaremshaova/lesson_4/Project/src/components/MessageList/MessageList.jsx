@@ -5,7 +5,6 @@ import {Message} from '../Message/Message';
 import './MessageList.css';
 
 export const MessageList = ({messages}) => {
-    console.log(messages);
     return (<ul className="MessageList">
         {messages.map((item, index) => <Message {...item} key={index} />)}
     </ul>);

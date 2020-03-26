@@ -43,7 +43,6 @@ export const ChatForm = ({onSendMessage}) => {
                 value={content} 
                 onChange={(event)=>{setContent(event.target.value)}}
                 onKeyPress={(event) => {
-                    console.log(`Pressed keyCode ${event.key}`);
                     if (event.key === 'Enter'){
                         event.preventDefault ? event.preventDefault() : event.returnValue = false;
                         if (content != ''){

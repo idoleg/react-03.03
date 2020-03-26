@@ -24,9 +24,11 @@ export const ChatList = ({chats, createNewChat}) =>{
   const classes = useStyles();
   return(
   <div className='ChatList'>
-  <List>
+    <div className='ChatList-container' scrolling="auto">
+  <List >
     {
-        Object.keys(chats).map((id) =>(
+        Object.keys(chats).map((id ) =>(
+         
           <div className="chat"  key={id}>
         <ListItem alignItems="flex-start" component={Link} to={`/chats/${id}`}  key={id}>
         <ListItemAvatar>
@@ -50,10 +52,12 @@ export const ChatList = ({chats, createNewChat}) =>{
       </ListItem>
       <Divider variant="inset" component="li" />
       </div>
-    
+        
   ))}
       </List> 
-
+      </div>
+      <div className="horisontal-line"></div>
+<div className="btn-container">
       <Button
       classes={{
         root: classes.root
@@ -68,6 +72,7 @@ export const ChatList = ({chats, createNewChat}) =>{
             >
                 Добавить новый чат
             </Button>
+            </div>
       </div>)
 
 }

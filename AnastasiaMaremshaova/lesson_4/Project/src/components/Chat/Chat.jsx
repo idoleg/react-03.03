@@ -14,6 +14,6 @@ export const Chat = ({messages, onSendMessage}) => {
 }
 
 Chat.propTypes = {
-    messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
+    chats: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
     onSendMessage: PropTypes.func.isRequired,
 }

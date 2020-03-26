@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { ChatContainer } from './ChatContainer';
+import { Switch, Route} from 'react-router-dom'
 import { ChatList } from '../components/ChatList/ChatList';
-import {ChatContainer} from './ChatContainer'
-import { Chat } from '../components/Chat/Chat';
+import {IndexPage} from '../components/IndexPage/IndexPage'
+import {Profile} from '../components/Profile/Profile'
 
 export const ROBOT = 'Robot';
 export class ChatListContainer extends Component {
@@ -27,63 +29,54 @@ export class ChatListContainer extends Component {
         countChats: 2
     };
 
-    timeoutId = null; 
+    timeoutID = null; 
 
-    handleRobotAnswer(){
-        let id = this.props.match.params.id;
-        const currentMessages = this.state.chats[id].messages; 
-        const lastMessage = currentMessages[currentMessages.length - 1];
-    
-        if ( lastMessage && lastMessage.name != ROBOT)  {
-    
-            this.handleSendMessage({
-                name: ROBOT,
-                content: `Hello ${lastMessage.name}, I'm Robot!`,
-            });
-        }
-    }
+    createNewChat = () =>{
+       let id = this.state.countChats + 1;
+       
+       this.setState(function(state, props){
+           return{
+           chats: {...state.chats, [id] : {name: `Chat ${id}`, messages: [ {name: '', content: ''} ] }}, countChats : id}
 
-     createNewChat = () =>{
-         //console.log(this.state.countChats)
-        let id = this.state.countChats + 1;
-        
-    
-        this.setState(function(state, props){
-            return{
-            chats: {...state.chats, [id] : {name: `Chat ${id}`, messages: [ {name: 'User', content: ''} ] }}, countChats : id}
+         })
+   }
 
-          })
+   timeoutId = null; 
 
-        console.log(this.state); 
-    }
-    
+   handleRobotAnswer=(id)=>{
+       const currentMessages = this.state.chats[id].messages; 
+       const lastMessage = currentMessages[currentMessages.length - 1];
+   
+       console.log(lastMessage)
+       if ( lastMessage && lastMessage.name != ROBOT)  {
+   
+           clearTimeout(this.timeoutID); 
+           this.timeoutID = setTimeout(()=>this.handleSendMessage(id)({
+               name: ROBOT,
+               content: `Hello ${lastMessage.name}, I'm Robot!`,
+           }), 1000);
+       }
+   }
 
-    handleSendMessage = (message)=> {
-        let id = this.props.match.params.id; 
-        this.setState((state) => ({
-            chats: {...state.chats, [id] : {name: state.chats[id].name, messages: [...state.chats[id].messages, message] }}, 
-        }), this.handleRobotAnswer)
-    }
-
-
-    render(){
-        //const chats = this.state.chats; 
-        let id = this.props.match;  
-       // let chats = Object.assign(this.state.chats); 
-        if (id === undefined)
-            return(
-                <ChatList chats={this.state.chats} createNewChat={this.createNewChat}/>
-        )
-        else
-        {  
-            let timeoutId = null; 
-            id = this.props.match.params.id;
-            console.log(id); 
-            const messages = this.state.chats[id].messages;  
-            console.log(messages); 
-            
-            //console.log(this.state); 
-            return <Chat messages={messages} onSendMessage={this.handleSendMessage}/>;
-        }
-    }
-}; 
+   handleSendMessage = (id) => (message) => {
+    this.setState((state) => ({
+        chats: {...state.chats, [id] : {name: state.chats[id].name, messages: [...state.chats[id].messages, message] }}, 
+    }), this.handleRobotAnswer(id))
+}
+   render(){
+       return(
+        <div className="MessageField">
+            <ChatList chats={this.state.chats} createNewChat={this.createNewChat}/>
+            <Switch>
+                <Route path= "/chats/" exact render={(props) => 
+                                                    (<ChatContainer {...props} handleSendMessage={this.handleSendMessage}/>)}></Route>
+                <Route path= "/chats/:id" exact render={(props) => 
+                                                    (<ChatContainer {...props} state={this.state.chats} handleSendMessage={this.handleSendMessage}/>)}></Route>
+                
+                <Route path= "/" exact component={IndexPage}></Route>
+                <Route path="/profile/" exact component={Profile}></Route>
+            </Switch>
+        </div>
+       )
+   }
+};
