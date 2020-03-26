@@ -85,7 +85,7 @@ const mapStateToProps = (store, props) => {
   }
 }
 
-const mapDispatchProps = (dispatch) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   sendMessage
 }, dispatch)
 
@@ -108,4 +108,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 }
 
 // export default connect(mapStateToProps, mapDispatchProps, mergeProps)(ChatContainer) //, mapDispatchProps, mergeProps
-export default connect(mapStateToProps, mapDispatchProps, mergeProps)(Chat) //, mapDispatchProps, mergeProps
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Chat) //, mapDispatchProps, mergeProps

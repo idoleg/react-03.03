@@ -3,27 +3,21 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
-
-function useInput(initialState) {
-  const [state, setState] = useState(initialState);
-  const setInput = (event) => {
-    setState(event.currentTarget.value);
-  }
-
-  return [state, setInput];
-}
+import { useInput } from '../../hooks/useInput';
 
 export const ChatForm = ({onSendMessage}) => {
   // const [name, setName] = useState('user');
   // const [content, setContent] = useState('');
   const [name, setName] = useInput('');
-  const [content, setContent] = useInput('');
-  // const textarea = useRef();
+  const [content, setContent, setContentState] = useInput('');
+  const textarea = useRef();
 
   const onSubmit = (event) => {
     // event.preventDefault();
     if(content !== '') {
       onSendMessage({name, content});
+      setContentState('');
+      textarea.current.focus();
     } else {
       alert("Введите текст сообщения!")
     }
@@ -46,6 +40,7 @@ export const ChatForm = ({onSendMessage}) => {
         onChange={setName}/>
       <TextField
         // ref={textarea}
+        inputRef={textarea}
         autoFocus
         multiline
         label="Сообщение"

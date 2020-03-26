@@ -1,5 +1,5 @@
 // import { createStore } from 'redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose } from 'redux';
 import chatReducer from './chatReducer';
 
 // const reducer = function(store={counter: 0}, action) {
@@ -20,6 +20,8 @@ const reducer = combineReducers({
   chats: chatReducer
 });
 
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
 export function initStore(preloaderState = undefined) {
-  return createStore(reducer, preloaderState);
+  return createStore(reducer, preloaderState, composeEnhancers());
 }

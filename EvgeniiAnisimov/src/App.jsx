@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ChatContainer from './containers/ChatContainer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { ChatList } from './components/ChatList/ChatList';
+// import { ChatList } from './components/ChatList/ChatList';
 import Layout from './components/Layout';
 import { initStore } from './store';
 import { Provider } from 'react-redux';
 import { sendMessage } from './store/chatActions';
 import { initChats } from './store/chatActions';
+import ChatListContainer from './containers/ChatListContainer';
 
 const store = initStore();
 
@@ -27,7 +28,7 @@ export const App = () => {
         <Switch>
           <Route path="/" exact>It's idex page</Route>
           <Route path="/chats">
-            <ChatList />
+            <ChatListContainer />
             <Switch>
               <Route path="/chats/" exact component={ChatContainer} />
               <Route path="/chats/:id" exact component={ChatContainer} />
