@@ -1,27 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
+import './ChatList.css';
 
-export default class ChatList extends React.Component {
-
-    render() {
+export const ChatList = () => {
         return <div className="chat__chatlist">
-            <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
+            <List component="nav">
+                <ListItem button component={Link} to='/chats/1/'>
                     <ListItemText primary="Chat1" />
                 </ListItem>
-                <ListItemLink href="#simple-list">
-                    <ListItemText primary="Chat2" />
-                </ListItemLink>
-                <ListItemLink href="#simple-list">
-                    <ListItemText primary="Chat3" />
-                </ListItemLink>
+                <ListItem button component={Link} to='/chats/2/'>
+                        <ListItemText primary="Chat2" />
+                </ListItem>
+                <ListItem button component={Link} to='/chats/3/'>
+                        <ListItemText primary="Chat3" />
+                </ListItem>
             </List>
         </div>
-    }
 }

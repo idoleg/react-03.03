@@ -1,0 +1,10 @@
+.chat {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.chat__main-chat {
+    width: 70%;
+}
