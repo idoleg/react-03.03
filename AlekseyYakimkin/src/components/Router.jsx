@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
-import { ChatContainer } from '../containers/ChatContainer';
-
+import ChatContainer from '../containers/ChatContainer';
+import {Layout} from './Layout'
 
 
 export default class Router extends React.Component {
@@ -9,9 +9,8 @@ export default class Router extends React.Component {
        return (
            <Switch>
                <Route exact path='/'>It's root page</Route>
-               <Route path='/chats' exact component={ChatContainer}></Route>
-               <Route path='/chats/add' exact component={ChatContainer}></Route>
-               <Route path='/chats/:id' exact component={ChatContainer}></Route>
+               <Route path='/chats' exact render={ (props) =>  <Layout { ...props } /> }></Route>
+               <Route path='/chats/:id' exact render={ (props) =>  <Layout { ...props } /> }></Route>
                <Route path='/about'>It's about page</Route>
                <Route path='/contacts'>It's contacts page</Route>
                <Route path='/profile'>It's user's profile</Route>

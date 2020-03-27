@@ -11,6 +11,8 @@ import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button'
+import {AddChatForm} from './AddChatForm'
+import {Header} from '../Header/Header'
 
 import './ChatList.css'
 
@@ -22,10 +24,14 @@ import './ChatList.css'
 //     },
 //   }));
 
-export const ChatList = ({chats,handleAddChat}) => {
+export const ChatList = ({chats,headerName,handleAddChat}) => {
     //const classes = useStyles();
+    console.log(handleAddChat);
     // console.log("ChatList return")
-    return  <div className="">
+    return  <>
+            <Header  headerName={headerName}/>
+            <div className="">
+                <AddChatForm addNewChat={handleAddChat}/>
                 <Button   onClick={handleAddChat}>Add Chat</Button>
                 <List >
                 {/* component={props => <Link to="/chats/1"/>} */}
@@ -55,4 +61,5 @@ export const ChatList = ({chats,handleAddChat}) => {
                     )} */}
                 </List>
             </div>
+            </>
 }
