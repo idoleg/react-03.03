@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, compose } from 'redux';
 import chatReducer from './ChatReducer';
 
 const reducer = combineReducers({
@@ -6,6 +6,8 @@ const reducer = combineReducers({
 })
 
 
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
 export function initStore(preloadedState = undefined) {
-    return createStore(reducer, preloadedState)
+    return createStore(reducer, preloadedState, composeEnhancers())
 }

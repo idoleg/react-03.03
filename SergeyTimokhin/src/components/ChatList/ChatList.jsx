@@ -4,7 +4,7 @@ import List from '@material-ui/core/List';
 
 import './ChatList.css';
 
-export const ChatList = () => {
+export const ChatList = ({chats}) => {
     const [chatsList, setChats] = useState([
         {chatLink: "/chats/1", chatAvatar: '../../../img/ava1.jpg', chatTitle: 'Family', messageSender: 'Mom', lastMessage: " Don't forget about the dinner tonight!"},
         {chatLink: "/chats/2", chatAvatar: '../../../img/ava3.jpg', chatTitle: 'Work', messageSender: 'Dilan', lastMessage: " Of course! See ya on Sunday"},
@@ -12,16 +12,27 @@ export const ChatList = () => {
         {chatLink: "/chats/4", chatAvatar: '', chatTitle: 'T', messageSender: 'Test', lastMessage: "Last"},
     ]);
 
+
     return (
+        // <List className ="chatList">
+        //     {chatsList.map((item, index) =>
+        //     <ChatListItem chatLink = {item.chatLink}
+        //     chatAvatar = {item.chatAvatar}
+        //     chatTitle = {item.chatTitle}
+        //     messageSender = {item.messageSender}
+        //     lastMessage = {item.lastMessage}
+        //     key={++index}
+        //     />)}
+        // </List>
         <List className ="chatList">
-            {chatsList.map((item, index) =>
-            <ChatListItem chatLink = {item.chatLink}
-            chatAvatar = {item.chatAvatar}
-            chatTitle = {item.chatTitle}
-            messageSender = {item.messageSender}
-            lastMessage = {item.lastMessage}
-            key={++index}
-            />)}
-        </List>
+        {chats.map(({id, name, messages, avatar}, index) =>
+        <ChatListItem chatLink = {"/chats/" + id}
+        chatAvatar = {avatar}
+        chatTitle = {name}
+        messageSender = {messages.map(({name, content}) => (name))} //
+        lastMessage = {""}
+        key={index}
+        />)}
+    </List>
     )
 }

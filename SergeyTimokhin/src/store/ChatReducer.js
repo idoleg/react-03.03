@@ -1,9 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { initChats, sendMessage } from './ChatActions';
 
-const initialState = {
-
-};
+const initialState = {};
 
 
 export default handleActions({
@@ -16,6 +14,7 @@ export default handleActions({
                     { name: "Dad", content: "Hello, how are you?" },
                     { name: "Mom", content: " Don't forget about the dinner tonight!" },
                 ],
+                avatar: '../../img/ava1.jpg',
             },
             2: {
                 name: 'Work',
@@ -24,6 +23,7 @@ export default handleActions({
                     { name: "Andrew", content: "Hello, are you coming?" },
                     { name: "Dilan", content: " Of course! See ya on Sunday" },
                 ],
+                avatar: '../../img/ava2.jpg',
             },
             3: {
                 name: 'Friends',
@@ -32,13 +32,26 @@ export default handleActions({
                     // {name: "Scott", content: "Hello, are you coming?"},
                     // {name: "Jennifer", content: " Wish I could come, but I'm out of town this weekend"},
                 ],
+                avatar: '../../img/ava3.jpg',
             },
         }
     },
     [sendMessage]: (store, action) => {
         console.log("action", action)
-        return store
-    },
+            // console.log(store)
+        const { id, name, content } = action.payload;
+
+        return {
+            ...store,
+            [id]: {
+                ...store[id],
+                messages: [
+                    ...store[id].messages,
+                    { name, content },
+                ]
+            }
+        };
+    }
 }, initialState)
 
 
