@@ -6,15 +6,13 @@ import { Link } from 'react-router-dom'
 
 import './ChatList.scss'
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
+
 export const ChatList = ({ chats }) => {
 
     return (
         <div className='chatList'>
             <List component="nav" aria-label="contacts">
-                {chats.map(item => (<ListItemLink key={item.id} href={`chats/${item.id}`} button><ListItemText primary={item.title} /></ListItemLink>))}
+                {chats.map(item => (<ListItem button key={item.id} component={Link} to={`/chats/${item.id}`}><ListItemText primary={item.title} /></ListItem>))}
 
             </List>
         </div>
