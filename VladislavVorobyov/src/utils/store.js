@@ -1,12 +1,15 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import initReducer from 'Reducers';
+import middlewares from 'Middlewares';
 
 function initStore() {
     const initialStore = {};
-
+    const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
     return createStore(
         initReducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+        composeEnhancers(
+            applyMiddleware(...middlewares),
+        )
     );
 }
 
