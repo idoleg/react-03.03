@@ -3,7 +3,7 @@ import { Message } from '~/components/Message/Message';
 import { ChatForm } from '~/components/ChatForm/ChatForm';
 import "./MessageField.scss";
 
-export const MessageField = ({chatId, messages, onSendMessage}) => {
+export const MessageField = ({ chatId, messages, onSendMessage }) => {
     // state = {
     //     messages: [
     //         { name: "Ivan", content: "Hello, world!" },
@@ -12,11 +12,19 @@ export const MessageField = ({chatId, messages, onSendMessage}) => {
     //     ]
     // }
 
- 
 
-  
-        // const { onSendMessage } = this;
-        // const {messages} = this.props;
+
+
+    // const { onSendMessage } = this;
+    // const {messages} = this.props;
+
+    if (chatId === undefined) {
+        return (
+            <div className='messageField'>Выберите чат!</div>
+        )
+    }
+        
+        
         return (
             <div className='messageField'>
                 <ul className='messages'>
@@ -26,5 +34,6 @@ export const MessageField = ({chatId, messages, onSendMessage}) => {
 
             </div>
         )
-    
+
+        
 }

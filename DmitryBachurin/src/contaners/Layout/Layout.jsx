@@ -55,9 +55,10 @@ export class Layout extends React.Component {
         });
     }
     getMessagesList = (chatId) => {
-        const chat = this.getChatById(chatId);
+        let chat = this.getChatById(chatId);
         // console.log(chat);
         if (chat === undefined) {
+            // chat = this.getChatById(1);
             return;
         }
         return chat.messagesArray.map((item) => this.getMessageById(item));
