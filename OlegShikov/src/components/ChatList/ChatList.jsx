@@ -1,13 +1,25 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import {useInput} from '../../hooks/useInput'
 
-export const ChatList = () => {
-        return (
-            <ul>
-                <li><Link to="/chats/1">Chat 1</Link></li>
-                <li><Link to="/chats/2">Chat 2</Link></li>
-                <li><Link to="/chats/3">Chat 3</Link></li>
-                <li><Link to="/chats/4">Chat 4</Link></li>
-            </ul>
-        )
+export const ChatList = ({chats, createChat}) => {
+    const [name, setName, setNameState] = useInput('');
+
+    const handleAddChat = (event) => {
+        event.preventDefault();
+        createChat(name);
+        setNameState('')
+    }
+
+    return (
+        <ul>
+            {chats.map(({id, name}) => <li key={id}><Link to={"/chats/" + id }>{name}</Link></li>)}
+            <li>
+                <form onSubmit={handleAddChat}>
+                    <input value={name} onChange={setName} />
+                    <button>Добавить чат</button>
+                </form>
+            </li>
+        </ul>
+    )
 }
