@@ -14,7 +14,7 @@ state = {
 timeoutId = null;
 
 componentDidUpdate() {
-  const lastMessage = this.state.messages[this.state.messages.length -1];
+  const lastMessage = this.state.messages[this.state.messages.length -1]
 
   if(lastMessage.author !== ROBOT)  {
     clearTimeout(this.timeoutId);
