@@ -8,7 +8,6 @@ export const Chat = ({ messages, onSendMessage }) => {
     if (messages) {
         return (<div>
             {messages.length ? <MessageList messages={messages} /> : "Нет сообщений"}
-            <Header/>
             <ChatForm onSendMessage={onSendMessage} />
         </div>);
     } else {

@@ -4,12 +4,15 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {sendMessage} from '../store/chatActions';
 
+
 const mapStateToProps = (store, props) => {
-    const {id} = props.match.params;
-    const chats = id && store.chats ? store.chats : undefined
+    const {
+        id
+    } = props.match.params;
+    const chats = id && store.chats ? store.chats : {}
 
     return {
-        messages: chats[id] ? chats[id].messages : undefined
+        messages: chats[id] ? chats[id].messages : undefined,
     }
 
 }
