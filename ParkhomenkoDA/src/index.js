@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {App} from './App';
 
-const messages = [
+/*const messages = [
     { name: "Ivan", content: "Hello, world!" },
     { name: "Petr", content: "Helo, how are you?" },
     { name: "Ivan", content: "I'm well" },
@@ -19,4 +20,8 @@ const MessageList = ({messages}) => {
 
 ReactDOM.render(
     <MessageList messages={messages} />, document.getElementById('root') ,
+);*/
+
+ReactDOM.render(
+    <App/>, document.getElementById('root') ,
 );

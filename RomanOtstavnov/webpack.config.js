@@ -3,7 +3,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin  = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "src", "index.js"),
+  entry: [
+    '@babel/polyfill',
+    path.resolve(__dirname, "src", "index.js"),
+  ],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "boundle.js",
@@ -15,20 +18,30 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env', '@babel/react']
+          presets: ['@babel/env', '@babel/react'],
+          plugins: [
+            [
+              "@babel/plugin-proposal-class-properties",
+              { "loose": true }
+            ]
+          ]
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
+          process.env.NODE_ENV === 'production'
+            ? MiniCssExtractPlugin.loader
+            : 'style-loader',
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'css-loader',
             options: {
-              sourceMap: true,
-              hmr: process.env.NODE_ENV === 'development'
-            }
+              modules: {
+                localIdentName: '[name]__[local]',
+              }
+            },
           },
-          'css-loader',
+          'sass-loader',
         ],
       },
     ]
@@ -48,5 +61,13 @@ module.exports = {
   devServer: {
     contentBase: 'src',
     port: 7000,
+    proxy: {
+      '/aiproject/api/': {
+        target: 'https://aiproject.ru/api/',
+        pathRewrite: { '/aiproject/api/': '' },
+        secure: false,
+        changeOrigin: true,
+      }
+    }
   }
 };

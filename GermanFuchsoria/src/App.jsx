@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import MessageField from './components/MessageField';
+import LayoutContainer from './containers/LayoutContainer';
 
 export default class App extends Component {
-  
   render() {
     return (
       <div className="app">
-        <h1 className="app__title">Chat with People</h1>
-        <div className="content">
-          <MessageField />
-        </div>
+        <LayoutContainer />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from './components/App.jsx';
-import './style.css'
+import { App } from './App.jsx';
+// import './style.css'
 
 // const messages = [
 //     { name: "Ivan", content: "Hello, world!" },
