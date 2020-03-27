@@ -1,8 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from "react";
 import SendButton from "../Buttons/Submitbutton"
-
-export default class SendForm extends React.Component {
+import "./SendForm.css"
+export default class SendForm extends Component {
   constructor(props) {
     super(props);
 
@@ -20,7 +19,8 @@ export default class SendForm extends React.Component {
 render() {
     return (
     <div className="layout">
-      <form className="chat-form" onSubmit={this.sendMessage}>
+      <form className="chat-form"
+            onSubmit={this.sendMessage}>
         <input
           type="text"
           name="name"
