@@ -6,7 +6,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { initStore } from '../../store';
 import { Provider } from 'react-redux';
 import { initChats } from '../../store/chatActions';
-import { ChatList } from './../ChatList/ChatList.jsx';
+import ChatListContainer from './../../containers/ChatListContainer';
 
 
 const store = initStore();
@@ -19,14 +19,14 @@ export const Layout = (props) => {
       <Header />
       <Container maxWidth="lg" className="container">
         <BrowserRouter>
-        <ChatList />
+          <ChatListContainer />
           <Switch>
             <Route path='/' exact>Main page</Route>
             <Route path='/profile'>Profile page</Route>
             <Route path='/chats' exact>
               <Redirect to="/chats/1" />
             </Route>
-            <Route path='/chats/:id' exact component={ ChatContainer }/>
+            <Route path='/chats/:id' exact component={ ChatContainer } />
             <Route path='/about'>About page</Route>
             <Route path='/contacts'>Contacts page</Route>
             <Route path='/'>404 page</Route>
