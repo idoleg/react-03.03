@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core';
 import {Link} from 'react-router-dom';
+import {push} from 'connected-react-router';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -38,7 +39,7 @@ export const ChatsList = ({chats, className="", handleAddNewChat})=> {
 
     const chatElements =Object.entries(chats).map(([id, chat]) => (
         <Link className={classes.link} to={`/chats/${id}`} key={id}>
-            <ListItem button>
+            <ListItem button onClick={}>
                 <ListItemAvatar>
                     <Avatar>
                         <ImageIcon />
