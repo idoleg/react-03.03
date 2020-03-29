@@ -42,6 +42,7 @@ export const ChatList = ({chats,headerName,handleAddChat}) => {
                                 </ListItemAvatar>
                                 <ListItemText primary="Add Chat" secondary="" />
                         </ListItem> */}
+                    {/* {Object.entries} */}
                     {Object.keys(chats).map((key, index) =>
                         <ListItem key={key} component={Link} to={chats[key].url}>
                                 <ListItemAvatar>

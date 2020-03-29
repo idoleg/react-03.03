@@ -15,7 +15,7 @@ import classname from 'classname'
 //  }
  
 export const Message = ({name, content}) => {
-    const className = classname("Message", {"Message--robot": name == 'Robot'})
+    const className = classname("Message", {"Message--robot": name == 'Робот'})
     return <li className={className}><strong>{name}:</strong> {content}</li>
 }
 
