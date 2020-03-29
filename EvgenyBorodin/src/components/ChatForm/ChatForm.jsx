@@ -15,8 +15,8 @@ function useInput(initialState) {
     return [state, setInput];
 }
 
-export const ChatForm = ({onSendMessage}) => {
-    const [user, setUser] = useInput('User');
+export const ChatForm = ({defaultUser, onSendMessage}) => {
+    const [user, setUser] = useInput(defaultUser);
     const [text, setText] = useInput('');
     
     const onSubmit = (event) => {
@@ -63,5 +63,6 @@ export const ChatForm = ({onSendMessage}) => {
 }
 
 ChatForm.propTypes = {
+    defaultUser: PropTypes.string,
     onSendMessage: PropTypes.func.isRequired,
 }

@@ -4,22 +4,27 @@ import {createBrowserHistory} from 'history';
 import { ChatContainer } from './containers/ChatContainer.jsx';
 import { Main } from './components/Main/Main.jsx';
 import { About } from './components/About/About.jsx';
-import { Profile } from './components/Profile/Profile.jsx';
+import Profile from './components/Profile/Profile.jsx';
 
 import './App.css'
 
+const store = initStore();
+store.dispatch(initChats());
+
 export const App = () => {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={Main} />
-                <Route exact path="/chats" component={ChatContainer} />
-                <Route exact path="/chats/:id" component={ChatContainer} />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/about" component={About} />
-                <Route path="/" component={Main} />
-            </Switch>
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={Main} />
+                    <Route exact path="/chats" component={ChatContainer} />
+                    <Route exact path="/chats/:id" component={ChatContainer} />
+                    <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/about" component={About} />
+                    <Route path="/" component={Main} />
+                </Switch>
+            </BrowserRouter>
+        </Provider>
     )
 }
 
