@@ -1,41 +1,68 @@
 import React, { Component } from 'react';
-import {Chat} from '../components/chat/chat.jsx'
-
+import {Chat} from '../components/chat/chat'
 export const Chatbot = "Chatbot";
 export class ChatContainer extends Component {
  state = {
-        messages: [
-    {name: "Ivan", content: "Hello!"},
-    {name: "Petr", content: "Hello, how are you?"},
-    {name: "Ivan", content: "I`m fine"},
-        ]
+     chats: {
+         1: {
+             name: 'Chat 1',
+               messages: [
+                   {name: "Ivan1", content: "Hello!"},
+                   {name: "Petr1", content: "Hello, how are you?"},
+                   {name: "Ivan1", content: "I`m fine"},
+                    ]
+         },
+          2: {
+             name: 'Chat 2',
+               messages: [
+                   {name: "Ivan2", content: "Hello!"},
+                   {name: "Petr2", content: "Hello, how are you?"},
+                   {name: "Ivan2", content: "I`m fine"},
+                    ]
+         },
+          3: {
+             name: 'Chat 3',
+               messages: []
+         },
+     }
+     
+      
    
  }
+timeoutId = null;
 
-componentDidUpdate () {
-    /* const chatBotMessage = {name: "Chatbot", content: "Hello! I'm Chatbot. What can i do for you?"}; 
-        if (this.state.messages[this.state.messages.length - 1].name !== chatBotMessage.name) {
-            //this.setState((state) => ({messages: [...this.state.messages, chatBotMessage]}));
-            this.handleSendMessage(chatBotMessage);
-            console.log(this.state.messages);
-        }else{
-    console.log(this.state.messages);}*/
-    
-    
-    const lastMessage = this.state.messages[this.state.messages.length - 1];
-     if (this.state.messages[this.state.messages.length - 1].name !== Chatbot ){
-         setTimeout(() => this.handleSendMessage(
+handleRobotAnswer = () => {
+    const {id} = this.props.match.params;
+    if(id && this.state.chats[id]) {
+        const currentMessages = this.state.chats[id].messages;
+        const lastMessage = currentMessages[currentMessages.length - 1];
+        
+        if (lastMessage && lastMessage.name !== Chatbot ){
+         clearTimeout(this.timeoutId);
+         this.timeoutId = setTimeout(() => this.handleSendMessage(id)(
              {name: Chatbot, content: `Hello ${lastMessage.name}! I'm Chatbot, what can i do for you?`,}), 1000); 
-     }
+    } 
     }
+ 
+ }
 
-handleSendMessage = (message) => {
+handleSendMessage =(id) => (message) => {
     this.setState((state) => ({
-        messages: [...state.messages, message]
-    }));
+        chats: {
+            ...state.chats,
+            [id]: {
+                name: state.chats[id].name,
+                messages: [ ...state.chats[id].messages, message]
+            }
+        }
+        //messages: [...state.messages, message]
+    }), this.handleRobotAnswer);
 }
     render(){
-        return <Chat messages={this.state.messages} onSendMessage = {this.handleSendMessage}/>;
+        const {id} = this.props.match.params;
+        const messages = id && this.state.chats[id] ? this.state.chats[id].messages : undefined ;
+        
+        return <Chat messages={messages} onSendMessage = {this.handleSendMessage(id)}/>;
     }
    
 }
