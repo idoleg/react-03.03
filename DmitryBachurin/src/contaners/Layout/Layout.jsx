@@ -4,19 +4,12 @@ import { ChatList } from '~/components/ChatList/ChatList';
 import { MessageField } from '~/contaners/MessageField/MessageField';
 import './Layout.scss';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 
 
 export class Layout extends React.Component {
-    // state = {
-    //     title: 'Чат на React',
-    //     contacts: [
-    //         { name: 'Иван' },
-    //         { name: 'Олег' },
-    //         { name: 'Дмитрий' },
-    //         { name: 'Михаил' },
-    //         { name: 'Анастасия' },
-    //     ]
-    // }
+
 
     state = {
         chats: [
@@ -67,26 +60,28 @@ export class Layout extends React.Component {
 
     // timeoutId = null;
 
-    onSendMessage = ({ chatId, name, content }) => {
-        this.setState(
-            (state) => {
-                const messageId = this.state.messages.length+1;
-                
-                const filteredChats = this.state.chats.filter((el) => {
-                    return el.id !== +chatId;
-                });
-                
-                const updatedChat = this.getChatById(chatId);
-                updatedChat.messagesArray.push(messageId);
-                filteredChats.push(updatedChat);
-                filteredChats.sort((a, b) => a.id > b.id ? 1 : -1);
-                
-                return  {chats: filteredChats, messages: [...this.state.messages, { id: messageId, name: name, content: content }] }
-            }
-           
-        )
-        console.log(this.state)
-    }
+
+    //Переписано в reducer
+    // onSendMessage = ({ chatId, name, content }) => {
+    //     this.setState(
+    //         (state) => {
+    //             const messageId = this.state.messages.length + 1;
+
+    //             const filteredChats = this.state.chats.filter((el) => {
+    //                 return el.id !== +chatId;
+    //             });
+
+    //             const updatedChat = this.getChatById(chatId);
+    //             updatedChat.messagesArray.push(messageId);
+    //             filteredChats.push(updatedChat);
+    //             filteredChats.sort((a, b) => a.id > b.id ? 1 : -1);
+
+    //             return { chats: filteredChats, messages: [...this.state.messages, { id: messageId, name: name, content: content }] }
+    //         }
+
+    //     )
+       
+    // }
 
     // componentDidUpdate() {
     //     const name = this.state.messages[this.state.messages.length - 1].name;
@@ -121,7 +116,7 @@ export class Layout extends React.Component {
                 <Header title={title} />
                 <div className="main">
                     <ChatList chats={chats} />
-                    <MessageField chatId={chatId} messages={getMessagesList(chatId)} onSendMessage={onSendMessage} />
+                    <MessageField chatId={chatId} messages={getMessagesList(chatId)} onSendMessage={handleSendMessage} />
                 </div>
 
             </>
@@ -130,3 +125,60 @@ export class Layout extends React.Component {
 
 
 }
+const mapStateToProps = (store, props) => {
+    const { id } = props.match.params;
+    const chat = store.chat;
+    return {
+        id,
+        chat
+    }
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    sendMessage
+}, dispatch)
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    
+    const { id } = ownProps.match.params;
+    title = 'Выберите чат';
+    chatId = undefined;
+
+    getChatById = (id) => {
+        return this.state.chats.find((elem) => {
+            if (elem.id == id) {
+                return elem;
+            }
+        });
+    }
+    getMessageById = (id) => {
+        return this.state.messages.find((elem) => {
+            if (elem.id == id) {
+                return elem;
+            }
+        });
+    }
+    getMessagesList = (chatId) => {
+        let chat = this.getChatById(chatId);
+
+        if (chat === undefined) {
+           
+            return;
+        }
+        return chat.messagesArray.map((item) => this.getMessageById(item));
+    }
+
+    const handleSendMessage = ({ name, content }) => {
+    
+        dispatchProps.sendMessage(chatId, name, content);
+
+    }
+    return {
+        messages: stateProps.messages,
+        handleSendMessage
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Layout)

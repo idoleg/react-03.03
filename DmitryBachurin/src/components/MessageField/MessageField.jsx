@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import { Message } from './Message/Message'
 
 export default class MessegeField extends Component {
-    state = {
-        messages: [
-            { name: "Ivan", content: "Hello, world!" },
-            { name: "Petr", content: "Helo, how are you?" },
-            { name: "Ivan", content: "I'm well" },
-        ]
-    }
+   
 
 
     handleClick = (e) => {
