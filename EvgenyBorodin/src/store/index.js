@@ -1,8 +1,14 @@
 import { createStore, combineReducers } from 'redux';
+import {createBrowserHistory} from 'history';
+import {routerMiddleware, connectRouter} from 'connected-react-router';
+
 import chatReducer from './chatReducer.js';
 
+export const history = createBrowserHistory();
+
 const reducer = combineReducers({
-    app: chatReducer
+    app: chatReducer,
+    router: connectRouter(history),
 });
 
 export function initStore (preloadedState = undefined) {

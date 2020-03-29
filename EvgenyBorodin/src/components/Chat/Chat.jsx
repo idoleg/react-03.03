@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {MessageList} from '../MessageList/MessageList.jsx';
-import {Message} from '../Message/Message.jsx'
-import {ChatForm} from '../ChatForm/ChatForm.jsx';
+import { MessageList } from '../MessageList/MessageList.jsx';
+import { Message } from '../Message/Message.jsx'
+import { ChatForm } from '../ChatForm/ChatForm.jsx';
 
 import './Chat.css'
 

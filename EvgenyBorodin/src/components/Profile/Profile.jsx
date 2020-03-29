@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
 import { updateProfile } from '../../store/chatActions.js';
+import { NavBar } from '../NavBar/NavBar.jsx'
+
 
 import './Profile.css'
 
@@ -27,11 +28,7 @@ const Profile = ({profile, onUpdateProfile}) => {
 
 
     return (<div>
-        <nav>
-            <Link to="/chats">Enter the messenger</Link>
-            <Link to="/">Main page</Link>
-            <Link to="/about">About...</Link>
-        </nav>
+        <NavBar selectedPath="Profile" />
         <h1>Profile</h1>
         <form className="profile__form">
             <label>Name:&nbsp;
