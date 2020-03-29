@@ -18,6 +18,7 @@ export const Chat = ({messages, onSendMessage}) => {
 			<strong>Select a chat in the list</strong>
 		)
 	}
+
 }
 
 Chat.propTypes = {
