@@ -9,4 +9,4 @@ const mapStateToProps = (store, props) => {
    }
 };
 
-export default connect(mapStateToProps)(Messenger); //, mapDispatchToProps, mergeProps
+export default connect(mapStateToProps)(Messenger);

@@ -1,5 +1,5 @@
 import {bindActionCreators} from "redux";
-import {addChat} from "../store/ChatActions";
+import {addChat} from "../store/actions/ChatActions";
 import {getId} from "../utils/IdUtil";
 import {BOT_NAME} from "../utils/Constants";
 import {connect} from "react-redux";
@@ -10,7 +10,6 @@ const mapStateToProps = (store, props) => {
       chats: store.chats,
       selectedChat: props.selectedChat,
    }
-
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

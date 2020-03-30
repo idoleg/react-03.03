@@ -1,6 +1,6 @@
 import {handleActions} from 'redux-actions';
-import {addChat, initChats, addMessage} from './ChatActions';
-import {CHATS} from "../utils/Constants";
+import {addChat, initChats, addMessage} from '../actions/ChatActions';
+import {CHATS} from "../../utils/Constants";
 
 const initialState = {};
 

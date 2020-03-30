@@ -4,6 +4,8 @@ export const AUTH_PATH = "/auth";
 export const BOT_NAME = "Bot";
 export const BOT_MESSAGE = "Thank you!";
 
+export const DEFAULT_USERNAME = "Guest";
+
 export const CHATS = [
    [1, {
       name: BOT_NAME,

@@ -1,9 +1,8 @@
 import {connect} from "react-redux";
 import {ChatView} from "../components/ChatView/ChatView";
-import {addMessage} from "../store/ChatActions";
+import {addMessage} from "../store/actions/ChatActions";
 import {getId} from "../utils/IdUtil";
 import {bindActionCreators} from "redux";
-import {BOT_NAME} from "../utils/Constants";
 
 
 const mapStateToProps = (store, props) => {
@@ -12,8 +11,8 @@ const mapStateToProps = (store, props) => {
       selectedChat: props.selectedChat,
       messages: chat.messages,
       botName: chat.name,
+      username: store.user.username,
    }
-
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -23,10 +22,9 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
    const onAddMessage = (text, automated = false) => {
-      //TODO get username from store, replace [username]
       dispatchProps.addMessage(
          getId(),
-         automated ? stateProps.botName : "[username]",
+         automated ? stateProps.botName : stateProps.username,
          text,
          automated,
          stateProps.selectedChat)
