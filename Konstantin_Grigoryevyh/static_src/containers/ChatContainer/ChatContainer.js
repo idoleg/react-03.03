@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from "redux";
 import {sendMessage} from '../../store/chatActions';
 
-
 export const ROBOT = 'Robot';
 
 const mapStateToProps = (store, props) => {
