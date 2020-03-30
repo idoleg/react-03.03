@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core';
-import {Link} from 'react-router-dom';
-import {push} from 'connected-react-router';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -19,12 +17,6 @@ const useStyle = makeStyles(theme => ({
         position: "static",
         boxShadow: 'none'
     },
-    link: {
-        textDecoration: 'none',
-        '&:visited': {
-            color: 'inherit',
-        }
-    },
     list: {
         overflow: "auto",
         maxHeight: "100%",
@@ -36,18 +28,15 @@ const useStyle = makeStyles(theme => ({
 export const ChatsList = ({chats, className="", handleAddNewChat})=> {
     const classes = useStyle();
     const [newChatName, setNewChatName] = useState('');
-
-    const chatElements =Object.entries(chats).map(([id, chat]) => (
-        <Link className={classes.link} to={`/chats/${id}`} key={id}>
-            <ListItem button onClick={}>
-                <ListItemAvatar>
-                    <Avatar>
-                        <ImageIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={chat.title} />
-            </ListItem>
-        </Link>
+    const chatElements =chats.map(({id, title, handleClick}) => (
+        <ListItem button onClick={handleClick} key={id}>
+            <ListItemAvatar>
+                <Avatar>
+                    <ImageIcon />
+                </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={title} />
+        </ListItem>
     ));
 
     return (
