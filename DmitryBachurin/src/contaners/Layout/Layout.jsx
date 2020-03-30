@@ -100,7 +100,7 @@ class Layout extends React.Component {
 
     render() {
         const { title, messages, chats, userName } = this.props;
-        console.log(userName);
+
 
         return (
             <>
@@ -168,6 +168,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     if (!(getChatById(chatId) === undefined)) {
         title = getChatById(chatId).title;
     }
+    title = `Чаты ${userName}. ${title}`
 
     const messsages = getMessagesList(chatId);
 
