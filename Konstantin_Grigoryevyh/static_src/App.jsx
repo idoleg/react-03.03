@@ -1,13 +1,15 @@
 import React from 'react';
-import ChatContainer from './containers/ChatContainer/ChatContainer.jsx';
+import ChatContainer from './containers/ChatContainer/ChatContainer';
 import {Header} from './components/Header/Header';
 import {Footer} from './components/Footer/Footer';
-import {ChatList} from "./components/ChatList/ChatList";
+import ChatListContainer from './containers/ChatListContainer/ChatListContainer';
 import {Profile} from "./components/Profile/Profile";
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {initStore} from "./store/index.js";
+import {Switch, Route, Link} from 'react-router-dom';
+import {initStore, history} from "./store/index.js";
 import {Provider} from  'react-redux';
 import {initChats} from "./store/chatActions";
+import {ConnectedRouter} from 'connected-react-router';
+
 
 import './styles/styles.css';
 
@@ -17,15 +19,15 @@ store.dispatch(initChats());
 export const App = () => {
     return (
         <Provider store={store}>
-            <BrowserRouter>
+            <ConnectedRouter history={history}>
                 <Switch>
-                    <Route path="/" exact> It;s index page</Route>
+                    <Route path="/" exact> It;s index page. <Link to="/chats">К чатам</Link></Route>
                     <Route path="/about">it's about page</Route>
                     <Route path="/profile"exact component={Profile} />
                     <Route path="/chats/" >
                         <Header />
                         <div className="chat">
-                            <ChatList />
+                            <ChatListContainer />
                             <Switch>
                                 <Route path="/chats" exact component={ChatContainer} />
                                 <Route path="/chats/:id" exact component={ChatContainer} />
@@ -35,7 +37,7 @@ export const App = () => {
                     </Route>
                     <Route path="/" >it's 404 page</Route>
                 </Switch>
-            </BrowserRouter>
+            </ConnectedRouter>
         </Provider>
     )
 }

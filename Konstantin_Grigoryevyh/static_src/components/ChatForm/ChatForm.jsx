@@ -1,25 +1,20 @@
-import React, { useState } from "react";
+import React, {useState, useRef, useEffect} from "react";
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {useInput} from '../../hooks/useInput'
 
 import './ChatForm.css';
 
-function useInput(initialState) {
-    const [state, setState] = useState(initialState);
-
-    const setInput = (event) => {
-        setState(event.currentTarget.value)
-    }
-    return [state, setInput];
-}
-
 export const ChatForm = ({ onSendMessage }) => {
     const [name, setName] = useInput('User');
-    const [content, setContent] = useInput('');
+    const [content, setContent, setContentState] = useInput('');
+    const textarea = useRef();
 
     const onSubmit = () => {
         onSendMessage({ name, content });
+        setContentState('');
+        textarea.current.focus();
     }
 
     return (<div className="form-wrapper">
@@ -34,6 +29,7 @@ export const ChatForm = ({ onSendMessage }) => {
             />
             <br/>
             <TextField
+                inputRef={textarea}
                 label="Введите cообщение"
                 autoFocus
                 multiline

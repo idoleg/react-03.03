@@ -1,13 +1,13 @@
 import React from 'react';
-import Message from './Message/Message';
+import Message from './Message/Message.jsx';
+import TextField from '@material-ui/core/TextField';
 
-
-export default class MessageField extends React.Component {
+export class MessageField extends React.Component {
     state = {
         messages: [
-            { name: "Oleg", text: "Hi, all!" },
-            { name: "Anton", text: "Hello!" },
-            { name: "Oleg", text: "Interesting lesson? )" },
+            { name: "Oleg", text: "Hi, all!", className: "" },
+            { name: "Anton", text: "Hello!", className: "" },
+            { name: "Oleg", text: "Interesting lesson? )", className: "" },
         ],
         robot: false,
         lastChatName: false,
@@ -20,39 +20,47 @@ export default class MessageField extends React.Component {
         text.value = "";
     };
 
+    timeoutID = null;
+
     componentDidUpdate() {
         if (!this.state.robot) {
-            setTimeout(() =>
+            clearTimeout(this.timeoutID);
+            this.timeoutID = setTimeout(() =>
                 this.setState(
                     {
-                        messages: [...this.state.messages, {name: "Robot", text: 'Здравствуйте, '+ this.state.lastChatName+'! Как Ваши дела?'}],
+                        messages: [...this.state.messages, {name: "Robot", text: 'Здравствуйте, '+ this.state.lastChatName+'! Как Ваши дела?', className: "robot" }],
                         robot: true
-                    }), 1000);
+                    }), 3000);
         }
     }
-
 
     render() {
         const messageElements = this.state.messages.map((message, index) => (
             <Message key={ index }  {...message} />));
-
-        return <div>
-            { messageElements }
-            <form onSubmit={ this.handleClick }>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Введите Имя"
-                    required
-                /><br/>
-                <input
-                    type="text"
-                    name="text"
-                    placeholder="Сообщение"
-                    required
-                /><br/>
-            <button >Отправить сообщение</button>
-            </form>
+        return <div className="chat__main-chat">
+            <div className="chat__messages">
+                { messageElements }
+            </div>
+            <div className="form-wrapper">
+                <form onSubmit={ this.handleClick } className="form">
+                    <TextField
+                        label="Введите Имя"
+                        id="standard-basic"
+                        type="text"
+                        name="name"
+                        required
+                    />
+                    <br/>
+                    <TextField
+                        label="Введите cообщение"
+                        type="text"
+                        id="standard-basic"
+                        name="text"
+                        required
+                    /><br/>
+                    <button >Отправить сообщение</button>
+                </form>
+            </div>
         </div>
     }
 }
