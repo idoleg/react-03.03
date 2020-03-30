@@ -23,9 +23,9 @@ export const ChatListItem = ({chatLink, chatAvatar, chatTitle, messageSender, la
                 secondary={
                 <React.Fragment>
                 <Typography component="span" variant="body1" color="textPrimary">
-                    {messageSender}:
+                <strong>{messageSender ? messageSender + ":" : messageSender}</strong>
                 </Typography>
-                { lastMessage }
+                { lastMessage ? " " + lastMessage : lastMessage}
                 </React.Fragment>
             }/>
         </ListItem>
