@@ -54,7 +54,7 @@ export default handleActions ({
         const id = Number(store.state.countChats) + 1;
 
 
-        return  {...store, state: {chats: {...store.state.chats,
+        return  {...store,  state:{...store.state, chats: {...store.state.chats,
             [id] : {
                 name: `Chat ${id}`,
                 messages: [
