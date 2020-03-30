@@ -5,7 +5,7 @@ import classname from 'classname';
 import './Message.css';
 
 export const Message = ({name, content}) => {
-    const className = classname("Message", {'Message--robot': name === 'Robot'});
+    const className = classname("Message", {'Message--robot': name === 'Bot'});
     return <li className={className} ><strong>{name}:</strong> {content}</li>
 }
 
