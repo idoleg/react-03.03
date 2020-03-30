@@ -36,9 +36,11 @@ const mapStateToProps = (store,props) => {
         // id,
         // messages: chats &&  chats[id] ?  chats[id].messages : undefined,
         // url,
+        isLoading: store.chats.isLoading,
         idChat,
         headerName,
         chats,
+        error: store.chats.error
     }
 }
 
@@ -62,11 +64,13 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
     return{
         // messages: stateProps.messages,
         // url: stateProps.url,
+        isLoading: stateProps.isLoading,
         headerName: stateProps.headerName,
         chats: stateProps.chats,
         handleAddChat,
         deleteChat,
-        id: idChat
+        id: idChat,
+        error: stateProps.error
     }
 }
 

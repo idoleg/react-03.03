@@ -1,14 +1,36 @@
 import {handleActions} from 'redux-actions'
-import {initChats,sendMessage,addNewChat,deleteChat} from './chatActions'
+import {loadingChats,failedLoadedChats,initChats,sendMessage,addNewChat,deleteChat} from './chatActions'
 
 const initialState = {
-    chats: {}
+    chats: {},
+    isLoading: false
 }
 
 export default handleActions({
+    [loadingChats]: (store, actions) => {
+        console.log('loadingChats', actions)
+        return {
+            ...store,
+            isLoading: true,
+            error: null
+        }
+    },
+    [failedLoadedChats]: (store, actions) => {
+        console.log('loadingChats', actions)
+        return {
+            ...store,
+            isLoading: false,
+            error: actions.payload.error
+        }
+    },
     [initChats]: (store, actions) => {
-        console.log('initChats', initChats)
-        return actions.payload.chats
+        console.log('initChats', actions)
+        return {
+            ...store,
+            chats: actions.payload.chats.chats,
+            isLoading: false,
+            error: null
+        }
     },
     [sendMessage]: (store, actions) => {
         console.log('store', store)

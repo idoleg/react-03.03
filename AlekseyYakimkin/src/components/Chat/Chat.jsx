@@ -4,7 +4,13 @@ import { Message } from '../Message/Message';
 import { MessageList } from '../MessageList/MessageList';
 import { ChatForm } from '../ChatForm/ChatForm';
 import './Chat.css'
-export const Chat = ({messages, onSendMessage}) => {
+export const Chat = ({error, isLoading, messages, onSendMessage}) => {
+    if(error){
+        return <div>{error}</div>
+    }
+    if(isLoading){
+        return <div>Loading progress ...</div>
+    }
     if(messages){
         return  <div className="ChatContainer">
                 {messages.length ? <MessageList messages={messages}/> : "Нет сообщений" }

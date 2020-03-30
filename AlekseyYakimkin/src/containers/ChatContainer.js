@@ -154,11 +154,13 @@ const mapStateToProps = (store,props) => {
     const headerName = id && store.chats.chats[id] ? store.chats.chats[id].name : "Чаты"
     const chats = store.chats &&  store.chats.chats ?  store.chats.chats: undefined
     return {
+        isLoading: store.chats.isLoading,
         id,
         messages: chats &&  chats[id] ?  chats[id].messages : undefined,
         url,
         headerName,
         chats,
+        error: store.chats.error
     }
 }
 
@@ -173,7 +175,9 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
         dispatchProps.sendMessage(id,name,content)
     }
     return{
+        error: stateProps.error,
         messages: stateProps.messages,
+        isLoading: stateProps.isLoading,
         url: stateProps.url,
         headerName: stateProps.headerName,
         chats: stateProps.chats,

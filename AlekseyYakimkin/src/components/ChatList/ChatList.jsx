@@ -24,10 +24,16 @@ import './ChatList.css'
 //     },
 //   }));
 
-export const ChatList = ({chats,headerName,handleAddChat, deleteChat ,id}) => {
+export const ChatList = ({error, isLoading, chats,headerName,handleAddChat, deleteChat ,id}) => {
     //const classes = useStyles();
     console.log(handleAddChat);
     // console.log("ChatList return")
+    if(error){
+        return <div>{error}</div>
+    }
+    if(isLoading){
+        return <div>Loading progress ...</div>
+    }
     return  <>
             <Header  headerName={headerName} deleteChat={deleteChat} id={id}/>
             <div className="">
