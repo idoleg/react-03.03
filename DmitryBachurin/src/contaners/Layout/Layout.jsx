@@ -99,15 +99,15 @@ class Layout extends React.Component {
 
 
     render() {
-        const { title, messages, chats } = this.props;
-
+        const { title, messages, chats, userName } = this.props;
+        console.log(userName);
 
         return (
             <>
                 <Header title={title} />
                 <div className="main">
                     <ChatList chats={chats} />
-                    <MessageField messages={messages} handleSendMessage={this.props.handleSendMessage} />
+                    <MessageField messages={messages} handleSendMessage={this.props.handleSendMessage} userName={userName}/>
                 </div>
 
             </>
@@ -120,7 +120,7 @@ const mapStateToProps = (store, props) => {
     const chat = store.chat;
 
     return {
-
+ 
         chat
     }
 }
@@ -162,7 +162,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         dispatchProps.sendMessage(chatId, name, content);
 
     }
-
+    const userName = stateProps.chat.userName;
+   
     let title = 'Выберите чат';
     if (!(getChatById(chatId) === undefined)) {
         title = getChatById(chatId).title;
@@ -171,6 +172,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const messsages = getMessagesList(chatId);
 
     return {
+        userName: userName,
         title: title,
         messages: messsages,
         chats: stateProps.chat.chats,

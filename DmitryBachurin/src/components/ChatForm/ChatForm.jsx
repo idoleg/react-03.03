@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import './chatForm.scss'
 
 
-export const ChatForm = ({handleSendMessage }) => {
-    const [name, setName] = useState('User');
+export const ChatForm = ({handleSendMessage, userName }) => {
+    const [name, setName] = useState(userName);
     const [content, setContent] = useState('');
 
 

@@ -9,6 +9,7 @@ export default handleActions({
 
     [initChats]: (store, action) => {
         return {
+            userName: 'Vasya',
             chats: [
                 { id: 1, title: 'Чат 1', messagesArray: [1, 2, 3] },
                 { id: 2, title: 'Чат 2', messagesArray: [4, 5, 6] },
@@ -28,7 +29,7 @@ export default handleActions({
             ],
         }
     },
-
+  
     [sendMessage]: (store, action) => {
 
         const {chatId, name, content} = action.payload;

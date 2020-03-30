@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Layout from '~/contaners/Layout/Layout';
-import { Profile } from '~/contaners/Profile/Profile';
+import Profile from '~/contaners/Profile/Profile';
 import { Provider } from 'react-redux';
 import { initStore } from '~/store';
 import { initChats } from '~/store/actions/chatActions'
 
 
 const store = initStore();
+
 store.dispatch(initChats());
 
 export const Router = () => {
