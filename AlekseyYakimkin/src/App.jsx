@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,useEffect} from 'react';
 // import ChatContainer from './containers/ChatContainer'
 // import ChatListContainer from './containers/ChatListContainer'
 import {Header} from './components/Header/Header'
@@ -7,7 +7,7 @@ import Router from './components/Router'
 import './css/style.css'
 import {initStore, history} from './store/index'
 import {Provider} from 'react-redux'
-import {initChats} from './store/chatActions'
+import {fetchChats} from './store/chatOperations'
 import {ConnectedRouter} from 'connected-react-router'
 
 {/* <Header/>
@@ -17,7 +17,7 @@ import {ConnectedRouter} from 'connected-react-router'
 //import {sendMessage} from './store/chatActions'
 //store.dispatch(sendMessage('test','message'))
 const store = initStore()
-store.dispatch(initChats())
+store.dispatch(fetchChats())
 
 console.log(store.getState())
 

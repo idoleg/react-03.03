@@ -2,7 +2,7 @@
 import {createActions} from 'redux-actions'
 
 export const {initChats, sendMessage, createChat, addNewChat, deleteChat} = createActions({
-    INIT_CHATS: () => ({}),
+    INIT_CHATS: (chats) => ({chats}),
     SEND_MESSAGE: (id, name,content) => ({id, name,content}),
     //CREATE_CHAT: (name) => ({name}),
     ADD_NEW_CHAT: (id,name) => ({id,name}),
