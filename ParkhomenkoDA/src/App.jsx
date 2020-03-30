@@ -1,15 +1,18 @@
-import React, {Component} from 'react';
+import React, { useEffect } from 'react';
 import ChatContainer from './containers/ChatContainer';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-//import {ChatList} from './components/ChatList/ChatList'
-import {initStore, history} from './store'
-import {Provider} from 'react-redux'
-import {initChats, sendMessage} from './store/chatActions'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { initStore, history } from './store'
+import { Provider } from 'react-redux'
+import { fetchChats } from './store/chatOperations'
 import ChatListContainer from './containers/ChatListContainer';
-import {ConnectedRouter} from 'connected-react-router';
+import { ConnectedRouter } from 'connected-react-router';
+// StaticRouter
+// MemoryRouter
+// HashRouter www.test.com/#about
+// BrowserRouter www.test.com/index
 
 const store = initStore();
-store.dispatch(initChats());
+store.dispatch(fetchChats());
 
 export const App = () => {
     return (
@@ -17,8 +20,8 @@ export const App = () => {
             <ConnectedRouter history={history}>
                 <Switch>
                     <Route path="/" exact>It's index page</Route>
-                    <Route path="/chats"> 
-                        <ChatListContainer/>
+                    <Route path="/chats">
+                        <ChatListContainer />
                         <Switch>
                             <Route path="/chats" exact component={ChatContainer} />
                             <Route path="/chats/:id" exact component={ChatContainer} />
@@ -45,7 +48,7 @@ export const App = () => {
 //     handleShowCounter = () => {
 //         this.setState((state) => ({isShowCounter: !state.isShowCounter}))
 //     }
-    
+
 //     handleCounter = (value) => {
 //         this.setState((state) => ({counter: state.counter + value}))
 //     }
