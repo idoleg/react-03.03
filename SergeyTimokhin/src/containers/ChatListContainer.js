@@ -1,21 +1,20 @@
 import { connect } from 'react-redux';
 import { ChatList } from '../components/ChatList/ChatList';
+import { createChat } from '../store/chatOperations';
+import { bindActionCreators } from 'redux';
+
 
 const mapStateToProps = (store) => {
     const chates = Object.entries(store.chats);
 
-    // console.log(chat[1].name);
-    // console.table(Object.entries(chats).map(([id, { name, massages }]) => ({ id, name, massages })))
-    // console.log(chats.map(([id, chat]) => (id, chat)))
-
-    const chats = chates.map(([id, { name, messages, avatar }]) => ({ id, name, messages, avatar }))
-
-    console.log(chats[0].messages[1])
-
-
+    const chats = chates.map(([id, { name, messages, avatar }]) => ({ id, name, messages, avatar }));
 
     return { chats }
 }
 
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    createChat
+}, dispatch)
 
-export default connect(mapStateToProps)(ChatList) // , mapDispatchToProps, mergeProps
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatList) // mergeProps
