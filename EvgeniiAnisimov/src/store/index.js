@@ -1,6 +1,11 @@
 // import { createStore } from 'redux';
-import { createStore, combineReducers, compose } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import chatReducer from './chatReducer';
+import botMiddleware from './botMiddleware'
+import { createBrowserHistory } from 'history';
+import { routerMiddleware, connectRouter } from 'connected-react-router';
+import chatMiddleware from './chatMiddleware';
+import ReduxThunk from 'redux-thunk';
 
 // const reducer = function(store={counter: 0}, action) {
 //   console.log("index->reducer", action);
@@ -16,12 +21,27 @@ import chatReducer from './chatReducer';
 //   };
 // }
 
+export const history = createBrowserHistory();
+
 const reducer = combineReducers({
-  chats: chatReducer
+  chats: chatReducer,
+  router: connectRouter(history)
 });
 
-const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const composeEnhancers = (typeof window !== 'undefined'
+  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 export function initStore(preloaderState = undefined) {
-  return createStore(reducer, preloaderState, composeEnhancers());
+  return createStore(
+    reducer,
+    preloaderState,
+    composeEnhancers(
+      applyMiddleware(
+        ReduxThunk,
+        routerMiddleware(history),
+        botMiddleware,
+        chatMiddleware
+      ),
+    )
+  );
 }

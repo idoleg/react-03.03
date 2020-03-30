@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useInput } from '../../hooks/useInput';
 
-export const ChatList = ({chats, addChat}) => {
+// export const ChatList = ({chats, addChat}) => {
+export const ChatList = ({chats, createChat}) => {
   const [name, setName, setNameState] = useInput('');
 
   const handleAddChat = (event) => {
     event.preventDefault();
 
-    addChat(name);
+    createChat(name);
     setNameState('');
   }
 

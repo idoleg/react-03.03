@@ -3,11 +3,12 @@ import ChatContainer from './containers/ChatContainer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import { ChatList } from './components/ChatList/ChatList';
 import Layout from './components/Layout';
-import { initStore } from './store';
+import { initStore, history } from './store';
 import { Provider } from 'react-redux';
 import { sendMessage } from './store/chatActions';
 import { initChats } from './store/chatActions';
 import ChatListContainer from './containers/ChatListContainer';
+import { ConnectedRouter } from 'connected-react-router';
 
 const store = initStore();
 
@@ -24,7 +25,7 @@ store.dispatch(initChats());
 export const App = () => {
   return(
     <Provider store={store}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" exact>It's idex page</Route>
           <Route path="/chats">
@@ -38,7 +39,7 @@ export const App = () => {
           <Route path="/contacts">It's contacts page</Route>
           <Route path="/">It's 404 page. Not found.</Route>
         </Switch>
-      </BrowserRouter>
+      </ConnectedRouter>
     </Provider>
   )
 }
