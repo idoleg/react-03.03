@@ -10,12 +10,11 @@ import {initMessages} from "Actions/messageActions";
 import {Messenger} from "Components/Messenger/Messenger";
 import ProfileContainer from "Containers/ProfileContainer";
 
+
 const {store, persistor} = initStore();
 store.dispatch(initChats());
 store.dispatch(initUsers());
 store.dispatch(initMessages());
-
-
 
 
 export const App = (props) => {

@@ -1,4 +1,6 @@
 import {sendMessage} from 'Actions/messageActions';
+import {startFire, finishFire} from "Actions/chatActions";
+
 
 const USER_ID = 1,
     BOT_ID = 2,
@@ -12,6 +14,7 @@ export default store => next => (action) => {
         case sendMessage.toString(): {
             validateSendMessageAction(store, action);
             generateBotAnswer(store, action);
+            fireChat(store, action);
         }
 
     }
@@ -45,3 +48,12 @@ function generateBotAnswer(store, action) {
     }
 }
 
+function  fireChat(store, action) {
+    const {senderId, chatId} = action.payload;
+    const path = store.getState().router.location.pathname.split('/');
+    const currentChatId = parseInt(path[path.length-1]);
+     if (senderId !== USER_ID && chatId !== currentChatId) {
+        store.dispatch(startFire(chatId));
+        setTimeout(()=> store.dispatch(finishFire(chatId)), 1500);
+    }
+}

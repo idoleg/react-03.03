@@ -17,6 +17,9 @@ const useStyle = makeStyles(theme => ({
         position: "static",
         boxShadow: 'none'
     },
+    itemFire: {
+        background: '#aaaaaa',
+    },
     list: {
         overflow: "auto",
         maxHeight: "100%",
@@ -28,8 +31,13 @@ const useStyle = makeStyles(theme => ({
 export const ChatsList = ({chats, className="", handleAddNewChat})=> {
     const classes = useStyle();
     const [newChatName, setNewChatName] = useState('');
-    const chatElements =chats.map(({id, title, handleClick}) => (
-        <ListItem button onClick={handleClick} key={id}>
+    const chatElements =chats.map(({id, title, fire, handleClick}) => {
+        return (
+        <ListItem button
+                  className={fire?classes.itemFire:''}
+                  onClick={handleClick}
+                  key={id}
+        >
             <ListItemAvatar>
                 <Avatar>
                     <ImageIcon />
@@ -37,7 +45,7 @@ export const ChatsList = ({chats, className="", handleAddNewChat})=> {
             </ListItemAvatar>
             <ListItemText primary={title} />
         </ListItem>
-    ));
+    )});
 
     return (
         <div className={className}>

@@ -23,6 +23,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         chats: Object.entries(stateProps.chats).map(([id, chat]) => ({
             id: id,
             title: chat.title,
+            fire: chat.fire,
             handleClick: () => push(`/chats/${id}`),
         }))
     }
