@@ -31,12 +31,14 @@ export default handleActions({
 
     [sendMessage]: (store, action) => {
 
-        const messageId = store.chat.messages.length + 1;
-        const filteredChats = store.chat.chats.filter((el) => {
+        const {chatId, name, content} = action.payload;
+        const messageId = store.messages.length + 1;
+        const filteredChats = store.chats.filter((el) => {
             return el.id !== +chatId;
         });
+        
+        const updatedChat = store.chats.find(item => item.id === +chatId);
 
-        const updatedChat = store.chat.chats.find(item => item.id === +chatId);
         updatedChat.messagesArray.push(messageId);
         filteredChats.push(updatedChat);
         filteredChats.sort((a, b) => a.id > b.id ? 1 : -1);
