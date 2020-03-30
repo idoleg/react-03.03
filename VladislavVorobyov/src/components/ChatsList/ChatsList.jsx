@@ -7,6 +7,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ImageIcon from '@material-ui/icons/Chat';
 import {ChatListHeader} from "Components/ChatListHeader/ChatListHeader";
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const useStyle = makeStyles(theme => ({
     root: {
@@ -31,7 +35,7 @@ const useStyle = makeStyles(theme => ({
 export const ChatsList = ({chats, className="", handleAddNewChat})=> {
     const classes = useStyle();
     const [newChatName, setNewChatName] = useState('');
-    const chatElements =chats.map(({id, title, fire, handleClick}) => {
+    const chatElements =chats.map(({id, title, fire, handleClick, handleRemove}) => {
         return (
         <ListItem button
                   className={fire?classes.itemFire:''}
@@ -44,6 +48,11 @@ export const ChatsList = ({chats, className="", handleAddNewChat})=> {
                 </Avatar>
             </ListItemAvatar>
             <ListItemText primary={title} />
+            <ListItemSecondaryAction>
+                <IconButton onClick={handleRemove} edge="end" aria-label="delete">
+                    <DeleteIcon />
+                </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
     )});
 
@@ -52,6 +61,7 @@ export const ChatsList = ({chats, className="", handleAddNewChat})=> {
             <ChatListHeader
                 className={classes.header}
                 handleAddNewChat={handleAddNewChat}
+
             />
             <List component="nav" className={classes.list}>
                 { chatElements }

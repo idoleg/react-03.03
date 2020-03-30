@@ -1,5 +1,5 @@
 import {handleActions, combineActions} from 'redux-actions';
-import {initChats, addChat, startFire, finishFire} from 'Actions/chatActions'
+import {initChats, addChat, removeChat, startFire, finishFire} from 'Actions/chatActions'
 
 
 const initialStore = {};
@@ -11,13 +11,19 @@ export default handleActions({
         3: {title: 'Chat 3', fire: false},
     }),
     [addChat]: (store, action) => {
-
-        const chatId = Object.keys(store).length + 1;
+        const chatsIds = Object.keys(store);
+        const chatId = parseInt(chatsIds[chatsIds.length-1])+1
         return {
             ...store,
             [chatId]: {title:action.payload.title, fire:false},
         }
 
+    },
+    [removeChat]: (store, action) => {
+        const {chatId} = action.payload;
+        const newStore = {...store};
+        delete newStore[chatId];
+        return newStore;
     },
     [combineActions(startFire, finishFire)]: (store, action) => {
         const {chatId} = action.payload;
