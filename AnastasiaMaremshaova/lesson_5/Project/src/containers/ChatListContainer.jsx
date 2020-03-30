@@ -25,9 +25,7 @@ export const ROBOT = 'Robot';
 //    }
 
 const mapStateToProps = (store, props) => {
-    const chats = store.chats.state.chats
-
-    console.log(chats); 
+    const chats = store.chats.state.chats;
     return {
         chats
     }
@@ -39,7 +37,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch)
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    console.log(stateProps); 
+    //console.log(stateProps); 
 
     const onCreateNewChat = () => {
         console.log(dispatchProps.createNewChat());

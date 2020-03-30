@@ -1,5 +1,5 @@
 import {handleActions, handleAction} from 'redux-actions';
-import {initChats, sendMessage, createNewChat} from './chatActions';
+import {initProfileData, initChats, sendMessage, createNewChat} from './chatActions';
 
 const initialState = {
     chats: {}
@@ -10,6 +10,10 @@ export default handleActions ({
     [initChats] : (store, action) => {
         return {
             state : {
+                profileData: {
+                    name: 'Заядлая кошатница',
+                    age: 20
+                },
                 chats: {
                     1: {
                         name: 'Chat 1', 
