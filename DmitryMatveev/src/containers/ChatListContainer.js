@@ -1,10 +1,10 @@
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {ChatList} from "../components/ChatList/ChatList"
-import {createChat} from "../store/chatOperation";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ChatList } from "../components/ChatList/ChatList"
+import { createChat } from "../store/chatOperation";
 
 const mapStateToProps = (store) => {
-    const chats = Object.entries(store.chats.chats).map(([id, {name, fire}]) => ({id, name, fire}));
+    const chats = Object.entries(store.chats.chats).map(([id, { name, fire }]) => ({ id, name, fire }));
 
     return {
         isLoading: store.chats.isLoading,
