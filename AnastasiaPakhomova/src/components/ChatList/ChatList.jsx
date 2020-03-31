@@ -8,16 +8,16 @@ import PropTypes from "prop-types"
 import TextField from '@material-ui/core/TextField'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {addChat} from '../../store/chatActions'
-
+import {createChat} from '../../store/chatOperations'
+import { push } from 'connected-react-router'
 
 class ChatList extends React.Component {
 
 	static propTypes = {
-       chats: PropTypes.object.isRequired,
-	   addChat: PropTypes.func.isRequired,
+		chats: PropTypes.object.isRequired,
+		createChat: PropTypes.func.isRequired,
+		push: PropTypes.func.isRequired,
    }
-
 
    state = {
        input: ''
@@ -29,25 +29,27 @@ class ChatList extends React.Component {
 
    handleKeyUp = (event) => {
        if (event.keyCode === 13) {
-           this.handleAddChat()
+           this.handleCreateChat()
        }
    }
 
-   handleAddChat = () => {
+   handleCreateChat = () => {
        if (this.state.input.length > 0) {
-           this.props.addChat(this.state.input)
+           this.props.createChat(this.state.input)
            this.setState({ input: '' })
        }
    }
 
+   handleNavigate = (link) => {
+       this.props.push(link)
+   }
+
    render() {
-       const { chats } = this.props;
+       const {chats} = this.props
        const chatElements = Object.keys(chats).map(id => (
-           <Link key={ id } to={ `/chats/${id}` }>
-               <ListItem alignItems="flex-start">
-               	   <ListItemText primary={ chats[id].name }/>
-               </ListItem>
-            </Link>))
+		   <ListItem alignItems="flex-start" key={ id } onClick={ () => this.handleNavigate(`/chats/${id}`) }>
+           	 <ListItemText primary={ chats[id].name }/>
+           </ListItem>))
 
        return (
            <List className="chat-list">
@@ -55,7 +57,7 @@ class ChatList extends React.Component {
 
            	<ListItem
              alignItems="flex-start"
-             onClick={ this.handleAddChat }
+             onClick={ this.handleCreateChat }
              style={ { height: '60px' } }>
            	<TextField
              fullWidth
@@ -72,12 +74,11 @@ class ChatList extends React.Component {
 }
 
 const mapStateToProps = (store, props) => {
-
    return {
       chats: store.chats.chats
    }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ addChat }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ createChat, push }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList)

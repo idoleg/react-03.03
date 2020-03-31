@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions'
-import {initChats, sendMessage, addChat, initProfile} from './chatActions'
+import {initChats, sendMessage, addChat} from './chatActions'
 import update from 'react-addons-update'
 
 
@@ -53,13 +53,12 @@ export default handleActions({
         }
     },
 	[addChat]: (store, action) => {
-		const {name} = action.payload
-		const id = Object.keys(store.chats).length + 1
+		const {id, name} = action.payload
 
 		 return {
             chats: {
                 ...store.chats,
-                [id]: {name: name, messages: []}
+                [id]: {name, messages: []}
             }
         }
 	}
