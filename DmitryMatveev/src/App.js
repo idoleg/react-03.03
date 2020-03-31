@@ -5,13 +5,13 @@ import {Header} from './components/Header/Header';
 import Profile from './components/Profile/Profile';
 import {initStore, history} from './store'
 import {Provider} from 'react-redux';
-import {initChats} from './store/chatActions';
+import {fetchChats} from './store/chatOperation';
 import ChatListContainer from './containers/ChatListContainer';
 import {ConnectedRouter} from 'connected-react-router';
 
 
 const store = initStore();
-store.dispatch(initChats());
+store.dispatch(fetchChats());
 
 
 export const App = () => {

@@ -6,9 +6,11 @@ import {sendMessage} from '../store/chatActions';
 
 const mapStateToProps = (store, props) => {
     const {id} = props.match.params;
-    const chats = id && store.chats ? store.chats : {}
+    const chats = id && store.chats.chats ? store.chats.chats : {}
 
     return {
+        isLoading: store.chats.isLoading,
+        error: store.chats.error,
         messages: chats[id] ? chats[id].messages : undefined,
     }
     
@@ -26,6 +28,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     }
 
     return {
+        isLoading: stateProps.isLoading,
+        error: stateProps.error,
         messages: stateProps.messages,
         onSendMessage
     }
