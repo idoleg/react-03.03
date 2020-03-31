@@ -24,12 +24,13 @@ export default store => next => (action) => {
 function validateSendMessageAction(store, action) {
     const storeData = store.getState();
     const {chatId, senderId} = action.payload;
-    const chatsKeys = Object.keys(storeData.chats);
-    const usersKeys = Object.keys(storeData.users);
-    if (!chatsKeys.includes(chatId.toString())){
+    const chat = storeData.chats.find(chat => chat.id === chatId);
+    const user = storeData.users.find(user => user.id === senderId);
+    console.log(chat, user);
+    if (!chat){
         throw `Chat with id ${chatId} does not exist!`
     }
-    if (!usersKeys.includes(senderId.toString())) {
+    if (!user) {
         throw `User with id ${senderId} does not exist!`
     }
 }
@@ -38,8 +39,8 @@ function validateSendMessageAction(store, action) {
 function generateBotAnswer(store, action) {
     const {senderId, chatId} = action.payload;
     const storeData = store.getState()
-    const userName = storeData.users[senderId].name;
-    const chatName = storeData.chats[chatId].title;
+    const userName = storeData.users.find(user => user.id === senderId).name;
+    const chatName = storeData.chats.find(chat => chat.id === chatId).title;
     if (senderId === USER_ID) {
         clearTimeout(timeouts[chatId]);
         timeouts[chatId] = setTimeout(()=> store.dispatch(

@@ -6,17 +6,17 @@ import {Chat} from "Components/Chat/Chat";
 
 
 const mapStateToProps = ({chats, messages, users}, ownProps) => {
-    const chatId = parseInt(ownProps.match.params.id);
-    const messageList = Object.entries(messages)
-        .filter(([id, message]) => message.chatId===chatId)
-        .map(([id, {chatId, senderId, content}])=> ({
-            id: parseInt(id),
+    const chatId = ownProps.match.params.id;
+    const chat =chats.find(chat => chat.id === chatId);
+    const messageList = messages.filter(message => message.chatId===chatId)
+        .map(({id, senderId, content}) => ({
+            id,
             senderId,
-            senderName: users[senderId].name,
+            senderName: users.find(user =>user.id ===senderId).name,
             content
         }));
     return {
-        chatTitle: chats[chatId] ? chats[chatId].title: undefined,
+        chatTitle: chat ? chat.title: undefined,
         messages: messageList,
     }
 };
@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const chatId = parseInt(ownProps.match.params.id);
+    const chatId = ownProps.match.params.id;
     const handleNewMessage = (content, senderId = 1) => {
         dispatchProps.sendMessage(chatId, senderId, content);
     };

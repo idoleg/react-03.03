@@ -23,15 +23,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return {
         ...ownProps,
         handleAddNewChat,
-        chats: Object.entries(stateProps.chats).map(([id, chat]) => ({
-            id: id,
-            title: chat.title,
-            fire: chat.fire,
-            handleClick: () => push(`/chats/${id}`),
-            handleRemove: ()=> removeChat(id),
+        chats: stateProps.chats.map((chat) => ({
+            ...chat,
+            handleClick: () => push(`/chats/${chat.id}`),
+            handleRemove: () => removeChat(chat.id),
         }))
     }
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatsList)

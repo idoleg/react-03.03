@@ -11,7 +11,8 @@ import {Messenger} from "Components/Messenger/Messenger";
 import ProfileContainer from "Containers/ProfileContainer";
 
 
-const {store, persistor} = initStore();
+// const {store, persistor} = initStore();
+const store = initStore();
 store.dispatch(initChats());
 store.dispatch(initUsers());
 store.dispatch(initMessages());
@@ -20,7 +21,7 @@ store.dispatch(initMessages());
 export const App = (props) => {
     return (
         <Provider store={store} >
-            <PersistGate loading={null} persistor={persistor} >
+            {/*<PersistGate loading={null} persistor={persistor} >*/}
                 <ConnectedRouter history={history}>
                     <Switch>
                         <Route path="/" exact >
@@ -30,7 +31,7 @@ export const App = (props) => {
                         <Route path="/profile/" exact component={ProfileContainer}/>
                     </Switch>
                 </ConnectedRouter>
-            </PersistGate>
+            {/*</PersistGate>*/}
         </Provider>
     )
 };

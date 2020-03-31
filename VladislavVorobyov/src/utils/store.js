@@ -20,7 +20,8 @@ function initStore() {
     const initialStore = {};
     const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
     const store = createStore(
-        persistReducer(persistConfig, initReducer(history)),
+        // persistReducer(persistConfig, initReducer(history)),
+        initReducer(history),
         initialStore,
         composeEnhancers(
             applyMiddleware(
@@ -30,7 +31,8 @@ function initStore() {
         )
     );
     const persistor = persistStore(store);
-    return {store, persistor};
+    // return {store, persistor};
+    return store;
 }
 
 export default initStore;
