@@ -2,9 +2,13 @@ export const CHATS_PATH = "/chats";
 export const AUTH_PATH = "/auth";
 
 export const BOT_NAME = "Bot";
-export const BOT_MESSAGE = "Thank you!";
+export const BOT_RESPONSE = "Thank you, ";
+export const BOT_GREETING = "Greetings!";
+export const BOT_RESPONSE_DELAY = 700;
 
 export const DEFAULT_USERNAME = "Guest";
+
+export const ACTION_LOCATION_CHANGE = "@@router/LOCATION_CHANGE";
 
 export const CHATS = [
    [1, {

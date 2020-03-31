@@ -1,3 +1,9 @@
-import MessageMiddleware from "./MessageMiddleware";
+import {BotMiddleware} from "./BotMiddleware";
+import {createBrowserHistory} from "history";
+import {routerMiddleware} from "connected-react-router";
+import {ChatListMiddleware} from "./ChatListMiddleware";
 
-export default [MessageMiddleware];
+
+export const history = createBrowserHistory();
+
+export default [BotMiddleware, ChatListMiddleware, routerMiddleware(history)];
