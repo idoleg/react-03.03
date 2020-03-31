@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ChatContainer from './containers/ChatContainer';
 import {Header} from './components/Header/Header';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Profile} from './components/Profile/Profile';
 import {initStore, history} from './store';
 import {Provider} from 'react-redux';
-import {initChats} from './store/ChatActions';
+import {fetchChats} from './store/chatOperations';
 import ChatListContainer from './containers/ChatListContainer';
 import { ConnectedRouter } from 'connected-react-router';
 
 
 
 const store = initStore();
-store.dispatch(initChats())
+store.dispatch(fetchChats())
 
 
 

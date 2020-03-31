@@ -1,4 +1,4 @@
-import { sendMessage, addChat } from './ChatActions';
+import { sendMessage, addChat } from './chatActions';
 
 // export const botAnswer = function(store) {
 //     return function(next) {
@@ -27,11 +27,11 @@ export default (store) => (next) => (action) => {
 }
 
 function generateBotAnswer(store, id, name) {
-    const chatName = store.getState().chats[id].name;
+    const chatName = store.getState().chats.chats[id].name;
     store.dispatch(sendMessage(id, BOT_NAME, `Hello, ${name}, it's Bot in chat "${chatName}"`))
 }
 
 function generateBotAnswerForNewChat(store, id) {
-    const chatName = store.getState().chats[id].name;
+    const chatName = store.getState().chats.chats[id].name;
     store.dispatch(sendMessage(id, BOT_NAME, `Welcome to the new chat "${chatName}"`))
 }

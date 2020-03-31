@@ -5,11 +5,15 @@ import { bindActionCreators } from 'redux';
 
 
 const mapStateToProps = (store) => {
-    const chates = Object.entries(store.chats);
+    const chates = Object.entries(store.chats.chats);
 
     const chats = chates.map(([id, { name, messages, avatar }]) => ({ id, name, messages, avatar }));
 
-    return { chats }
+    return {
+        isLoading: store.chats.isLoading,
+        error: store.chats.error,
+        chats
+    }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

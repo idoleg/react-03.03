@@ -8,7 +8,7 @@ import {useInput} from '../../hooks/useInput'
 
 import './ChatList.css';
 
-export const ChatList = ({chats, createChat}) => {
+export const ChatList = ({isLoading, error, chats, createChat}) => {
     const [name, setName, setNameState] = useInput('');
 
     const handleAddChat = (event) => {
@@ -17,6 +17,12 @@ export const ChatList = ({chats, createChat}) => {
         setNameState('');
     }
 
+    if (isLoading){
+        return <h1>Loading chats...</h1>
+    }
+    if (error){
+        return null
+    }
     return (
         <List className ="chatList">
         {chats.map(({id, name, messages, avatar}) =>

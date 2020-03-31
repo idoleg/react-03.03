@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { createChat, addChat } from './ChatActions';
+import { createChat, addChat } from './chatActions';
 
 
 export default store => next => action => {
