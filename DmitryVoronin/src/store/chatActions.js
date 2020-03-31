@@ -1,7 +1,11 @@
 import {createActions} from 'redux-actions';
 
-export const {initChats, sendMessage, addChat} = createActions({
-    INIT_CHATS: () => ({}),
+export const {loadingChats, failedLoadedChats, initChats, sendMessage, addChat, fire, unfire} = createActions({
+    LOADING_CHATS: () => ({}),
+    FAILED_LOADED_CHATS: (error) => ({error}),
+    INIT_CHATS: (chats) => ({chats}),
     SEND_MESSAGE: (id, name, content) => ({id, name, content}),
-    ADD_CHAT: (id, name) => ({id, name}),
+    ADD_CHAT: (id, name, botId) => ({id, name, botId}),
+    FIRE: (id) => ({id}),
+    UNFIRE: (id) => ({id}),
 })
