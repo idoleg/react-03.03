@@ -32,7 +32,16 @@ module.exports = {
     extensions: [".jsx",".js"]
    },
    devServer: {
-       historyApiFallback: true
+       contentBase: 'src',
+       historyApiFallback: true,
+       proxy: {
+           '/bot/': {
+                target: 'https://aiproject.ru/api/',
+                pathRewrite: {'/bot/': ''},
+                sequre: false,
+                changeOrigin: true
+           }
+       }
    },
    devtool: 'inline-source-map'
 };

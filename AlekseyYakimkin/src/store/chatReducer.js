@@ -54,7 +54,7 @@ export default handleActions({
     [addNewChat]: (store, actions) => {
         console.log('store', store)
         console.log('actions', actions)
-        const {id, name} = actions.payload
+        const {id, name, botId} = actions.payload
 
         console.dir(Object.keys(store.chats))//Object.keys(chats).map((key, index) =>
         const chatsKeys = [...Object.keys(store.chats)];
@@ -70,6 +70,7 @@ export default handleActions({
                 ...store.chats,
                 [newKey]: {
                     name,
+                    botId,
                     img: "",
                     url: "/chats/"+newKey,
                     messages:[]

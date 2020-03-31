@@ -7,6 +7,6 @@ export const {loadingChats, failedLoadedChats, initChats, sendMessage, createCha
     INIT_CHATS: (chats) => ({chats}),
     SEND_MESSAGE: (id, name,content) => ({id, name,content}),
     //CREATE_CHAT: (name) => ({name}),
-    ADD_NEW_CHAT: (id,name) => ({id,name}),
+    ADD_NEW_CHAT: (id,name,botId) => ({id,name,botId}),
     DELETE_CHAT: (id) => ({id})
 })
