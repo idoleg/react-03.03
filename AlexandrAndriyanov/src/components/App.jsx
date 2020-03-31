@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import {ChatContainer} from '../containers/ChatContainer.jsx'
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {ChatList} from './ChatList/ChatList'
@@ -17,7 +17,6 @@ export const App = () => {
             </Switch>
             
         </BrowserRouter>
-        
         
       //<ChatContainer/>
     )
