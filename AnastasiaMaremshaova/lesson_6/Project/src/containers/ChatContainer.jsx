@@ -34,7 +34,7 @@ const mapStateToProps = (store, props) => {
     console.log(chats); 
     return {
         id,
-        messages: chats[id] ? chats[id].messages : undefined,
+        messages: chats && chats[id] ? chats[id].messages : undefined,
     }
     
 }
