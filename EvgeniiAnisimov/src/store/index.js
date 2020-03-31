@@ -6,6 +6,7 @@ import { createBrowserHistory } from 'history';
 import { routerMiddleware, connectRouter } from 'connected-react-router';
 import chatMiddleware from './chatMiddleware';
 import ReduxThunk from 'redux-thunk';
+import { apiMiddleware } from 'redux-api-middleware';
 
 // const reducer = function(store={counter: 0}, action) {
 //   console.log("index->reducer", action);
@@ -37,6 +38,7 @@ export function initStore(preloaderState = undefined) {
     preloaderState,
     composeEnhancers(
       applyMiddleware(
+        apiMiddleware,
         ReduxThunk,
         routerMiddleware(history),
         botMiddleware,

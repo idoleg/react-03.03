@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import ChatContainer from './containers/ChatContainer';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import { ChatList } from './components/ChatList/ChatList';
@@ -6,7 +6,8 @@ import Layout from './components/Layout';
 import { initStore, history } from './store';
 import { Provider } from 'react-redux';
 import { sendMessage } from './store/chatActions';
-import { initChats } from './store/chatActions';
+// import { initChats } from './store/chatActions';
+import { fetchChat } from './store/chatOperations';
 import ChatListContainer from './containers/ChatListContainer';
 import { ConnectedRouter } from 'connected-react-router';
 
@@ -20,9 +21,15 @@ const store = initStore();
 // store.dispatch(sendMessage("Ivan", "message"));
 // console.log(store.getState());
 
-store.dispatch(initChats());
+// store.dispatch(initChats());
+store.dispatch(fetchChat());
 
 export const App = () => {
+  // useEffect(async () => {
+  //   const res = await fetch('/api/chats.json');
+  //   const data = await res.json();
+  //   console.log("App->data", data);
+  // },[]);
   return(
     <Provider store={store}>
       <ConnectedRouter history={history}>
