@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import Message from './Message';
-import FormForUser from './FormForUser';
+import Message from './Message/Message';
+import FormForUser from './FormForUser/FormForUser';
 
 export default class MessageField extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SendForm from "./sendform";
-import MessageList from './messageslist';
+import SendForm from "./SendForm/sendform";
+import MessageList from './MessageList/MessagesList';
 
 export default class App extends React.Component {
 
@@ -21,13 +21,20 @@ export default class App extends React.Component {
     const array = [...this.state.messages, message];
     this.setState({ messages: array });
   }
-
+  componentDidUpdate() {
+    if (this.state.messages.length % 2 === 1) {
+      setTimeout(() =>
+          this.setState(
+              { messages: [ ...this.state.messages, {author: 'Robot', text: 'Не приставай ко мне, я робот!'} ] }),
+            1000);
+        }
+    }
   render() {
 
     const { messages } = this.state;
 
     return (
-      <div className="app">
+      <div className="layout">
         <h1 className="app-title">Ку Чатланин!</h1>
         <div className="content">
           <MessageList messages={messages} />

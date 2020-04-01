@@ -10,16 +10,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.(js|jsx)$/,
         include: path.resolve(__dirname, "src"),
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env', '@babel/react']
+            presets: ['@babel/env', '@babel/react']
         }
       },
       {
         test: /\.(css)$/,
-        include: path.resolve(__dirname, "src/css"),
         use: [
           { loader: 'style-loader', options: { injectType: 'linkTag' } },
           { loader: 'file-loader' },
