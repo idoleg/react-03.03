@@ -17,7 +17,7 @@ export const ChatForm = ({onSendMessage}) => {
     if(content !== '') {
       onSendMessage({name, content});
       setContentState('');
-      textarea.current.focus();
+      // textarea.current.focus();
     } else {
       alert("Введите текст сообщения!")
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classname from 'classname';
-import './Message.css';
+// import './Message.css';
 
 // export class Message extends Component {
 //   render() {
