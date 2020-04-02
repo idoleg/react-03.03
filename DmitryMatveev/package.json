@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },
@@ -17,17 +18,25 @@
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "html-inline-css-webpack-plugin": "^1.8.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.2.6",
+    "mini-css-extract-plugin": "^0.9.0",
+    "react-test-renderer": "^16.13.1",
     "style-loader": "^1.1.3",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.9.1",
     "classname": "0.0.0",
     "classnames": "^2.2.6",
+    "connected-react-router": "^6.8.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
@@ -35,7 +44,9 @@
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
     "redux-action": "^1.2.2",
-    "redux-actions": "^2.6.5"
+    "redux-actions": "^2.6.5",
+    "redux-api-middleware": "^3.2.1",
+    "redux-thunk": "^2.3.0"
   },
   "description": ""
 }

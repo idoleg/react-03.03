@@ -11,7 +11,7 @@ import {useInput} from '../../hooks/useInput';
 export const FormForUser = ({onSendMessage}) => {
     const [name, setName] = useInput('User');
     const [text, setContent, setContentState] = useInput('');
-    
+
     const textarea = useRef();
 
     const onSubmit = (event) => {
