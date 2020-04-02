@@ -67,7 +67,7 @@ export const ChatForm = ({onSendMessage}) => {
         // event.preventDefault();
         onSendMessage({name, content});
         setContentState('');
-        textarea.current.focus();
+        // textarea.current.focus();
     }  
 
     return (<form> 
