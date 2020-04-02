@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> React </title>
     <base href="/">
+    <link rel= "manifest" href= "manifest/manifest.json" >
 </head>
 
 <body>
@@ -13,5 +14,23 @@
     <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 </body>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+                // Registration was successful
+                console.log('ServiceWorker успешно зарегистрирован со сферой действия: ' , registration. scope);
+            }, function (err) {
+                // registration failed :(
+                console.log('ServiceWorker не удалось зарегистрировать: ', err);
+            }).catch(function (err) {
+                console.log(err)
+            });
+        });
+    } else {
+        console.log('ServiceWorker не поддерживается');
+    }
+</script>
 
 </html>

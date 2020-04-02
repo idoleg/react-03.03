@@ -1,5 +1,5 @@
-import { sendMessage, addChat, fire, unfire } from './chatActions';
-import { push, LOCATION_CHANGE } from 'connected-react-router';
+import {sendMessage, addChat, fire, unfire} from './chatActions';
+import {push, LOCATION_CHANGE} from 'connected-react-router';
 
 export default store => next => action => {
     next(action);
@@ -8,16 +8,16 @@ export default store => next => action => {
     //     const id = Date.now();
     //     store.dispatch(addChat(id, action.payload.name));
     // }else 
-    if (action.type === addChat.toString()) {
+    if(action.type === addChat.toString()){
         store.dispatch(push('/chats/' + action.payload.id));
-    } else if (action.type === sendMessage.toString()) {
-        const currentChat = store.getState().router.location.pathname.split('/')[2];
-        if (currentChat !== action.payload.id) {
+    }else if(action.type === sendMessage.toString()){
+        const currentChat = +store.getState().router.location.pathname.split('/')[2];
+        if(currentChat !== action.payload.id) {
             store.dispatch(fire(action.payload.id));
         }
-    } else if (action.type === LOCATION_CHANGE) {
+    }else if(action.type === LOCATION_CHANGE) {
         const currentChat = store.getState().router.location.pathname.split('/')[2];
         store.dispatch(unfire(currentChat));
     }
-
+    
 }

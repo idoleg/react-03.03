@@ -1,0 +1,21 @@
+{
+    "short_name": "Geekchat",
+    "name": "Geekbrains chat",
+    "icons": [
+        {
+            "src": "/manifest/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/manifest/favicon-196x196.png",
+            "sizes": "196x196",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#7ACCE5",
+    "theme_color": "#7ACCE5",
+    "orientation": "any",
+    "display": "standalone"
+}
