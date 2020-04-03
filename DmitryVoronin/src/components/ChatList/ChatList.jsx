@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { useInput } from '../hooks/useInput'
+import { useInput } from '../../hooks/useInput'
 
 export const ChatList = ({ isLoading, error, chats, createChat }) => {
     const [name, setName, setNameState] = useInput('');

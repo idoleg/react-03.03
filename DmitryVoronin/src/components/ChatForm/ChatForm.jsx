@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useInput } from '../hooks/useInput';
+import { useInput } from '../../hooks/useInput';
 
 export const ChatForm = ({ onSendMessage }) => {
     const [name, setName] = useInput('User');
@@ -11,7 +11,6 @@ export const ChatForm = ({ onSendMessage }) => {
     const onSubmit = (event) => {
         onSendMessage({ name, content });
         setContentState('');
-        textarea.current.focus();
     }
 
     return (<form>
