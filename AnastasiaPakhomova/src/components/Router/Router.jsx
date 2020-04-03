@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Profile from '../Profile/Profile'
 import Header from '../Header/Header'
@@ -8,6 +8,7 @@ import {Provider} from 'react-redux'
 import {initChats, initProfile} from '../../store/chatActions'
 import {ConnectedRouter} from 'connected-react-router'
 import {PersistGate} from 'redux-persist/integration/react'
+import "regenerator-runtime/runtime"
 
 
 const {store, persistor} = initStore()
@@ -17,6 +18,14 @@ store.dispatch(initProfile())
 console.log(store.getState())
 
 export const Router = () => {
+
+	useEffect(async () => {
+	const res = await fetch('/api/chats.json')
+	const data = await res.json()
+	console.log("Router -> data", data)
+}, [])
+
+
     return (
 	<Provider store={store}>
      <PersistGate loading={null} persistor={persistor}>
