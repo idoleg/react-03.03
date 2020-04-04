@@ -1,33 +1,43 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import {ConnectedRouter} from 'connected-react-router';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { initStore, history } from './store';
-import { initChats } from './store/chatActions';
-import ChatContainer from './containers/ChatContainer.jsx';
+import { initChats } from './store/chatActions.js';
+
+import NavBar from './components/NavBar/NavBar.jsx';
 import { Main } from './components/Main/Main.jsx';
-import { About } from './components/About/About.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import { About } from './components/About/About.jsx';
+import ChatContainer from './containers/ChatContainer.jsx';
 
 import './App.css';
 
-const store = initStore();
+const { store, persistor } = initStore();
 store.dispatch(initChats());
 
 export const App = () => {
     return (
         <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <Switch>
-                    <Route exact path="/" component={Main} />
-                    <Route exact path="/chats" component={ChatContainer} />
-                    <Route exact path="/chats/:id" component={ChatContainer} />
-                    <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/about" component={About} />
-                    <Route path="/" component={Main} />
-                </Switch>
-            </ConnectedRouter>
+            <PersistGate loading={ null } persistor={ persistor }>
+                <ConnectedRouter history={history}>
+                    <NavBar />
+                    <Switch>
+                        <Route exact path="/" component={Main} />
+                        <Route path="/chats">
+                            <Switch>
+                                <Route exact path="/chats" component={ChatContainer} />
+                                <Route exact path="/chats/:id" component={ChatContainer} />
+                            </Switch>
+                        </Route>
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/about" component={About} />
+                        <Route path="/" component={Main} />
+                    </Switch>
+                </ConnectedRouter>
+            </PersistGate>
         </Provider>
     )
 }

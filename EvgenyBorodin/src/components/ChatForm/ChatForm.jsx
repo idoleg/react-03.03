@@ -1,28 +1,23 @@
-import React, {useState} from "react";
+import React, { useRef } from "react";
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import useInput from '../../hooks/useInput.js';
+
 import './ChatForm.css'
-
-function useInput(initialState) {
-    const [state, setState] = useState(initialState);
-
-    const setInput = (event) => {
-        setState(event.currentTarget.value)
-    }
-
-    return [state, setInput];
-}
 
 export const ChatForm = ({defaultUser, onSendMessage}) => {
     const [user, setUser] = useInput(defaultUser);
     const [text, setText] = useInput('');
+
+    const textarea = useRef();
     
     const onSubmit = (event) => {
         // event.preventDefault();
         onSendMessage({user, text});
         setText({ currentTarget: { value: '' }});
+        textarea.current.focus();
     }
     
     const onKeyUp = (event) => {
@@ -40,6 +35,7 @@ export const ChatForm = ({defaultUser, onSendMessage}) => {
             value={user} 
             onChange={setUser}/>
         <TextField
+            inputRef={textarea}
             variant="outlined"
             label="Сообщение"
             autoFocus

@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { initChats, sendMessage, addChat, updateProfile } from './chatActions.js';
+import { initChats, sendMessage, addChat, updateProfile, selectChat, fireChat, unfireChat } from './chatActions.js';
 
 const initialState = {};
 
@@ -9,6 +9,8 @@ export default handleActions({
             chats: {
                 1: {
                     name: "IT Group",
+                    fire: false,
+                    selected: false,
                     messages: [
                         { user: "Ivan", text: "Hello, world!" },
                         { user: "Petr", text: "Helo, how are you?" },
@@ -17,6 +19,8 @@ export default handleActions({
                 },
                 2: {
                     name: "Bot Group",
+                    fire: false,
+                    selected: false,
                     messages: [
                         { user: "Bot 1", text: "Hello, bots!" },
                         { user: "Bot 2", text: "Get out of here, bot!" },
@@ -25,6 +29,8 @@ export default handleActions({
                 },
                 3: {
                     name: "Never read this",
+                    fire: false,
+                    selected: false,
                     messages: [
                         { user: "sss", text: "Whoa!" },
                         { user: "qqq", text: "Oops!" },
@@ -35,11 +41,11 @@ export default handleActions({
             profile: {
                 defaultUser: '',
             }
-        };
+        }
     },
     [sendMessage]: (store, action) => {
         const {id, user, text} = action.payload;
-        console.log(store)
+        // console.log(store)
         return {
             ...store,
             chats: {
@@ -62,7 +68,9 @@ export default handleActions({
             chats: {
                 ...store.chats,
                 [newId]: { 
-                    name,               
+                    name,
+                    fire: false,
+                    selected: false,
                     messages: []
                 }
             }
@@ -74,5 +82,62 @@ export default handleActions({
             ...store,
             profile
         }
-    }
+    },
+    [selectChat]: (store, action) => {
+        const {id} = action.payload;
+        const [prevId] = Object.keys(store.chats).filter(item => store.chats[item].selected)
+        if (prevId) {
+            return {
+                ...store,
+                chats: {
+                    ...store.chats,
+                    [id]: {
+                        ...store.chats[id],
+                        selected: true,
+                    },
+                    [prevId]: {
+                        ...store.chats[prevId],
+                        selected: false,
+                    }
+                }
+            }
+        } else {
+            return {
+                ...store,
+                chats: {
+                    ...store.chats,
+                    [id]: {
+                        ...store.chats[id],
+                        selected: true,
+                    },
+                }
+            }
+        }
+    },
+    [fireChat]: (store, action) => {
+        const {id} = action.payload;
+        return {
+            ...store,
+            chats: {
+                ...store.chats,
+                [id]: {
+                    ...store.chats[id],
+                    fire: true,
+                }
+            }
+        }
+    },
+    [unfireChat]: (store, action) => {
+        const {id} = action.payload;
+        return {
+            ...store,
+            chats: {
+                ...store.chats,
+                [id]: {
+                    ...store.chats[id],
+                    fire: false,
+                }
+            }
+        }
+    },
 }, initialState)

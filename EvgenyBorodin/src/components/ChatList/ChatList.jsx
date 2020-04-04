@@ -4,20 +4,20 @@ import { ChatListItem } from '../ChatListItem/ChatListItem.jsx';
 
 import './Chatlist.css';
 
-export const ChatList = ({chats, selectedId, onAddChat}) => {
+export const ChatList = ({chats, addChat}) => {
+    // console.log(chats)
     const onNewChat = () => {
-        const name = prompt('Enter new chat name')
-        onAddChat({name})
+        const newChatName = prompt('Enter new chat name')
+        addChat(newChatName)
     }
 
     return <form className="chatlist__form">
-        {Object.entries(chats).map((item, index) => <ChatListItem item={item[1]} index={item[0]} selectedId={selectedId} key={item[0]}/>)}
+        {chats.map(({id, name, fire, selected}) => <ChatListItem item={name} index={id} fire={fire} selected={selected} key={id}/>)}
         <span className="chatlist__btn" onClick={onNewChat}>New chat</span>
     </form> 
 }
 
 ChatList.propTypes = {
-    chats: PropTypes.object.isRequired,
-    selectedId: PropTypes.string,
-    onAddChat: PropTypes.func.isRequired
+    chats: PropTypes.array.isRequired,
+    addChat: PropTypes.func.isRequired
 }

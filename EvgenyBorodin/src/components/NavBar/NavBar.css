@@ -8,3 +8,23 @@
     border: 1px inset #000;
     border-radius: 5px;
 }
+
+nav > a {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 5px 20px;
+    text-align: center;
+    background-color: #ccc;
+    text-decoration: none;
+    border: 1px inset #000;
+    border-radius: 5px;
+}
+
+nav > a:active {
+    background-color: #aaa;
+}
+
+nav {
+    margin-bottom: 5px;
+}
