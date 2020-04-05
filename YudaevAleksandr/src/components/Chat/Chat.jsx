@@ -12,9 +12,13 @@ export const Chat = ({messages, onSendMessage, onKeyDown}) => {
             flexGrow: 1,
             backgroundColor: theme.palette.background.default,
             padding: theme.spacing(3),
+            paddingLeft: 200,
         },
         input: {
             width: '100%',
+        },
+        messageField: {
+            paddingLeft: 180,
         },
     }));
     const classes = useStyles();

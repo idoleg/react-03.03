@@ -5,10 +5,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const drawerWidth = 240;
+const minWidth = 180;
 
 const useStyles = makeStyles(theme => ({
     appBar: {
-        width: `calc(100% - ${drawerWidth}px)`,
+        maxWidth: `calc(100% - ${drawerWidth}px)`,
+        minWidth: `calc(100% - ${minWidth}px)`,
+        width: `calc(100% - 15%)`,
         marginLeft: drawerWidth,
     },
 }));

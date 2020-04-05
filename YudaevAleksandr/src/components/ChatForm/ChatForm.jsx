@@ -5,7 +5,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
-const drawerWidth = 280;
+const drawerWidth = 220;
 
 export const ChatForm = ({onSendMessage, onKeyDown}) => {
     const useStyles = makeStyles(theme => ({
