@@ -2,13 +2,18 @@ import React, {useState, useRef, useEffect} from "react";
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
 import './ChatForm.css'
 
+import {useStylesBtn, useStylesTextField} from './useStyles'
+
+
 export const ChatForm = ({onSendMessage}) => {
+
+    const classesBtn = useStylesBtn();
+    const classesTextField = useStylesTextField(); 
+
     const [name, setName] = useState('User');
     const [content, setContent] = useState('');
-    //const [state, setState] = useState(initialState);
 
 
     const clearValue = (event) =>{
@@ -21,24 +26,26 @@ export const ChatForm = ({onSendMessage}) => {
     }  
 
 
-    return (<form> 
+    return (<form  > 
             <TextField 
-
-                className="input-name"
-                variant="outlined"
+            classes={{root: classesTextField.root}}
+                id="filled-basic"
+                variant="filled"
                 label="Имя"
                 name="name" 
                 value={name} 
+                multiline
                 onChange={(event) => {setName(event.target.value)}}/>
             <TextField
+            classes={{root: classesTextField.root}}
+            id="filled-basic"
+            variant="filled"
             className="input-message"
-                variant="outlined"
                 label="Сообщение"
-                autoFocus
-                multiline
                 required
                 name="content" 
                 placeholder="Введите наше сообщение..." 
+                multiline
                 value={content} 
                 onChange={(event)=>{setContent(event.target.value)}}
                 onKeyPress={(event) => {
@@ -51,9 +58,9 @@ export const ChatForm = ({onSendMessage}) => {
                 }}
                 }/>
             <Button
+            classes={{root: classesBtn.root}}
                 className="btn-send"
                 variant="contained"
-                color="primary"
                 onClick={()=>{
                     if (content != ''){
                     onSubmit(); 
@@ -61,8 +68,9 @@ export const ChatForm = ({onSendMessage}) => {
                     }
                 }
                 }
+                
             >
-                Send
+                <img src='src/img/send-button.svg' alt="send" className="img-send"/>
             </Button>
         </form>);
 }

@@ -1,20 +1,34 @@
 .btn-send{
-    height: 54px;
-    width: 10%; 
+
+    height: 60px;
+    width: 60px; 
     background-color: rgb(91, 33, 145);
 }
 
 .input-name{
     width: 20%; 
+    height: 80%;
 }
 
 .input-message{
-    width: 70%; 
+    width: 65%; 
+    height: 40%; 
+
 }
 
+.img-send{
+    width: 80%;
+    height: 10%;
+    padding-left: 8px;
+}
+
+
 form{
-    padding-top: 5px;
+    box-sizing: border-box;
+    height: 12%; 
+    background-color: rgb(108, 79, 136);
     flex: 0 0 auto;
     width: 100%;
+    color: rgb(219, 219, 219);
 
 }

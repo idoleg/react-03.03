@@ -4,14 +4,14 @@
     list-style: none;
     border-radius: 5px;
     align-self: flex-end;
-}   
-
-.Message--robot { 
-    align-self: flex-start;
-    background-color: rgba(75, 22, 121, 0.5);
-    color: white; 
 }
 
-.Message:not(:last-child){
+.Message--robot {
+    align-self: flex-start;
+    background-color: rgba(75, 22, 121, 0.5);
+    color: white;
+}
+
+.Message:not(:last-child) {
     margin-bottom: 20px;
 }

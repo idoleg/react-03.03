@@ -1,9 +1,8 @@
-import {handleActions, handleAction} from 'redux-actions';
-import {initProfileData, initChats, sendMessage, createNewChat} from './chatActions';
+import {handleActions} from 'redux-actions';
+import {initChats, addChat, saveChangesProfileData, sendMessage} from './chatActions';
 
 const initialState = {
-    chats: {}
-, };
+    chats: {}, };
 
 
 export default handleActions ({
@@ -11,8 +10,7 @@ export default handleActions ({
         return {
             state : {
                 profileData: {
-                    name: 'Заядлая кошатница',
-                    age: 20
+                    name: 'Заядлая кошатница'
                 },
                 chats: {
                     1: {
@@ -36,8 +34,30 @@ export default handleActions ({
             }
         } 
     },
+
+    [addChat]: (store, action) => {
+        const {id, name} = action.payload;
+        return  {...store,  
+                    state:{...store.state, chats: {...store.state.chats,
+            [id] : {
+                name: name,
+                messages: [
+                     {name: '', content: ''} ]
+            }
+        }
+        , countChats : id}}},
+
+    [saveChangesProfileData] : (store, action) => {
+        const nameSave = action.payload; 
+        console.log(action.payload);
+        return {
+            ...store, state:{...store.state, profileData: {name: nameSave}}
+        }
+    },
+
+
     [sendMessage] : (store, action) =>{
-        const {id, name, content} = action.payload
+        const {id, name, content} = action.payload;
         console.log("action", action);
         return {
             ...store, state:{...store.state, chats: {...store.state.chats,
@@ -50,16 +70,16 @@ export default handleActions ({
             } 
         }}}
     },
-    [createNewChat] : (store, action)=>{
-        const id = Number(store.state.countChats) + 1;
+    // [createNewChat] : (store, action)=>{
+    //     const id = Number(store.state.countChats) + 1;
 
-        return  {...store,  state:{...store.state, chats: {...store.state.chats,
-            [id] : {
-                name: `Chat ${id}`,
-                messages: [
-                     {name: '', content: ''} ]
-            }
-        }
-        , countChats : id}}}
+    //     return  {...store,  state:{...store.state, chats: {...store.state.chats,
+    //         [id] : {
+    //             name: `Chat ${id}`,
+    //             messages: [
+    //                  {name: '', content: ''} ]
+    //         }
+    //     }
+    //     , countChats : id}}}
 
 }, initialState)

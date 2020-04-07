@@ -1,8 +1,29 @@
 .MessageList {
     background-color: rgb(174, 135, 206);
-    padding: 20px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    margin: 0; 
+    margin: 0;
     flex: 1 0 auto;
+    height: 76%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.MessageList::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+
+.MessageList::-webkit-scrollbar-track {
+    background: #AA83BB;
+    background: -webkit-linear-gradient(bottom, #AA83BB, #6F3D77);
+    background: -moz-linear-gradient(bottom, #AA83BB, #6F3D77);
+    background: linear-gradient(to top, #AA83BB, #6F3D77);
+    border-radius: 20px;
+}
+
+.MessageList::-webkit-scrollbar-thumb {
+    background: rgb(91, 32, 99);
+    border-radius: 5px;
 }
