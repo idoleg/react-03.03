@@ -1,15 +1,14 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import {enterKeyToSubmit, useInput} from "../../utils/InputUtil";
 import {Link} from "react-router-dom";
 
 import TextField from "@material-ui/core/TextField";
 import Fab from "@material-ui/core/Fab";
+import Button from "@material-ui/core/Button";
 import CheckIcon from "@material-ui/icons/Check";
+import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
 
 import "./LoginForm.css";
-import Button from "@material-ui/core/Button";
-import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
-import ListItem from "@material-ui/core/ListItem";
 
 
 export const LoginForm = ({username, setUsername}) => {
@@ -26,7 +25,7 @@ export const LoginForm = ({username, setUsername}) => {
       <>
          <form className="LoginForm">
             <TextField
-               label="Enter your username"
+               label={username}
                variant="outlined"
                className="LoginField"
                autoFocus
