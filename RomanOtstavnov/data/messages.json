@@ -1,14 +1,35 @@
 [
   {
-    "name": "Ivan",
-    "content": "Hello, world!"
+    "id": 1,
+    "name": "chat 1",
+    "messages": [
+      {
+        "name": "Ivan",
+        "content": "Привет, есть кто?"
+      },
+      {
+        "name": "Petr",
+        "content": "Ага"
+      },
+      {
+        "name": "Ivan",
+        "content": "Как дела?"
+      }
+    ]
   },
   {
-    "name": "Petr",
-    "content": "Hello, how are you?"
+    "id": 2,
+    "name": "chat 2",
+    "messages": [
+      {
+        "name": "Мария",
+        "content": "Привет, похоже я тут одна"
+      }
+    ]
   },
   {
-    "name": "Ivan",
-    "content": "I'm well"
+    "id": 3,
+    "name": "chat 3",
+    "messages": []
   }
 ]

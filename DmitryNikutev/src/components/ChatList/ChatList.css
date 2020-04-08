@@ -1,4 +1,6 @@
 .ChatList{
     width: 25%;
     min-width: 320px;
+    max-height: 500px;
+    overflow-y: scroll;
 }

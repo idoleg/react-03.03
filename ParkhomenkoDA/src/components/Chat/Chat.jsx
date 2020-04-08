@@ -23,7 +23,6 @@ export const Chat = ({ isLoading, error, messages, onSendMessage }) => {
             <strong>Выберите чат в списке.</strong>
         )
     }
-
 }
 
 Chat.propTypes = {

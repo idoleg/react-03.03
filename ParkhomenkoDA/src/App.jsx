@@ -32,6 +32,7 @@ export const App = () => {
                     <Route path="/">It's 404 page. Not found.</Route>
                 </Switch>
             </ConnectedRouter>
+
         </Provider>
     )
 }

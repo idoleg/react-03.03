@@ -1,5 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classname from 'classname';
 
-export const Message = ({name, content}) => {
-    return <li><strong>{name}:</strong> {content}</li>
+import './Message.css';
+
+export const Message = ({ name, content }) => {
+    const className = classname("Message", { 'Message--robot': name === 'Bot' });
+    return <li className={className} ><strong>{name}:</strong> {content}</li>
+}
+
+Message.propTypes = {
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
 }
