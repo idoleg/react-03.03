@@ -8,16 +8,16 @@ import Typography from '@material-ui/core/Typography';
 import "./Message.css";
 
 
-export const Message = ({name, text, automatic}) => {
+export const Message = ({name, text, automated}) => {
    const classes = useStyles();
-   const className = classname("Message", {"Message--robot": automatic});
+   const className = classname("Message", {"Message--robot": automated});
    return (
       <li className={className}>
          <Paper variant="outlined" className="MessageBody">
-               <Typography className={classes.name} color="textSecondary" gutterBottom>
+               <Typography className={classes.name} color="textSecondary" gutterBottom noWrap>
                   {name}
                </Typography>
-               <Typography className={classes.text} variant="body2" component="p">
+               <Typography className={classes.text} variant="body2" component="p" display="block">
                   {text}
                </Typography>
          </Paper>
@@ -31,5 +31,6 @@ const useStyles = makeStyles({
    },
    text: {
       fontSize: 16,
-   },
+      wordBreak: "break-word",
+},
 });

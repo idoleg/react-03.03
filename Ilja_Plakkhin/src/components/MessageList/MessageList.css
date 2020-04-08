@@ -1,0 +1,16 @@
+.content__messages {
+  background-color: grey;
+}
+.content__messages ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  align-content: center;
+  flex-flow: column;
+  height: calc(100vh - 20vh);
+}
+.layout {
+  height: 20v
+}

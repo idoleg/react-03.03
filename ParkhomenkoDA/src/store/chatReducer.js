@@ -85,6 +85,7 @@ export default handleActions({
                     ...store.chats[id],
                     fire: false,
                 }
+
             }
         };
     }

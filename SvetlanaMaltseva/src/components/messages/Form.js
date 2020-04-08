@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { concat } from 'async';
+
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
       text: '',
       name: ''
     };
@@ -24,12 +25,12 @@ class Form extends Component {
     this.addMessage({ name: name, text: text });
     this.setState({ name: '', text: '' });
 
-    
   }
 
   render() {
     return (
       <form className='mt-auto mb-4' onSubmit={this.sendForm}>
+
         <div className='form-row'>
           <div className='col-3'>
             <input
