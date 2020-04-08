@@ -14,11 +14,10 @@ import {useInput} from '../../hooks/useInput'
 //     return [state,setInput]
 // }
 
-export const AddChatForm = ({createChat}) => {
-    const [name, setName, setNameState] = useInput('')
+export const DeleteChatForm = ({deleteChat,id}) => {
+    //const [name, setName, setNameState] = useInput('')
 
-    console.log(createChat)
-
+    console.log(deleteChat)
     // useEffect(() => {
     //     console.log("Page updated")
     //     //textarea.current.focus()  // ref={textarea} в <textarea>
@@ -26,17 +25,11 @@ export const AddChatForm = ({createChat}) => {
     const onSubmit = (event) => {
         event.preventDefault()
         //if(content)
-        createChat({name})
-        setNameState('') 
+        deleteChat({id})
+        //setNameState('') 
     }
-    const handleKeyUp = (event) => {
-        if (event.keyCode === 13) { // Enter
-            createChat({name})
-        }
-     };
     return  <form >
-                <TextField name="name" label="Новый чат" placeholder="Добавить чат" value={name} onChange={setName}/>
-                <Button variant="contained" color="primary"   onClick={onSubmit}>Add</Button>
+                <Button variant="contained" color="primary"   onClick={onSubmit}>Delete</Button>
             </form>
 }
 

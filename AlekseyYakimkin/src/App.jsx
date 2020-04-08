@@ -5,9 +5,10 @@ import {Header} from './components/Header/Header'
 import { BrowserRouter } from 'react-router-dom';
 import Router from './components/Router'
 import './css/style.css'
-import {initStore} from './store/index'
+import {initStore, history} from './store/index'
 import {Provider} from 'react-redux'
 import {initChats} from './store/chatActions'
+import {ConnectedRouter} from 'connected-react-router'
 
 {/* <Header/>
                 <ChatListContainer />
@@ -24,12 +25,12 @@ export const App = () => {
     return ( 
         <div className="AppContainer">
             <Provider store={store}>
-                <BrowserRouter>
+                <ConnectedRouter history={history}>
                     
                     {/* <ChatListContainer /> */}
                     {/* <ChatContainer module="ChatList" /> */}
                     <Router/>
-                </BrowserRouter>
+                </ConnectedRouter>
             </Provider>
         </div>
     )

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { ChatList } from '../components/ChatList/ChatList'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {addNewChat} from '../store/chatActions'
+import {deleteChat} from '../store/chatActions'
+import {createChat} from '../store/chatOperations'
 
 export const ROBOT = "Robot"
 
@@ -35,28 +36,37 @@ const mapStateToProps = (store,props) => {
         // id,
         // messages: chats &&  chats[id] ?  chats[id].messages : undefined,
         // url,
+        idChat,
         headerName,
         chats,
     }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    addNewChat
+    createChat, deleteChat
 }, dispatch)
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
     console.log(ownProps)
-    //const {id} = ownProps.match.params
+    //console.log(idChat)
+    const {idChat} = ownProps
+    const id = idChat
+    console.log(idChat)
     const handleAddChat = ({name}) => {
-        dispatchProps.addNewChat(name)
+        dispatchProps.createChat(name)
+    }
+    const deleteChat = ({id}) => {
+        dispatchProps.deleteChat(id)
     }
     return{
         // messages: stateProps.messages,
         // url: stateProps.url,
         headerName: stateProps.headerName,
         chats: stateProps.chats,
-        handleAddChat
+        handleAddChat,
+        deleteChat,
+        id: idChat
     }
 }
 

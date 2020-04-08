@@ -24,15 +24,15 @@ import './ChatList.css'
 //     },
 //   }));
 
-export const ChatList = ({chats,headerName,handleAddChat}) => {
+export const ChatList = ({chats,headerName,handleAddChat, deleteChat ,id}) => {
     //const classes = useStyles();
     console.log(handleAddChat);
     // console.log("ChatList return")
     return  <>
-            <Header  headerName={headerName}/>
+            <Header  headerName={headerName} deleteChat={deleteChat} id={id}/>
             <div className="">
-                <AddChatForm addNewChat={handleAddChat}/>
-                <Button   onClick={handleAddChat}>Add Chat</Button>
+                <AddChatForm createChat={handleAddChat}/>
+                {/* <Button   onClick={handleAddChat}>Add Chat</Button> */}
                 <List >
                 {/* component={props => <Link to="/chats/1"/>} */}
                     {/* {Object.keys(chats).forEach(index => { */}
@@ -42,6 +42,7 @@ export const ChatList = ({chats,headerName,handleAddChat}) => {
                                 </ListItemAvatar>
                                 <ListItemText primary="Add Chat" secondary="" />
                         </ListItem> */}
+                    {/* {Object.entries} */}
                     {Object.keys(chats).map((key, index) =>
                         <ListItem key={key} component={Link} to={chats[key].url}>
                                 <ListItemAvatar>
