@@ -1,11 +1,10 @@
-/*
 .chat-field {
 	display: flex;
-	justify-content: space-between;
 	align-items: flex-start;
+/*	justify-content: space-between;*/
+/*	margin-top: 20px;*/
 }
 
-.chat-container {
+.chat {
 	width: 70%;
 }
-*/
