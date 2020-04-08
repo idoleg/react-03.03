@@ -1,0 +1,13 @@
+.Navigation {
+    width: 30%;
+    height: 100%;
+    box-shadow: 10px 0 5px -8px rgba(121, 58, 115, 0.75);
+    border-right:1px solid  #d690cd;
+
+}
+
+.containerNavigation {
+    width: 30%;
+    height: 100%;
+    position: absolute;
+}

@@ -1,37 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
 import { updateProfile } from '../../store/chatActions.js';
+import useInput from '../../hooks/useInput.js';
 
 import './Profile.css'
 
-const Profile = ({profile, onUpdateProfile}) => {
-
-    function useInput(initialState) {
-        const [state, setState] = useState(initialState);
-    
-        const setInput = (event) => {
-            setState(event.currentTarget.value)
-        }
-    
-        return [state, setInput];
-    }
-
+const Profile = ({profile, updateProfile}) => {
     const [name, setName] = useInput(profile.defaultUser ? profile.defaultUser : '');
 
     const onProfileUpdate = () => {
-        onUpdateProfile({defaultUser: name})
+        updateProfile({defaultUser: name})
     }
 
-
     return (<div>
-        <nav>
-            <Link to="/chats">Enter the messenger</Link>
-            <Link to="/">Main page</Link>
-            <Link to="/about">About...</Link>
-        </nav>
         <h1>Profile</h1>
         <form className="profile__form">
             <label>Name:&nbsp;
@@ -51,17 +34,19 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     updateProfile
 }, dispatch)
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {profile} = stateProps;
+// const mergeProps = (stateProps, dispatchProps, ownProps) => {
+//     const {profile} = stateProps;
 
-    const onUpdateProfile = (profile) => {
-        dispatchProps.updateProfile(profile)
-    }
+//     const onUpdateProfile = (profile) => {
+//         dispatchProps.updateProfile(profile)
+//     }
 
-    return {
-        profile,
-        onUpdateProfile
-    }
-}
+//     return {
+//         profile,
+//         onUpdateProfile
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Profile)
+// export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Profile)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

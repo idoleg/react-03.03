@@ -9,6 +9,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button'
+import {AddChatForm} from './AddChatForm'
+import {Header} from '../Header/Header'
 
 import './ChatList.css'
 
@@ -20,18 +24,43 @@ import './ChatList.css'
 //     },
 //   }));
 
-export const ChatList = ({chats}) => {
+export const ChatList = ({chats,headerName,handleAddChat, deleteChat ,id}) => {
     //const classes = useStyles();
-    return  <div className="">
-                 <List >
-                    
-                    {chats.map((item, index) => <ListItem key={index}>
+    console.log(handleAddChat);
+    // console.log("ChatList return")
+    return  <>
+            <Header  headerName={headerName} deleteChat={deleteChat} id={id}/>
+            <div className="">
+                <AddChatForm createChat={handleAddChat}/>
+                {/* <Button   onClick={handleAddChat}>Add Chat</Button> */}
+                <List >
+                {/* component={props => <Link to="/chats/1"/>} */}
+                    {/* {Object.keys(chats).forEach(index => { */}
+                        {/* <ListItem key="0" component={Link} to="/chats/add">
+                                <ListItemAvatar>
+                                <Avatar alt="Add Chat" src="https://via.placeholder.com/40" />
+                                </ListItemAvatar>
+                                <ListItemText primary="Add Chat" secondary="" />
+                        </ListItem> */}
+                    {/* {Object.entries} */}
+                    {Object.keys(chats).map((key, index) =>
+                        <ListItem key={key} component={Link} to={chats[key].url}>
+                                <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src={chats[key].img} />
+                                </ListItemAvatar>
+                                <ListItemText primary={chats[key].name} secondary="Jan 9, 2014" />
+                        </ListItem>)
+                        
+                    }
+                    {/* {chats.map((key, index) => 
+                    <ListItem key={index} component={Link} to={chats.key.url}>
                         <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src={item.img} />
                         </ListItemAvatar>
                         <ListItemText primary={item.name} secondary="Jan 9, 2014" />
                     </ListItem>
-                    )}
+                    )} */}
                 </List>
             </div>
+            </>
 }

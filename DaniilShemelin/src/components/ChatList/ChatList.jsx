@@ -1,5 +1,7 @@
 import React from 'react';
-import { makeStyles, List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { useInput } from '../../hooks/useInput';
+import { makeStyles, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,79 +14,42 @@ const useStyles = makeStyles(theme => ({
     display: 'inline',
   },
   listItem: {
-    cursor: 'pointer'
+    alignItems: 'center'
   }
 }));
 
-export const ChatList = () => {
+export const ChatList = ({ chats, addChat }) => {
   const classes = useStyles();
+  const [name, setName, setNameState] = useInput('');
+  const handleAddChat = (event) => {
+    event.preventDefault();
+    addChat(name);
+    setNameState('');
+  }
 
   return (
     <List className={classes.root}>
-      <ListItem className={classes.listItem} alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem className={classes.listItem} alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Summer BBQ"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem className={classes.listItem} alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Cindy Baker" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Oui Oui"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Sandra Adams
-              </Typography>
-              {' — Do you have Paris recommendations? Have you ever…'}
-            </React.Fragment>
-          }
-        />
+
+      { chats.map(({id, name}) => {
+          return (
+            <Link key={id} to={`/chats/${id}`}>
+              <ListItem className={classes.listItem}>
+                <ListItemAvatar>
+                  <Avatar />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={name}
+                />
+              </ListItem>
+            </Link>
+          )
+        })
+      }
+      <ListItem className={classes.listItem}>
+        <form onSubmit={handleAddChat}>
+          <input type="text" placeholder="Chat name" value={name} onChange={setName} />
+          <button>Create chat</button>
+        </form>
       </ListItem>
     </List>
   )

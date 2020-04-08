@@ -5,7 +5,7 @@ const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").def
 
 
 module.exports = {
-    entry: path.resolve(__dirname, "src", "index.js"),
+    entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.js"),],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "index.js",
@@ -16,10 +16,7 @@ module.exports = {
                 test: /\.(js|jsx)$/i,
                 include: path.resolve(__dirname, "src"),
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/env', '@babel/react'],
-                    plugins: ['@babel/plugin-proposal-class-properties']
-                }
+                // options: 
             },
             {
                 test: /\.css$/i,
@@ -37,6 +34,14 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
+        proxy: {
+            '/bot/': {
+            target: 'https://aiproject.ru/api/',
+            pathRewrite: { '/bot/': '' },
+            secure: false,
+            changeOrigin: true,
+            }
+        }
     },
     devtool: 'inline-source-map'
 }

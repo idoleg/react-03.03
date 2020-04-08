@@ -2,9 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: { index: './index.js' },
+    entry: path.resolve(__dirname, "static_src", "index.js"),
     output: {
-        path: path.resolve(__dirname, "app"),
+        path: path.resolve(__dirname, "out"),
         filename: 'index.js'
     },
     module: {
@@ -13,7 +13,6 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 include: path.resolve(__dirname, ''),
                 loader: 'babel-loader',
-                exclude: '/node_modules/',
                 options: {
                     presets: ['@babel/env', '@babel/react'],
                     plugins: [
@@ -34,9 +33,14 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './index.html'})
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "static_src", "index.html")
+        })
     ],
     resolve: {
         extensions: ['.jsx', '.js']
-    }
+    },
+    devServer: {
+        historyApiFallback: true,
+    },
 };

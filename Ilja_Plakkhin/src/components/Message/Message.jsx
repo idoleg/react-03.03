@@ -1,14 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./style.css";
-export default class Message extends React.Component {
-  render() {
-    const { author, text } = this.props;
+import PropTypes from 'prop-types';
+import classname from 'classname';
+import "./Message.css";
 
-    return (
-      <li className="li-message">
-        <strong>{author}</strong>: {text}
-      </li>
-    );
-  }
+export const Message = ({ author, text }) => {
+  const className = classname("Message", {'Message--robot': author === 'Robot'});
+return <li className={className}><strong>{author}</strong>: {text}</li>}
+
+Message.propTypes = {
+  author: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 }

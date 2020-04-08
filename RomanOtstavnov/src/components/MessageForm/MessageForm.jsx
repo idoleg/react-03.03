@@ -19,7 +19,7 @@ const useInput = (initialState) => {
   return [state, setInput];
 };
 
-export const MessageForm = ({ setMessage }) => {
+export const MessageForm = ({ addMessage }) => {
   const [name, setName] = useInput('');
   const [content, setContent] = useInput('');
   const [nameSaved, setNameSaved] = useState(false);
@@ -32,8 +32,8 @@ export const MessageForm = ({ setMessage }) => {
 
   const sendForm = (e) => {
     e.preventDefault();
-    if(name && content && isFunction(setMessage)) {
-      setMessage({ name, content });
+    if(name && content && isFunction(addMessage)) {
+      addMessage({ name, content });
       setContent({ currentTarget: { value: '' } });
       setNameSaved(true);
       messageField.current.focus();
