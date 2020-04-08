@@ -18,6 +18,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
+          sourceMaps: true,
           presets: ['@babel/env', '@babel/react'],
           plugins: [
             [
@@ -60,7 +61,8 @@ module.exports = {
   ],
   devServer: {
     contentBase: 'src',
-    port: 7000,
+    port: 3000,
+    historyApiFallback: true,
     proxy: {
       '/aiproject/api/': {
         target: 'https://aiproject.ru/api/',

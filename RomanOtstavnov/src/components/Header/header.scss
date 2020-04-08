@@ -1,3 +1,19 @@
 .container {
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
+.link {
+  opacity: .5;
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  };
+
+  &.active {
+    opacity: 1;
+  }
+}
