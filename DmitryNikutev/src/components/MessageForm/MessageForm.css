@@ -9,10 +9,9 @@
 }
 
 .InputField {
-    width: 100%;
+    flex: 1;
 }
 
-.InputButton {
+.SendButton {
     align-self: center;
-    width: auto;
 }
