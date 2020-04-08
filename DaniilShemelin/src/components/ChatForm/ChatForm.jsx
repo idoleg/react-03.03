@@ -1,26 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { useInput } from '../../hooks/useInput';
 import "./ChatForm.css";
 
-function useInput(initialState) {
-  const [state, setState] = useState(initialState);
 
-  const setInput = (event) => {
-    setState(event.currentTarget.value);
-  }
-
-  return [state, setInput];
-}
 
 export const ChatForm = ({ onSendMessage }) => {
   const [name, setName] = useInput('Daniil');
-  const [content, setContent] = useInput('');
+  const [content, setContent, setContentState] = useInput('');
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if(content && name) onSendMessage({name, content});
-    else {
+    if(content && name) {
+      onSendMessage({name, content});
+      setContentState('');
+    } else {
       console.error(new Error("Заполните обязательные поля"))
       return;
     }

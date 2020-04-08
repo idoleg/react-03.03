@@ -9,7 +9,7 @@ export const Chat = ({ messages, onSendMessage }) => {
   if(messages) {
   return (
     <div className="chat__wrapper">
-      { messages.length ? <MessageList messages={ messages } /> : 'Нет сообщений' }
+      { messages.length ? <MessageList messages={ messages } /> : <h1 className="message__none">Нет сообщений</h1> }
       <ChatForm onSendMessage={ onSendMessage } />
     </div>
   )
