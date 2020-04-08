@@ -1,7 +1,12 @@
-.li-message {
+.Message {
+  list-style-type: none;
   background-color: lightblue;
   padding: 5px 15px;
   border-radius: 20px;
   font-size: 18px;
   margin: 5px;
+  align-self: flex-end;
+}
+.Message--robot {
+  align-self: flex-start;
 }
