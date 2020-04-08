@@ -1,0 +1,24 @@
+.messageField {
+    display: flex;
+    flex-direction: column;
+    .messages {
+        background-color: rgb(213, 252, 248);
+        list-style: none;
+        flex-grow: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 10px;
+        margin: 0;
+        .message {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 10px;
+            background-color: rgb(161, 243, 209);
+           &__robot {
+               align-self: flex-start;
+            }
+        }
+        
+       }
+}

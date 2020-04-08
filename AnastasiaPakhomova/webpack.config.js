@@ -11,7 +11,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx)$/i,
                 include: path.resolve(__dirname, "src"),
                 loader: 'babel-loader',
                 exclude: /node_modules/,
@@ -20,6 +20,10 @@ module.exports = {
 					plugins: ['@babel/plugin-proposal-class-properties'],
                 }
             },
+			{
+				test: /\.css$/i,
+           		loader: 'style-loader!css-loader',
+			},
         ],
     },
     plugins: [
@@ -28,4 +32,8 @@ module.exports = {
 	resolve: {
 		extensions: [".jsx", ".js"],
 	},
+	devServer: {
+		 historyApiFallback: true,
+	},
+	devtool: 'inline-source-map',
 }

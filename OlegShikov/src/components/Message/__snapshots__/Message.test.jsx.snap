@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message.jsx render content 1`] = `
+<li
+  className="Message"
+>
+  <strong>
+    Ivan
+    :
+  </strong>
+   
+  Hello!
+</li>
+`;

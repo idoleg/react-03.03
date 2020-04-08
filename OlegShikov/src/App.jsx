@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import ChatContainer from './containers/ChatContainer';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {initStore, history} from './store'
 import {Provider} from 'react-redux'
-import {initChats, sendMessage} from './store/chatActions'
+import {fetchChats} from './store/chatOperations'
 import ChatListContainer from './containers/ChatListContainer';
 import {ConnectedRouter} from 'connected-react-router';
 // StaticRouter
@@ -12,7 +12,7 @@ import {ConnectedRouter} from 'connected-react-router';
 // BrowserRouter www.test.com/index
 
 const store = initStore();
-store.dispatch(initChats());
+store.dispatch(fetchChats());
 
 export const App = () => {
     return (

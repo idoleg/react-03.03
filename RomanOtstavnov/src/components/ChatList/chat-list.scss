@@ -2,3 +2,14 @@
   background: #fff;
 }
 
+.link {
+  color: #000;
+  text-decoration: none;
+  transition: transform .5s, opacity .5s;
+  opacity: .5;
+
+  &.active {
+    opacity: 1;
+    transform: translateX(6px);
+  }
+}

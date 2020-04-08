@@ -58,9 +58,11 @@ module.exports = {
       chunkFilename: '[id].css',
     })
   ],
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: 'src',
-    port: 7000,
+    port: 3000,
+    historyApiFallback: true,
     proxy: {
       '/aiproject/api/': {
         target: 'https://aiproject.ru/api/',

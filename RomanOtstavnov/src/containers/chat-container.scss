@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 70px);
+  align-items: stretch;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0 15px;
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.chat-list {
+  width: 30%;
+}
+.message-field {
+  width: 70%;
+  overflow: auto;
+}
+
+.footer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
