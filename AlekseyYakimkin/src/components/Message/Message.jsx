@@ -9,7 +9,7 @@ import classname from 'classname'
 //     // };
  
 //     render() {
-//         const {props:{name,content}} = this;
+//         const {name,content} = this.props; //const {props:{name,content}} = this;
 //         return <li><strong>{name}:</strong> {content}</li>
 //     }
 //  }
