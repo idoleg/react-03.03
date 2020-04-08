@@ -18,7 +18,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          sourceMaps: true,
           presets: ['@babel/env', '@babel/react'],
           plugins: [
             [
@@ -59,6 +58,7 @@ module.exports = {
       chunkFilename: '[id].css',
     })
   ],
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: 'src',
     port: 3000,

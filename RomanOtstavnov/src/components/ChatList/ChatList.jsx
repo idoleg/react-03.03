@@ -15,8 +15,10 @@ export const ChatList = ({ items, containerClassName, addChat }) => {
 
   const sendForm = (e) => {
     e.preventDefault();
-    isFunction(addChat) && addChat(chatName);
-    setChatName('');
+    if(chatName){
+      isFunction(addChat) && addChat({ name: chatName });
+      setChatName('');
+    }
   };
 
   return (
