@@ -15,21 +15,26 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         maxHeight: '100%',
     },
-    appBar: {
+    chatTitle: {
         position: 'static',
+        boxShadow: "none",
     },
-    toolbar: theme.mixins.toolbar,
 }));
 
 
-export const Chat = ({chat: {messages, title}, handleNewMessage}) => {
+export const Chat = ({className="", messages, chatTitle, handleNewMessage}) => {
     const classes = useStyles();
+    if (!chatTitle) {
+        return <div className={className}>
+            <h3>Запрашиваемый чат не существует</h3>
+        </div> ;
+    }
     return (
-        <div className={classes.root}>
-            <AppBar className={classes.appBar}>
+        <div className={`${classes.root} ${className}`}>
+            <AppBar className={classes.chatTitle}>
                 <Toolbar>
                     <Typography variant="h6" noWrap>
-                        {title}
+                        {chatTitle}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -45,7 +50,7 @@ export const chatProps = PropTypes.shape({
     messages: PropTypes.arrayOf(messageProps).isRequired,
 });
 
-Chat.propTypes = {
-    chat: chatProps,
-    handleNewMessage: PropTypes.func.isRequired,
-};
+// Chat.propTypes = {
+//     chat: chatProps,
+//     handleNewMessage: PropTypes.func.isRequired,
+// };

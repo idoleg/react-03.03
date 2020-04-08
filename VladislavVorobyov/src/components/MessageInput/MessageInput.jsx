@@ -33,7 +33,8 @@ export const MessageInput = ({handleNewMessage}) => {
         sendMessage();
     };
     const onKeyUp = (event) => {
-        if (event.keyCode === 13 && !event.shiftKey) sendMessage();
+        if (event.keyCode === 13 && !event.shiftKey) {sendMessage()};
+
     };
     const onChange = (event) => {
         setContent(event.currentTarget.value)
@@ -59,6 +60,7 @@ export const MessageInput = ({handleNewMessage}) => {
                     className={classes.iconButton}
                     variant="contained"
                     color="primary"
+                    onClick={sendMessage}
                 >
                     <Icon>send</Icon>
                 </IconButton>
