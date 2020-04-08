@@ -3,7 +3,7 @@ import { Chat } from '../components/Chat/Chat';
 
 export const ROBOT = 'Robot';
 
-export class ChatContainer extends Component {
+export class ChatContainer extends Component{
     state = {
         messages: [
             { name: "Ivan", content: "Hello, world!" },
@@ -11,15 +11,18 @@ export class ChatContainer extends Component {
             { name: "Ivan", content: "I'm well" },
         ]
     };
+    timeoutId = null; 
 
     componentDidUpdate() {
         const lastMessage = this.state.messages[this.state.messages.length - 1];
 
         if ((lastMessage.name != ROBOT) ) {
-            this.handleSendMessage({
+
+            clearTimeout(this.timeoutId);
+            this.timeoutId = this.setTimeout(() => this.handleSendMessage({
                 name: ROBOT,
                 content: `Hello ${lastMessage.name}, I'm Robot!`,
-            });
+            }), 1000);
         }
     }
 

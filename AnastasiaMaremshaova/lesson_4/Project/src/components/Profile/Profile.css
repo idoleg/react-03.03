@@ -1,0 +1,44 @@
+.container{
+    width: 70%;
+    height: 100%;
+    display: flex; 
+    justify-content: space-around;
+    background-color: rgb(174, 135, 206);
+
+}
+
+.img{
+    width: 100%; 
+    border-radius: 50%;
+
+}
+
+.div-img{
+    margin: 50px; 
+    width: 350px; 
+   
+}
+
+.answer{
+    font-size: 20px; 
+    font-weight: 800;
+    color: white; 
+}
+.title{
+    font-size: 20px;
+    margin: 20px; 
+    font-weight: 1000;
+    color: rgb(109, 71, 139);
+
+}
+.img-txt{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background-color: rgba(190, 190, 190, 0.562);
+    border-radius: 50px 50px 50px 50px;
+    margin-right: 100px; 
+    margin-top: 100px; 
+    margin-bottom: 50px;
+    width: 500px; 
+    height: 200px; 
+    border: solid 2px white; 
+}

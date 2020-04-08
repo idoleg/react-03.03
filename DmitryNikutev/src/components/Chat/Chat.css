@@ -1,3 +1,8 @@
-.SecondaryText {
-    display: inline;
+.LastMessageText {
+    display: block;
+}
+
+.ChatLink {
+    color: inherit;
+    text-decoration: none;
 }

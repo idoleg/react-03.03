@@ -72,7 +72,7 @@ export const ROBOT = 'Robot';
 
 const mapStateToProps = (store, props) => {
     const {id} = props.match.params;
-    const chats = id && store.chats ? store.chats : {}
+    const chats = id && store.chats ? store.chats  : undefined
 
     return {
         messages: chats[id] ? chats[id].messages : undefined,

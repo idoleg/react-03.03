@@ -1,0 +1,17 @@
+.profile__form {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profile__btn {
+    cursor: pointer;
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px 20px;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.profile__btn:active {
+    background-color: #aaa;
+}

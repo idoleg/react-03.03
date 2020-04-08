@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MessageItem from '../MessageItem/MessageItem';
 
 class MessageList extends Component {
@@ -6,13 +7,16 @@ class MessageList extends Component {
     const { messages } = this.props;
 
     return (
-      <div>
+      <>
         {messages.map((message, index) => (
           <MessageItem key={index} {...message} />
         ))}
-      </div>
+      </>
     );
   }
 }
+MessageList.propTypes = {
+  messages: PropTypes.array.isRequired
+};
 
 export default MessageList;
