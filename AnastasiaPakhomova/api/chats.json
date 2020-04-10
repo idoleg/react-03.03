@@ -1,6 +1,7 @@
-{"chats":{
+{
 	"1":{
 		"name":"Chat 1",
+		"botId":"44369b3b771540",
 		 "messages":[
 			 {"name":"Ivan","text":"Hello in chat 1!"},
 			 {"name":"Petr","text":"Helo, how are you?"},
@@ -9,6 +10,7 @@
 		},
 	"2":{
 		"name":"Chat 2",
+		"botId":"6e33f93904304f",
 		 "messages":[
 			 {"name":"Fedor","text":"Hi, it's chat 2!"},
 			 {"name":"NiKola","text":"Hi! How are you?!"},
@@ -17,11 +19,12 @@
 		},
 	"3":{
 		"name":"Chat 3",
+		"botId":"55dbc0ca9c0645",
 		 "messages":[
 			 {"name":"Alex","text":"Hello in chat 3!"},
 			 {"name":"Moisha","text":"Helo, how are you?"},
 			 {"name":"Alex","text":"I'm well"}
 		 ]
 		}
-	}
+
 }

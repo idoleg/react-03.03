@@ -3,11 +3,20 @@ import PropTypes from "prop-types"
 import {Message} from '../Message/Message'
 import {MessageList} from '../MessageList/MessageList'
 import {ChatForm} from '../ChatForm/ChatForm'
+import './Chat.css'
 
-export const Chat = ({messages, onSendMessage}) => {
+
+export const Chat = ({isLoading, error, messages, onSendMessage}) => {
+
+	if (isLoading) {
+	   return <div>Messages are loaded</div>
+   }
+	if(error) {
+        return <div>Ошибка подключения</div>
+    }
 	if(messages) {
 		return (
-			<div>
+			<div className="chat">
 				{messages.length ? <MessageList messages={messages}/> : <h4>No messages</h4> }
 				<ChatForm onSendMessage={onSendMessage} />
 			</div>
@@ -18,7 +27,6 @@ export const Chat = ({messages, onSendMessage}) => {
 			<strong>Select a chat in the list</strong>
 		)
 	}
-
 }
 
 Chat.propTypes = {

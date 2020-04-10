@@ -3,7 +3,7 @@ const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-    entry: ["@babel/polyfill", "./app/js", path.resolve(__dirname, "src", "index.js")],
+    entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.js")],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "index.js",
@@ -34,6 +34,14 @@ module.exports = {
 	},
 	devServer: {
 		 historyApiFallback: true,
+		 proxy: {
+            '/bot/': {
+            target: 'https://aiproject.ru/api/',
+            pathRewrite: { '/bot/': '' },
+            secure: false,
+            changeOrigin: true,
+            }
+        },
 	},
 	devtool: 'inline-source-map',
 }
