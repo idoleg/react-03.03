@@ -6,8 +6,11 @@ import {removeChat} from "Actions/chatActions";
 import {ChatsList} from "Components/ChatsList/ChatsList";
 
 
-const mapStateToProps = ({chats}, ownProps) => ({
-    chats: chats
+const mapStateToProps = ({chats:{loading, data, hasError, errorMessage}}, ownProps) => ({
+    chats: data,
+    loading,
+    hasError,
+    errorMessage,
 });
 
 
@@ -22,6 +25,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
     return {
         ...ownProps,
+        ...stateProps,
         handleAddNewChat,
         chats: stateProps.chats.map((chat) => ({
             ...chat,

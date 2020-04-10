@@ -1,38 +1,72 @@
 import {handleActions, combineActions} from 'redux-actions';
-import {initChats, addChat, removeChat, startFire, finishFire} from 'Actions/chatActions'
+import {
+    loadingChats,
+    failedLoadedChats,
+    initChats,
+    addChat,
+    removeChat,
+    startFire,
+    finishFire
+} from 'Actions/chatActions'
 
 
-const initialStore = [];
+const initialStore = {
+    loading: false,
+    data: [],
+    hasError: false,
+    errorMessage: '',
+};
 
 export default handleActions({
-    [initChats]: (store, action) => ([
-        {id: "1", title: 'Chat 1', fire: false},
-        {id: "2", title: 'Chat 2', fire: false},
-        {id: "3", title: 'Chat 3', fire: false},
-    ]),
-    [addChat]: (store, action) => {
-        const chatsIds = Object.keys(store);
-        const chatId = parseInt(chatsIds[chatsIds.length-1])+1;
-        return [
+    [loadingChats]: (store, action) => ({
+        ...store,
+        loading: true,
+        hasError: false,
+        errorMessage: '',
+    }),
+    [failedLoadedChats]: (store, action) => ({
+        ...store,
+        loading: false,
+        hasError: true,
+        errorMessage: action.payload.error,
+    }),
+    [initChats]: (store, action) => {
+        const {chats} = action.payload;
+        return {
             ...store,
-            {id: chatId.toString(), title:action.payload.title, fire:false},
-        ]
-
+            loading: false,
+            hasError: false,
+            errorMessage: '',
+            data: chats.map(chat => ({...chat, fire: false}))
+        }
+    },
+    [addChat]: (store, action) => {
+        const chatsIds = Object.keys(store.data);
+        const chatId = parseInt(chatsIds[chatsIds.length-1])+1;
+        return {
+            ...store,
+            data: [
+                ...store.data,
+                {id: chatId.toString(), title: action.payload.title, fire: false}
+            ],
+        }
     },
     [removeChat]: (store, action) => {
         const {chatId} = action.payload;
-        return store.filter(chat => chat.id !== chatId);
+        return {
+            ...store,
+            data: store.data.filter(chat => chat.id !== chatId)
+        };
     },
     [combineActions(startFire, finishFire)]: (store, action) => {
         const {chatId} = action.payload;
-        const chat = store.find(chat => chat.id === chatId);
-        return [
-            {
-                ...chat,
-                fire: action.type === startFire.toString()
-            },
-            ...store.filter(chat => chat.id !== chatId),
-
-        ]
+        const chat = store.data.find(chat => chat.id === chatId);
+        return {
+            ...store,
+            data:[
+                {...chat, fire: action.type === startFire.toString()},
+                ...store.data.filter(chat => chat.id !== chatId),
+            ],
+        }
     },
 }, initialStore);

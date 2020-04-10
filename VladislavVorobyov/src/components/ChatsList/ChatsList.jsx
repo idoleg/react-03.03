@@ -27,14 +27,58 @@ const useStyle = makeStyles(theme => ({
     list: {
         overflow: "auto",
         maxHeight: "100%",
+    },
+    loading: {
+        display: "flex",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    errorLoad: {
+        display: "flex",
+        height: "100%",
+        // alignItems: "center",
+        justifyContent: "center",
+        color: "red",
+    },
+    loadingImg: {
+        width: "40px",
+        height: "40px"
     }
-
 }));
 
 
-export const ChatsList = ({chats, className="", handleAddNewChat})=> {
+export const ChatsList = ({chats, loading, hasError, errorMessage, className="", handleAddNewChat})=> {
     const classes = useStyle();
     const [newChatName, setNewChatName] = useState('');
+    if (loading) {
+        return (
+            <div className={className}>
+                <ChatListHeader
+                    className={classes.header}
+                    handleAddNewChat={handleAddNewChat}
+
+                />
+                <List component="nav" className={classes.loading}>
+                    <img className={classes.loadingImg} src="/img/loading.gif" />
+                </List>
+            </div>
+        )
+    }
+    if (hasError) {
+        return (
+            <div className={className}>
+                <ChatListHeader
+                    className={classes.header}
+                    handleAddNewChat={handleAddNewChat}
+
+                />
+                <List component="nav" className={classes.errorLoad}>
+                    {errorMessage}
+                </List>
+            </div>
+        )
+    }
     const chatElements =chats.map(({id, title, fire, handleClick, handleRemove}) => {
         return (
         <ListItem button

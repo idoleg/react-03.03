@@ -2,6 +2,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {createBrowserHistory} from "history";
 import {routerMiddleware} from "connected-react-router";
 import {persistStore, persistReducer} from "redux-persist";
+import reduxThunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import initReducer from 'Reducers';
@@ -25,12 +26,13 @@ function initStore() {
         initialStore,
         composeEnhancers(
             applyMiddleware(
+                reduxThunk,
                 routerMiddleware(history),
                 ...middlewares
             ),
         )
     );
-    const persistor = persistStore(store);
+    // const persistor = persistStore(store);
     // return {store, persistor};
     return store;
 }

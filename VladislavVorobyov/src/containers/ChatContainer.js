@@ -4,10 +4,9 @@ import {sendMessage} from "Actions/messageActions";
 import {Chat} from "Components/Chat/Chat";
 
 
-
 const mapStateToProps = ({chats, messages, users}, ownProps) => {
     const chatId = ownProps.match.params.id;
-    const chat =chats.find(chat => chat.id === chatId);
+    const chat =chats.data.find(chat => chat.id === chatId);
     const messageList = messages.filter(message => message.chatId===chatId)
         .map(({id, senderId, content}) => ({
             id,

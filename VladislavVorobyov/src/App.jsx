@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from "connected-react-router";
 import {PersistGate} from 'redux-persist/integration/react';
 import initStore, { history } from "Utils/store";
+import {fetchChats} from "Operations/chatListOperations";
 import {initChats} from "Actions/chatActions";
 import {initUsers} from "Actions/usersAction";
 import {initMessages} from "Actions/messageActions";
@@ -13,7 +14,7 @@ import ProfileContainer from "Containers/ProfileContainer";
 
 // const {store, persistor} = initStore();
 const store = initStore();
-store.dispatch(initChats());
+store.dispatch(fetchChats());
 store.dispatch(initUsers());
 store.dispatch(initMessages());
 
