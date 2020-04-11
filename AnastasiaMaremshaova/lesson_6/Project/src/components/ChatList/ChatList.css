@@ -1,0 +1,88 @@
+.ChatList{
+    display: flex; 
+    flex-wrap: wrap; 
+    background-color: #d690cd;
+    width: 100%; 
+    height: 89%;
+    z-index: 1; 
+    position: relative; 
+}
+
+
+.ChatList-container::-webkit-scrollbar {width: 8px; }
+
+
+.ChatList-container::-webkit-scrollbar-track {
+    background: #AA83BB;
+    background: -webkit-linear-gradient(bottom, #AA83BB, #6F3D77);
+    background: -moz-linear-gradient(bottom, #AA83BB, #6F3D77);
+    background: linear-gradient(to top, #AA83BB, #6F3D77);
+   border-radius:20px;
+  }
+  
+  .ChatList-container::-webkit-scrollbar-thumb {
+    background: rgb(91, 32, 99); 
+    border-radius: 5px;
+}
+
+  
+
+.ChatList-container{
+    width: 100%; 
+    height: 70%;
+    overflow-y: auto
+}
+
+.avatar{
+    background-color:  rgb(174, 135, 206);
+    width: 60px;
+}
+
+
+.White{
+    color: white; 
+}
+
+.w-500{
+    width: 500px; 
+}
+
+.chat:hover{
+    background-color: rgb(196, 132, 196);
+    transition: 0.5s;
+
+}
+
+.btn-menu:hover stop{
+    animation: colors 12s infinite;
+}
+
+
+.btn-menu:hover .stop-1{
+    animation-delay: 2s
+}
+
+
+.btn-menu{
+    margin: 0; 
+    width: 60px;
+    height: 60px;  
+    color: #fff;
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+.img-menu{
+    width: 70%; 
+    height: 70%; 
+}
+
+.showUpChatList{
+    transform: translateY(-17%);
+    transition: transform 1s ease-in-out;
+}
+
+.showDownChatList{
+    transform: translateY(0%);
+    transition: transform 1s ease-in-out;    
+}
