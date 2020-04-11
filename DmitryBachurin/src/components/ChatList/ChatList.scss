@@ -1,0 +1,13 @@
+.chatList {
+    list-style: none;
+    padding: 0;
+    background-color: rgb(250, 231, 231);
+    margin: 0;
+    &_contact {
+        padding: 5px 10px;
+        &:hover {
+            background-color: rgb(213, 252, 248);
+            cursor: pointer;
+        }
+    }
+}

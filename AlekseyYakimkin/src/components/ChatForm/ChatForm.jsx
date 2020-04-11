@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField'
 import Icon from '@material-ui/core/Icon'
 import Button from '@material-ui/core/Button'
+import {useInput} from '../../hooks/useInput'
+
 // export class ChatForm extends Component{
 //     state = {
 //         name: "",
@@ -40,19 +42,9 @@ import Button from '@material-ui/core/Button'
 //     }
 // }
 
-function useInput(initialState) {
-    const [state,setState] = useState(initialState)
-
-    const setInput = (event) => {
-        setState(event.currentTarget.value)
-    }
-
-    return [state,setInput]
-}
-
 export const ChatForm = ({onSendMessage}) => {
     const [name, setName] = useInput('Alex')
-    const [content, setContent] = useInput('')
+    const [content, setContent, setContentState] = useInput('')
     const textarea = useRef();
 
     useEffect(() => {
@@ -63,7 +55,8 @@ export const ChatForm = ({onSendMessage}) => {
         event.preventDefault()
         //if(content)
         onSendMessage({name, content})
-         
+        setContentState('')
+        textarea.current.focus()
     }
     const handleKeyUp = (event) => {
         if (event.keyCode === 13) { // Enter
@@ -72,7 +65,7 @@ export const ChatForm = ({onSendMessage}) => {
      };
     return  <form >
                 <TextField name="name" label="Имя" placeholder="Введите имя" value={name} onChange={setName}/>
-                <TextField autoFocus multiline variant="outlined" label="Сообщение" required name="content" placeholder="Текст" value={content} onChange={setContent} onKeyUp={ (event) => handleKeyUp(event) }/>
+                <TextField inputRef={textarea} autoFocus multiline variant="outlined" label="Сообщение" required name="content" placeholder="Текст" value={content} onChange={setContent} onKeyUp={ (event) => handleKeyUp(event) }/>
                 <Button variant="contained" color="primary"  endIcon={<Icon>send</Icon>} onClick={onSubmit}>Send</Button>
             </form>
 }

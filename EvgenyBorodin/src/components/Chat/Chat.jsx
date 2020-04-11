@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {MessageList} from '../MessageList/MessageList.jsx';
-import {Message} from '../Message/Message.jsx'
-import {ChatForm} from '../ChatForm/ChatForm.jsx';
+import { MessageList } from '../MessageList/MessageList.jsx';
+import { Message } from '../Message/Message.jsx'
+import { ChatForm } from '../ChatForm/ChatForm.jsx';
 
 import './Chat.css'
 
-export const Chat = ({messages, onSendMessage}) => {
+export const Chat = ({messages, defaultUser, onSendMessage}) => {
     if (messages) {
         return (<div className="chat">
             {messages.length ? <MessageList messages={messages}/> : <h2>No messages.</h2> }
-            <ChatForm onSendMessage={onSendMessage}/>
+            <ChatForm defaultUser={defaultUser} onSendMessage={onSendMessage}/>
         </div>);
     } else {
         return (<div className="chat">
@@ -21,5 +21,6 @@ export const Chat = ({messages, onSendMessage}) => {
 
 Chat.propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape(Message.propTypes)),
+    defaultUser: PropTypes.string,
     onSendMessage: PropTypes.func.isRequired,
 }
