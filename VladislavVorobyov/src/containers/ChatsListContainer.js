@@ -22,14 +22,16 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const {handleAddNewChat, push, removeChat} = dispatchProps;
-
+    const {path} = ownProps;
+    const props = {...ownProps};
+    delete props['path'];
     return {
         ...ownProps,
         ...stateProps,
         handleAddNewChat,
         chats: stateProps.chats.map((chat) => ({
             ...chat,
-            handleClick: () => push(`/chats/${chat.id}`),
+            handleClick: () => push(`${path}/${chat.id}`),
             handleRemove: () => removeChat(chat.id),
         }))
     }

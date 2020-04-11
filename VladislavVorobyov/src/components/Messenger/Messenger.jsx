@@ -55,13 +55,13 @@ export const Messenger = (props) => {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <ChatsList className={ classes.chatList } />
+            <ChatsList path={path} className={ classes.chatList } />
             <Settings className={ classes.settings } />
             <Switch>
                 <Route path={path} exact>Выберите чат</Route>
-                <Route path={`${path}/:id`}
-                       render={(props)=><ChatContainer {...props} className={classes.chat} />}
-                />
+                <Route path={`${path}/:id`}>
+                    <ChatContainer path={path} className={classes.chat} />
+                </Route>
             </Switch>
 
         </div>
