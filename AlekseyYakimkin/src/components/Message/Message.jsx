@@ -9,13 +9,13 @@ import classname from 'classname'
 //     // };
  
 //     render() {
-//         const {props:{name,content}} = this;
+//         const {name,content} = this.props; //const {props:{name,content}} = this;
 //         return <li><strong>{name}:</strong> {content}</li>
 //     }
 //  }
  
 export const Message = ({name, content}) => {
-    const className = classname("Message", {"Message--robot": name == 'Robot'})
+    const className = classname("Message", {"Message--robot": name == 'Робот'})
     return <li className={className}><strong>{name}:</strong> {content}</li>
 }
 

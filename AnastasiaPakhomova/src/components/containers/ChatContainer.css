@@ -1,0 +1,10 @@
+.chat-field {
+	display: flex;
+	align-items: flex-start;
+/*	justify-content: space-between;*/
+/*	margin-top: 20px;*/
+}
+
+.chat {
+	width: 70%;
+}

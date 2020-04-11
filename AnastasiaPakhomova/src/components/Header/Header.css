@@ -1,0 +1,35 @@
+header{
+    width: 100%;
+	display: flex;
+/*	justify-content: space-between;*/
+	align-items: center;
+	background-color: #80CBC4;
+	font-family: sans-serif;
+}
+
+nav {
+	display: flex;
+	width: 30%;
+	justify-content: space-around;
+}
+
+.nav-item a {
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 600;
+	color: #303F9F;
+	color: white;
+}
+
+.nav-item a:hover, .nav-item a:focus {
+	text-decoration: none;
+	color: #009688;
+}
+
+h1 {
+	text-align: center;
+	color: #303F9F;
+	color: white;
+	margin-right: auto;
+	margin-left: auto;
+}

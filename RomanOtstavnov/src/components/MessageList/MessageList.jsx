@@ -9,13 +9,13 @@ import {Box} from "@material-ui/core";
 
 const cx = classnames.bind(styles);
 
-export const MessageList = ({ messages, className }) => {
-  const containerRef = useRef();
+export const MessageList = ({ messages, containerRef }) => {
   useEffect(() => {
     containerRef.current.scrollTop = containerRef.current.scrollHeight;
   }, [messages]);
+
   return (
-    <Box py={1} px={2} className={cx('container', className)} ref={containerRef}>
+    <Box className={cx('container')}>
       <List>
         {messages.map(({name, content, type}, index) => (
             <ListItem
