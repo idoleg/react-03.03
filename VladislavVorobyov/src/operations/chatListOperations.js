@@ -1,8 +1,5 @@
 import {loadingChats, initChats, failedLoadedChats} from "Actions/chatActions";
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+import {sleep} from "Utils/sleep";
 
 
 export const fetchChats = () => async (dispatch, getState) => {

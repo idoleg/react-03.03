@@ -38,9 +38,7 @@ module.exports = {
         },
     },
     devServer: {
-        historyApiFallback: {
-            disableDotRule: true,
-        },
+        historyApiFallback: true,
     },
     devtool: 'inline-source-map'
 };

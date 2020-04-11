@@ -7,8 +7,20 @@
   },
   {
     "id": 2,
+    "chatId": "1",
+    "content": "Привет!",
+    "senderId": 1
+  },
+  {
+    "id": 3,
     "chatId": "2",
     "content": "Здравствуйте!",
     "senderId": 2
+  },
+  {
+    "id": 4,
+    "chatId": "2",
+    "content": "И тебе не хворать!",
+    "senderId": 1
   }
 ]

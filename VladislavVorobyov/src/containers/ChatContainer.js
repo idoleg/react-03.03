@@ -4,10 +4,14 @@ import {sendMessage} from "Actions/messageActions";
 import {Chat} from "Components/Chat/Chat";
 
 
-const mapStateToProps = ({chats, messages, users}, ownProps) => {
-    const chatId = ownProps.match.params.id;
+const mapStateToProps = ({chats, messages, users, router:{location:{pathname}}}, ownProps) => {
+
+    const {path} = ownProps;
+    const props = {...ownProps};
+    delete props['path'];
+    const chatId = pathname.match(`${path}/(.*)/?`)[1];
     const chat =chats.data.find(chat => chat.id === chatId);
-    const messageList = messages.filter(message => message.chatId===chatId)
+    const messageList = messages.data.filter(message => message.chatId===chatId)
         .map(({id, senderId, content}) => ({
             id,
             senderId,
@@ -15,8 +19,12 @@ const mapStateToProps = ({chats, messages, users}, ownProps) => {
             content
         }));
     return {
+        ...props,
+        chatId,
         chatTitle: chat ? chat.title: undefined,
         messages: messageList,
+        loading: messages.loading,
+        errorMessage: messages.errorMessage,
     }
 };
 
@@ -26,7 +34,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const chatId = ownProps.match.params.id;
+    const chatId = stateProps.chatId;
+    delete stateProps['chatId'];
     const handleNewMessage = (content, senderId = 1) => {
         dispatchProps.sendMessage(chatId, senderId, content);
     };

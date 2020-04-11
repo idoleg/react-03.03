@@ -57,7 +57,6 @@ export const ChatsList = ({chats, loading, hasError, errorMessage, className="",
                 <ChatListHeader
                     className={classes.header}
                     handleAddNewChat={handleAddNewChat}
-
                 />
                 <List component="nav" className={classes.loading}>
                     <img className={classes.loadingImg} src="/img/loading.gif" />
