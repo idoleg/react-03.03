@@ -11,13 +11,20 @@ import {useInput} from '../../hooks/useInput'
 
 import './ChatList.css';
 
-export const ChatList = ({chats, createChat}) => {
+export const ChatList = ({isLoading, error, chats, createChat}) => {
     const [name, setName, setNameState] = useInput('');
 
     const handleAddChat = (event) => {
         event.preventDefault();
         createChat(name);
         setNameState('')
+    }
+
+    if(isLoading) {
+        return <div>Загрухка чатов</div>
+    }
+    if(error) {
+        return null;
     }
 
         return <div className="chat__chatlist">
@@ -29,6 +36,7 @@ export const ChatList = ({chats, createChat}) => {
                         <DraftsIcon />
                     </ListItemIcon>*/}
                 </ListItem>
+
                 )}
             </List>
             <div>

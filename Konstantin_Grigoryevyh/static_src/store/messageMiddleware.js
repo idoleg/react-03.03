@@ -19,11 +19,11 @@ export default (store) => (next) => (action) => {
 }
 
 function generateBotAnswer(store, id, name) {
-    const chatName = store.getState().chats[id].name;
+    const chatName = store.getState().chats.chats[id].name;
     store.dispatch(sendMessage(id, BOT_NAME, `Hi, ${name}! Welcome to chat ${chatName}`))
 }
 
 function generateBotAnswerForNewChat(store, id) {
-    const chatName = store.getState().chats[id].name;
+    const chatName = store.getState().chats.chats[id].name;
     store.dispatch(sendMessage(id, BOT_NAME, `Hello! Welcome to just created chat ${chatName}`))
 }
