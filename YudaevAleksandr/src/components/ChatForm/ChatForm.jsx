@@ -26,37 +26,37 @@ export const ChatForm = ({onSendMessage, onKeyDown}) => {
     }));
     const classes = useStyles();
     const [content, setContent] = useState();
+    const textarea = useRef();
+
+    const onSubmit = (event) => {
+        if(content && (event.currentTarget.type === "button" || event.ctrlKey && event.keyCode === 13)){
+            onSendMessage({name: 'Me', content: content, isRobot: false});
+            setContent('');
+            textarea.current.focus();
+        }
+    };
 
     return (
         <div className={classes.form}>
             <TextField
                 autoFocus
+                inputRef={textarea}
                 id="standard-multiline-flexible"
                 placeholder="Input here your message"
                 multiline
                 rowsMax="4"
                 className={classes.input}
-                value = {content}
-                name = "content"
+                value={content}
+                name="content"
                 onChange={({currentTarget: {value}}) => setContent(value)}
-                onKeyDown={(e) => {
-                    if(e.ctrlKey && e.keyCode === 13) {
-                        onKeyDown(e, {name: 'Me', content: content, isRobot: false});
-                        setContent('');
-                    }
-                }}
+                onKeyDown={onSubmit}
             />
             <Button
                 variant="contained"
                 color="primary"
                 className={classes.button}
                 endIcon={<Icon>send</Icon>}
-                onClick={() => {
-                    if(content) {
-                        onSendMessage({name: 'Me', content: content, isRobot: false});
-                        setContent('');
-                    }
-                }}
+                onClick={onSubmit}
             >
                 Send
             </Button>

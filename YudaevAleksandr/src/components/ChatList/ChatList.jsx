@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link} from 'react-router-dom';
+import {useInput} from "../../hooks/useInput";
 
 const drawerWidth = 240;
 
@@ -27,8 +28,16 @@ const useStyles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,
 }));
 
-export const ChatList = () => {
+export const ChatList = ({chats, createChat}) => {
+    //console.log(chats);
     const classes = useStyles();
+    const [name, setName, setNameState] = useInput('');
+
+    const handleAddChat = (event) => {
+        event.preventDefault();
+        createChat(name);
+        setNameState('');
+    };
 
     return (
         <Drawer
@@ -39,40 +48,22 @@ export const ChatList = () => {
             }}
             anchor="left"
         >
-            <div className={classes.toolbar} />
-            <Divider />
+            <div className={classes.toolbar}/>
+            <Divider/>
             <List>
-                {/*{['RobotAlex', 'Sarah', 'Michael'].map((text, index) => (*/}
-                {/*    <ListItem button key={index}>*/}
-                {/*        <ListItemIcon>{<MailIcon />}</ListItemIcon>*/}
-                {/*        <ListItemText primary={text} />*/}
-                {/*    </ListItem>*/}
-                {/*))}*/}
-                <Link to="1">
-                    <ListItem button>
-                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                        <ListItemText primary="RobotAlex" />
-                    </ListItem>
-                </Link>
-                <Link to="2">
-                    <ListItem button>
-                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                        <ListItemText primary="Sarah" />
-                    </ListItem>
-                </Link>
-                <Link to="3">
-                    <ListItem button>
-                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                        <ListItemText primary="Michael" />
-                    </ListItem>
-                </Link>
-                <Link to="4">
-                    <ListItem button>
-                        <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                        <ListItemText primary="no chat" />
-                    </ListItem>
-                </Link>
+                {chats.map(({id, name}) => (
+                    <Link to={id} key={id}>
+                        <ListItem button>
+                            <ListItemIcon>{<MailIcon/>}</ListItemIcon>
+                            <ListItemText primary={name}/>
+                        </ListItem>
+                    </Link>
+                ))}
             </List>
+            <form onSubmit={handleAddChat}>
+                <input value={name} onChange={setName}/>
+                <button>add</button>
+            </form>
         </Drawer>
     )
 };

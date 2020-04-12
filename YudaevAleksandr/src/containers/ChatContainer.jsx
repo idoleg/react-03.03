@@ -99,8 +99,8 @@ const ROBOT = "RobotAlex";
 
 const mapStateToProps = (store, props) => {
     const {id} = props.match.params;
-    const chats = id && store.chats ? store.chats : undefined;
-    console.log(chats);
+    const chats = id && store.chats ? store.chats : {};
+    //console.log(chats);
 
     return {
         id,
