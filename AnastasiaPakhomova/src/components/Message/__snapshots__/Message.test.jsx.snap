@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message.jsx render content 1`] = `
+<li
+  className="message"
+>
+  <span
+    className="user-name"
+  >
+    Ivan
+    :
+  </span>
+   
+  Hello!
+</li>
+`;
