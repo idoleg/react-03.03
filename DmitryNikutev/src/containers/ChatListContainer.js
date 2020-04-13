@@ -1,13 +1,16 @@
 import {bindActionCreators} from "redux";
 import {addChat} from "../store/actions/ChatActions";
 import {getId} from "../utils/IdUtil";
-import {BOT_NAME} from "../utils/Constants";
+import {BOT_NAME, FETCHING, SUCCESS} from "../utils/Constants";
 import {connect} from "react-redux";
 import {ChatList} from "../components/ChatList/ChatList";
+import {isEmpty} from "../utils/ObjUtil";
+
 
 const mapStateToProps = (store, props) => {
    return {
       chats: store.chats,
+      loading: store.loading.chats,
       selectedChat: props.selectedChat,
    }
 };
@@ -27,6 +30,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
    return {
       chats: stateProps.chats,
+      loading: stateProps.loading,
       selectedChat: stateProps.selectedChat,
       addChat: onAddChat,
    };

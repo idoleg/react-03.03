@@ -2,6 +2,7 @@ import {handleActions} from 'redux-actions';
 import {initUser, setUser} from "../actions/UserActions";
 import {DEFAULT_USERNAME} from "../../utils/Constants";
 
+
 const initialState = {};
 
 export default handleActions({

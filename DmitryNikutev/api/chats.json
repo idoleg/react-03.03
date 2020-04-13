@@ -1,0 +1,44 @@
+[
+  [
+    1586791067158,
+    {
+      "name": "Bot 1586791067158",
+      "avatar": "https://picsum.photos/201",
+      "messages": [
+        [
+          234,
+          {
+            "name": "Bot 1586791067158",
+            "text": "Hello, I`m polite bot, send me something",
+            "automated": true
+          }
+        ]
+      ]
+    }
+  ],
+  [
+    1586791067159,
+    {
+      "name": "Bot 1586791067159",
+      "avatar": "https://picsum.photos/202",
+      "messages": [
+        [
+          4,
+          {
+            "name": "Bot 1586791067159",
+            "text": "I am not polite",
+            "automated": true
+          }
+        ]
+      ]
+    }
+  ],
+  [
+    1586791067168,
+    {
+      "name": "Bot 1586791067168",
+      "avatar": "https://picsum.photos/203",
+      "messages": []
+    }
+  ]
+]

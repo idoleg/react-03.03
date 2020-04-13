@@ -1,6 +1,7 @@
 import {addChat, addMessage} from "../actions/ChatActions";
 import {getId} from "../../utils/IdUtil";
-import {ACTION_LOCATION_CHANGE, BOT_GREETING, BOT_RESPONSE, BOT_RESPONSE_DELAY} from "../../utils/Constants";
+import {BOT_GREETING, BOT_RESPONSE_DELAY} from "../../utils/Constants";
+import {sendMessageToRemoteBot} from "../operations/ChatOperations";
 
 
 const botTimer = {};
@@ -9,12 +10,13 @@ export const BotMiddleware = store => next => action => {
    next(action);
 
    if (action.type === addMessage.toString()) {
-      const {name, automated, chat: chatId} = action.payload;
+      const {name, automated, chat: chatId, content} = action.payload;
+
       if (!automated) {
          const chatName = store.getState().chats.get(chatId).name;
          clearTimeout(botTimer[chatId]);
          botTimer[chatId] = setTimeout(
-            () => store.dispatch(addMessage(getId(), chatName, BOT_RESPONSE + name, true, chatId)),
+            () => store.dispatch(sendMessageToRemoteBot(chatId, chatName, content)),
             BOT_RESPONSE_DELAY
          );
 
