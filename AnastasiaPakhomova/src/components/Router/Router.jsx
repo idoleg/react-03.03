@@ -5,16 +5,16 @@ import Header from '../Header/Header'
 import ChatContainer from '../containers/ChatContainer'
 import {initStore, history} from '../../store'
 import {Provider} from 'react-redux'
-import {initProfile} from '../../store/chatActions'
 import {ConnectedRouter} from 'connected-react-router'
 import {PersistGate} from 'redux-persist/integration/react'
 import {fetchChats} from '../../store/chatOperations'
+import {fetchProfile} from '../../store/profileOperations'
 import ChatListContainer from '../containers/ChatListContainer'
 import './Router.css'
 
 const {store, persistor} = initStore()
 store.dispatch(fetchChats())
-store.dispatch(initProfile())
+store.dispatch(fetchProfile())
 
 console.log(store.getState())
 
