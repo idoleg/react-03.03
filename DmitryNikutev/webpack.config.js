@@ -2,10 +2,10 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-   entry: path.resolve(__dirname, "src", "index.jsx"),
+   entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.jsx")],
    output: {
-      path : path.resolve(__dirname, "build"),
-      filename : "index.js",
+      path: path.resolve(__dirname, "build"),
+      filename: "index.js",
    },
    module: {
       rules: [
@@ -15,7 +15,7 @@ module.exports = {
             loader: "babel-loader",
             options: {
                presets: ["@babel/env", "@babel/react"],
-               plugins:["@babel/plugin-proposal-class-properties"],
+               plugins: ["@babel/plugin-proposal-class-properties"],
             }
          },
          {
@@ -32,6 +32,14 @@ module.exports = {
    },
    devServer: {
       historyApiFallback: true,
+      proxy: {
+         "/api/bot/": {
+            target: "https://aiproject.ru/api/",
+            pathRewrite: {"/api/bot/": ""},
+            secure: false,
+            changeOrigin: true,
+         }
+      }
    },
    devtool: "inline-source-map",
 };

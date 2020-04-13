@@ -5,8 +5,8 @@ import Messenger from "./containers/MessengerContainer";
 import AppToolbar from "./containers/ToolbarContainer";
 import LoginForm from "./containers/LoginFormContainer";
 import {initStore} from "./store/Store";
-import {initChats} from "./store/actions/ChatActions";
-import {initUser} from "./store/actions/UserActions";
+import {initUser} from "./store/operations/UserOperations";
+import {initChats} from "./store/operations/ChatOperations";
 import {AUTH_PATH, CHATS_PATH} from "./utils/Constants";
 import {ConnectedRouter} from "connected-react-router"
 import {history} from "./store/middlewares/Middlewares";

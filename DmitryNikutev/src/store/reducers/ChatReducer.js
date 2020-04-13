@@ -1,12 +1,12 @@
 import {handleActions} from 'redux-actions';
-import {addChat, initChats, addMessage} from '../actions/ChatActions';
-import {CHATS} from "../../utils/Constants";
+import {addChat, addMessage, setChats} from '../actions/ChatActions';
+
 
 const initialState = {};
 
 export default handleActions({
-   [initChats]: (store, action) => {
-      return new Map(CHATS);
+   [setChats]: (store, action) => {
+      return action.payload.chats;
    },
    [addMessage]: (store, action) => {
       const {id, name, content, automated, chat: chatId} = action.payload;
