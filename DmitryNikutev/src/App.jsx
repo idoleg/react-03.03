@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {Provider as ReduxProvider} from "react-redux";
 import {Link, Redirect, Route, Switch} from "react-router-dom";
 import Messenger from "./containers/MessengerContainer";
