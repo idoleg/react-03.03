@@ -9,7 +9,11 @@ const initialState = {
 
 export default handleActions({
     [initChats]: (store, action) => {
-        return null
+        return {
+			...store,
+            isLoading: false,
+			chats: action.payload
+		}
     },
 
     [sendMessage]: (store, action) => {
