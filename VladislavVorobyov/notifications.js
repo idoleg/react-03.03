@@ -1,6 +1,5 @@
 function notifications(window) {
     'use strict';
-
 // Кнопка подписки/отписки для push-уведомлений
     var pushElement = document.querySelector('.push');
     var pushImgElement = document.querySelector('.push__image');
@@ -52,7 +51,7 @@ function notifications(window) {
                 .then(function (subscription) {
                     alert('Успешно подписаны.');
                     console.info('Подписаны на push-уведомления.');
-                    console.log(subscription);
+                    console.log(subscription.endpoint);
                     changePushStatus(true);
                 })
                 .catch(function (error) {
@@ -98,10 +97,10 @@ function notifications(window) {
         pushElement.checked = status;
         if (status) {
             pushElement.classList.add('active');
-            pushImgElement.src = '../images/push-on.png';
+            pushImgElement.src = '/img/push-on.png';
         } else {
             pushElement.classList.remove('active');
-            pushImgElement.src = '../images/push-off.png';
+            pushImgElement.src = '/img/push-off.png';
         }
     }
 
