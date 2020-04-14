@@ -9,7 +9,6 @@ const USER_ID = 1,
 
 
 export default store => next => (action) => {
-
     switch (action.type) {
         case sendMessage.toString(): {
             validateSendMessageAction(store, action);
@@ -24,9 +23,8 @@ export default store => next => (action) => {
 function validateSendMessageAction(store, action) {
     const storeData = store.getState();
     const {chatId, senderId} = action.payload;
-    const chat = storeData.chats.find(chat => chat.id === chatId);
+    const chat = storeData.chats.data.find(chat => chat.id === chatId);
     const user = storeData.users.find(user => user.id === senderId);
-    console.log(chat, user);
     if (!chat){
         throw `Chat with id ${chatId} does not exist!`
     }
@@ -38,9 +36,9 @@ function validateSendMessageAction(store, action) {
 
 function generateBotAnswer(store, action) {
     const {senderId, chatId} = action.payload;
-    const storeData = store.getState()
+    const storeData = store.getState();
     const userName = storeData.users.find(user => user.id === senderId).name;
-    const chatName = storeData.chats.find(chat => chat.id === chatId).title;
+    const chatName = storeData.chats.data.find(chat => chat.id === chatId).title;
     if (senderId === USER_ID) {
         clearTimeout(timeouts[chatId]);
         timeouts[chatId] = setTimeout(()=> store.dispatch(

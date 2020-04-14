@@ -26,9 +26,12 @@ export default handleActions({
     [sendMessage]: (store, action) => {
         const messageId = Object.keys(store).length + 1;
         const {chatId, senderId, content} = action.payload;
-        return [
+        return {
             ...store,
-            {...action.payload, id: messageId},
-        ]
+            data: [
+                ...store.data,
+                {...action.payload, id: messageId},
+            ],
+        }
     },
 }, initialStore);
