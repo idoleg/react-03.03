@@ -14,10 +14,11 @@ module.exports = {
                test: /\.(js|jsx)$/,
                include: path.resolve(__dirname, "src"),
                loader: 'babel-loader',
-               options: {
-                   presets: ['@babel/env', '@babel/react'],
-                   plugins: ['@babel/plugin-proposal-class-properties']
-               }
+            //ушло в .babelrc
+            //    options: {
+            //        presets: ['@babel/env', '@babel/react'],
+            //        plugins: ['@babel/plugin-proposal-class-properties']
+            //    }
            },
            {
                test:  /\.css$/i,

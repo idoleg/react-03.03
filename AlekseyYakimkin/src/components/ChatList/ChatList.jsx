@@ -54,7 +54,7 @@ export const ChatList = ({error, isLoading, chats,headerName,handleAddChat, dele
                                 <ListItemAvatar>
                                 <Avatar alt="Remy Sharp" src={chats[key].img} />
                                 </ListItemAvatar>
-                                <ListItemText primary={chats[key].name} secondary="Jan 9, 2014" />
+                                <ListItemText primary={chats[key].name} secondary={chats[key].fire ? "Есть непрочитанные" : ""} />
                         </ListItem>)
                         
                     }

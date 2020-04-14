@@ -52,11 +52,11 @@ export const ChatForm = ({onSendMessage}) => {
         //textarea.current.focus()  // ref={textarea} в <textarea>
     }, [])
     const onSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault() //comment for test
         //if(content)
         onSendMessage({name, content})
         setContentState('')
-        textarea.current.focus()
+        textarea.current.focus()  //comment for test
     }
     const handleKeyUp = (event) => {
         if (event.keyCode === 13) { // Enter

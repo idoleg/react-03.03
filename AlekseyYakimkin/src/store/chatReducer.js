@@ -1,5 +1,5 @@
 import {handleActions} from 'redux-actions'
-import {loadingChats,failedLoadedChats,initChats,sendMessage,addNewChat,deleteChat} from './chatActions'
+import {loadingChats,failedLoadedChats,initChats,sendMessage,addNewChat,deleteChat,fire,unfire} from './chatActions'
 
 const initialState = {
     chats: {},
@@ -73,7 +73,8 @@ export default handleActions({
                     botId,
                     img: "",
                     url: "/chats/"+newKey,
-                    messages:[]
+                    messages:[],
+                    fire: false
                 }
             }
 
@@ -110,5 +111,35 @@ export default handleActions({
             //     products: state.products.filter(item => item.id !== action.payload)
             //}
         }
-    }
+    },
+    [fire]: (store, actions) => {
+        console.log('store', store)
+        console.log('actions', actions)
+        const {id} = actions.payload
+        return {
+            ... store,
+            chats: {
+                ...store.chats,
+                [id]: {
+                    ... store.chats[id],
+                    fire: true
+                }
+            }
+        }
+    },
+    [unfire]: (store, actions) => {
+        console.log('store', store)
+        console.log('actions', actions)
+        const {id} = actions.payload
+        return {
+            ... store,
+            chats: {
+                ...store.chats,
+                [id]: {
+                    ... store.chats[id],
+                    fire: false
+                }
+            }
+        }
+    },
 }, initialState)

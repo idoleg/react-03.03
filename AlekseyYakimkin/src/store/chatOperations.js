@@ -1,5 +1,13 @@
 import {loadingChats,failedLoadedChats,initChats,addNewChat,sendMessage} from './chatActions'
 import {v4 as uuid} from 'uuid'
+import {createAction} from 'redux-api-middleware'
+
+//для 'redux-api-middleware'
+// export const fetchChats = () => createAction({
+//     endpoint: '/api/chats.json',
+//     method: 'GET',
+//     types: [loadingChats.toString(), initChats.toString(), failedLoadedChats()]
+// });
 
 export const fetchChats = () => async (dispatch) => {
     dispatch(loadingChats())
