@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 
 
 module.exports = {
@@ -19,11 +21,17 @@ module.exports = {
                     presets: ['@babel/env', '@babel/react'],
                     plugins: ['@babel/plugin-proposal-class-properties'],
                 }
+            },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")}),
+        new MiniCssExtractPlugin(),
+        new HTMLInlineCSSWebpackPlugin(),
     ],
     resolve: {
         extensions: ['.jsx', '.js'],
