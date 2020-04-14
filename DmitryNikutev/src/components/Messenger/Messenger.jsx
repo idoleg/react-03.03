@@ -1,21 +1,16 @@
-import React, {useState} from 'react';
-import {Login} from "../Login/Login";
-import {ChatContainer} from "../../containers/ChatContainer/ChatContainer";
-import {ChatList} from "../ChatList/ChatList";
+import React from 'react';
+import ChatList from "../../containers/ChatListContainer";
+import ChatView from "../../containers/ChatViewContainer";
 
 import "./Messenger.css"
 
 
-export const Messenger = () => {
-   const [username, setUsername] = useState("Guest");
-   
+export const Messenger = ({selectedChat}) => {
+
    return (
-      <>
-         <Login username={username} updateUsername={setUsername}/>
-         <div className="ChatsContainer">
-            <ChatList/>
-            <ChatContainer username={username}/>
-         </div>
-      </>
+      <div className="Messenger">
+         <ChatList selectedChat={selectedChat}/>
+         {selectedChat ? <ChatView selectedChat={selectedChat}/> : "Choose a chat from list"}
+      </div>
    );
 };

@@ -3,32 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
 import { updateProfile } from '../../store/chatActions.js';
-import { NavBar } from '../NavBar/NavBar.jsx'
-
+import useInput from '../../hooks/useInput.js';
 
 import './Profile.css'
 
-const Profile = ({profile, onUpdateProfile}) => {
-
-    function useInput(initialState) {
-        const [state, setState] = useState(initialState);
-    
-        const setInput = (event) => {
-            setState(event.currentTarget.value)
-        }
-    
-        return [state, setInput];
-    }
-
+const Profile = ({profile, updateProfile}) => {
     const [name, setName] = useInput(profile.defaultUser ? profile.defaultUser : '');
 
     const onProfileUpdate = () => {
-        onUpdateProfile({defaultUser: name})
+        updateProfile({defaultUser: name})
     }
 
-
     return (<div>
-        <NavBar selectedPath="Profile" />
         <h1>Profile</h1>
         <form className="profile__form">
             <label>Name:&nbsp;
@@ -48,17 +34,19 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     updateProfile
 }, dispatch)
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {profile} = stateProps;
+// const mergeProps = (stateProps, dispatchProps, ownProps) => {
+//     const {profile} = stateProps;
 
-    const onUpdateProfile = (profile) => {
-        dispatchProps.updateProfile(profile)
-    }
+//     const onUpdateProfile = (profile) => {
+//         dispatchProps.updateProfile(profile)
+//     }
 
-    return {
-        profile,
-        onUpdateProfile
-    }
-}
+//     return {
+//         profile,
+//         onUpdateProfile
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Profile)
+// export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Profile)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

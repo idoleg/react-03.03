@@ -3,11 +3,75 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { sendMessage, addChat } from '../store/chatActions.js';
 
-import { ChatLayout } from '../components/ChatLayout/ChatLayout.jsx'
+import { Header } from '../components/Header/Header.jsx';
+import { Chat } from '../components/Chat/Chat.jsx';
+// import { ChatList } from '../components/ChatList/ChatList.jsx'
+import ChatListContainer from './ChatListContainer.jsx';
+// import { ChatLayout } from '../components/ChatLayout/ChatLayout.jsx'
 
-// import './ChatContainer.css'
+import './ChatContainer.css'
 
 export const ROBOT = 'Robot'
+
+const ChatLayout = ({isLoading, error, id, chats, defaultUser, onSendMessage}) => {
+    const messages = id && chats[id] ? chats[id].messages : undefined ;
+    let text = defaultUser !== '' ? `Welcome, ${defaultUser}! ` : 'Welcome! '
+    text += id && chats[id] ? ` Chat ${chats[id].name}` : `Choose chat from the list`
+
+    if (isLoading) {
+        return <strong>Chats are loading...</strong>
+    }
+
+    if (error) {
+        return <strong>Something is not good at all...</strong>
+    }
+
+    return (<div className="chatcontainer">
+        <Header headerText={text}/>
+        <ChatListContainer />
+        <Chat messages={messages} defaultUser={defaultUser} onSendMessage={onSendMessage} />
+    </div>)
+}
+
+const mapStateToProps = (store, props) => {
+    const {id} = props.match.params;
+    const isLoading = store.app.isLoading;
+    const error = store.app.error;
+    const chats = store.app.chats ? store.app.chats  : undefined
+    const defaultUser = store.app.profile.defaultUser ? store.app.profile.defaultUser : ''
+
+    return {
+        isLoading,
+        error,
+        chats,
+        selectedId: id,
+        defaultUser
+    }
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    sendMessage
+}, dispatch)
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const {id} = ownProps.match.params;
+    // console.log('state', stateProps, 'own', ownProps)
+
+    const onSendMessage = ({user, text}) => {
+        dispatchProps.sendMessage(id, user, text)
+    }
+
+    return {
+        isLoading: stateProps.isLoading,
+        error: stateProps.error,
+        id,
+        chats: stateProps.chats,
+        defaultUser: stateProps.defaultUser,
+        onSendMessage
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatLayout)
 
 // export class ChatContainer extends Component {
 //     state = {
@@ -106,46 +170,6 @@ export const ROBOT = 'Robot'
 //         </div>)
 //     }
 // }
-
-const mapStateToProps = (store, props) => {
-    const {id} = props.match.params;
-    const chats = store.app.chats ? store.app.chats  : undefined
-    const defaultUser = store.app.profile.defaultUser ? store.app.profile.defaultUser : ''
-
-    return {
-        chats,
-        selectedId: id,
-        defaultUser
-    }
-}
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    addChat,
-    sendMessage
-}, dispatch)
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {id} = ownProps.match.params;
-    // console.log('state', stateProps, 'own', ownProps)
-
-    const onAddChat = ({name}) => {
-        dispatchProps.addChat(name)
-    }
-
-    const onSendMessage = ({user, text}) => {
-        dispatchProps.sendMessage(id, user, text)
-    }
-
-    return {
-        id,
-        chats: stateProps.chats,
-        defaultUser: stateProps.defaultUser,
-        onAddChat,
-        onSendMessage
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatLayout)
 
 // export const ChatContainer = () => {
 //     return connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatLayout)
