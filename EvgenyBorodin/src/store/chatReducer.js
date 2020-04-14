@@ -1,52 +1,38 @@
 import { handleActions } from 'redux-actions';
-import { initChats, sendMessage, addChat, updateProfile, selectChat, fireChat, unfireChat } from './chatActions.js';
+import { loadingChats, failedLoadedChats, initChats, sendMessage, addChat, renameChat, updateProfile, selectChat, fireChat, unfireChat, deleteChat } from './chatActions.js';
 
-const initialState = {};
+const initialState = {
+    chats: {},
+    isLoading: false,
+    error: null,
+    profile: {},
+};
 
 export default handleActions({
+    [loadingChats]: (store, action) => {
+        return {
+            ...store,
+            isLoading: true,
+        }
+    },
+    [failedLoadedChats]: (store, action) => {
+        return {
+            ...store,
+            isLoading: false,
+            error: action.payload.error,
+        }
+    },
     [initChats]: (store, action) => {
         return {
-            chats: {
-                1: {
-                    name: "IT Group",
-                    fire: false,
-                    selected: false,
-                    messages: [
-                        { user: "Ivan", text: "Hello, world!" },
-                        { user: "Petr", text: "Helo, how are you?" },
-                        { user: "Ivan", text: "I'm well" }
-                    ]
-                },
-                2: {
-                    name: "Bot Group",
-                    fire: false,
-                    selected: false,
-                    messages: [
-                        { user: "Bot 1", text: "Hello, bots!" },
-                        { user: "Bot 2", text: "Get out of here, bot!" },
-                        { user: "Bot 3", text: "No bots allowed in this chat, ha-ha-ha!" }
-                    ]
-                },
-                3: {
-                    name: "Never read this",
-                    fire: false,
-                    selected: false,
-                    messages: [
-                        { user: "sss", text: "Whoa!" },
-                        { user: "qqq", text: "Oops!" },
-                        { user: "www", text: "Yep." }
-                    ]
-                }
-            },
-            profile: {
-                defaultUser: '',
-            }
+            ...store,
+            isLoading: false,
+            ...action.payload,
         }
     },
     [sendMessage]: (store, action) => {
         const {id, user, text} = action.payload;
         // console.log(store)
-        return {
+          return {
             ...store,
             chats: {
                 ...store.chats,
@@ -60,6 +46,13 @@ export default handleActions({
             }
         };
     },
+    [updateProfile]: (store, action) => {
+        const {profile} = action.payload;
+        return {
+            ...store,
+            profile,
+        }
+    },
     [addChat]: (store, action) => {
         const newId = Object.keys(store.chats).length + 1
         const {name} = action.payload;
@@ -71,17 +64,22 @@ export default handleActions({
                     name,
                     fire: false,
                     selected: false,
-                    messages: []
+                    messages: [],
                 }
             }
         };
     },
-    [updateProfile]: (store, action) => {
-        const {profile} = action.payload;
+    [renameChat]: (store, action) => {
+        const {id, name} = action.payload;
         return {
             ...store,
-            profile
-        }
+            chats: {
+                ...store.chats,
+                [id]: { 
+                    name,
+                }
+            }
+        };
     },
     [selectChat]: (store, action) => {
         const {id} = action.payload;
@@ -139,5 +137,18 @@ export default handleActions({
                 }
             }
         }
+    },
+    [deleteChat]: (store, action) => {
+        const {id} = action.payload;
+        const newStore = {...store, chats: {}}
+        Object.keys(store.chats).forEach(item => {
+            console.log(item)
+            if (Number(item) < Number(id)) newStore.chats[item]={...store.chats[item]}
+            else if (Number(item) > Number(id)) newStore.chats[Number(item) - 1]={...store.chats[item]}
+        })
+
+        return {
+            ...newStore,
+        };
     },
 }, initialState)

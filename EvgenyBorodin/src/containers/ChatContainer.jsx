@@ -13,24 +13,36 @@ import './ChatContainer.css'
 
 export const ROBOT = 'Robot'
 
-const ChatLayout = ({id, chats, defaultUser, onAddChat, onSendMessage}) => {
+const ChatLayout = ({isLoading, error, id, chats, defaultUser, onSendMessage}) => {
     const messages = id && chats[id] ? chats[id].messages : undefined ;
     let text = defaultUser !== '' ? `Welcome, ${defaultUser}! ` : 'Welcome! '
     text += id && chats[id] ? ` Chat ${chats[id].name}` : `Choose chat from the list`
+
+    if (isLoading) {
+        return <strong>Chats are loading...</strong>
+    }
+
+    if (error) {
+        return <strong>Something is not good at all...</strong>
+    }
+
     return (<div className="chatcontainer">
         <Header headerText={text}/>
         <ChatListContainer />
-        {/* <ChatList chats={chats} selectedId={id} onAddChat={onAddChat} /> */}
         <Chat messages={messages} defaultUser={defaultUser} onSendMessage={onSendMessage} />
     </div>)
 }
 
 const mapStateToProps = (store, props) => {
     const {id} = props.match.params;
+    const isLoading = store.app.isLoading;
+    const error = store.app.error;
     const chats = store.app.chats ? store.app.chats  : undefined
     const defaultUser = store.app.profile.defaultUser ? store.app.profile.defaultUser : ''
 
     return {
+        isLoading,
+        error,
         chats,
         selectedId: id,
         defaultUser
@@ -38,7 +50,6 @@ const mapStateToProps = (store, props) => {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    addChat,
     sendMessage
 }, dispatch)
 
@@ -46,19 +57,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const {id} = ownProps.match.params;
     // console.log('state', stateProps, 'own', ownProps)
 
-    const onAddChat = ({name}) => {
-        dispatchProps.addChat(name)
-    }
-
     const onSendMessage = ({user, text}) => {
         dispatchProps.sendMessage(id, user, text)
     }
 
     return {
+        isLoading: stateProps.isLoading,
+        error: stateProps.error,
         id,
         chats: stateProps.chats,
         defaultUser: stateProps.defaultUser,
-        onAddChat,
         onSendMessage
     }
 }

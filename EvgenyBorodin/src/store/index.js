@@ -2,6 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware, connectRouter } from 'connected-react-router';
 import ReduxThunk from 'redux-thunk';
+import { apiMiddleware } from 'redux-api-middleware';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -32,6 +33,7 @@ export function initStore (preloadedState = {}) {
         preloadedState,
         composeEnhancers(applyMiddleware(
             ReduxThunk,
+            apiMiddleware,
             routerMiddleware(history),
             botMiddleware,
             chatMiddleware

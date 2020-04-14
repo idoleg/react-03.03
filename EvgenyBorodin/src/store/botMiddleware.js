@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
-import { addChat, sendMessage } from './chatActions';
+import { addChat, sendMessage } from './chatActions.js';
+import { sendMessageToBot } from './chatOperations.js'
 import { ROBOT } from '../containers/ChatContainer.jsx';
 
 const timeoutId = {}
@@ -9,11 +10,10 @@ export default store => next => action => {
     next(action);
 
     if(action.type === sendMessage.toString()){
-        const {id, user} = action.payload
+        const {id, user, text} = action.payload
         if(user !== ROBOT ) {
             clearTimeout(timeoutId[id]);
-            timeoutId[id] = setTimeout(generateBotAnswer, 5000, store, id, user)
-            
+            timeoutId[id] = setTimeout(generateBotAnswer, 5000, store, id, user, text)
         }
         // store.dispatch(push('/chats/' + action.payload.id));
     }else if(action.type === addChat.toString()){
@@ -23,9 +23,10 @@ export default store => next => action => {
     }
 }
 
-function generateBotAnswer (store, id, user) {
+function generateBotAnswer (store, id, user, text) {
     const chatName = store.getState().app.chats[id].name
-    store.dispatch(sendMessage(id, ROBOT, `Hello ${user} in ${chatName}! Robot is busy, it will answer soon...`))
+    // store.dispatch(sendMessage(id, ROBOT, `Hello ${user} in ${chatName}! Robot is busy, it will answer soon...`))
+    store.dispatch(sendMessageToBot(id, ROBOT, text))
 }
 
 function generateBotAnswerInNewChat (store, id) {
