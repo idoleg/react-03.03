@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { initStore, history } from './store';
-import { initChats } from './store/chatActions.js';
+import { fetchChats, fetchChatsOtherWay } from './store/chatOperations.js';
 
 import NavBar from './components/NavBar/NavBar.jsx';
 import { Main } from './components/Main/Main.jsx';
@@ -16,7 +16,7 @@ import ChatContainer from './containers/ChatContainer.jsx';
 import './App.css';
 
 const { store, persistor } = initStore();
-store.dispatch(initChats());
+store.dispatch(fetchChatsOtherWay());
 
 export const App = () => {
     return (
