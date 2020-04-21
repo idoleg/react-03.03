@@ -14,7 +14,7 @@ export const Chat = ({ messages, onSendMessage }) => {
     </div>
   )
   } else {
-    return <div>Выбери чат из списка</div>
+    return <h1>Выбери чат из списка</h1>
   }
 }
 

@@ -44,11 +44,11 @@ export default handleActions({
     }
   },
   [addChat]: (store, action) => {
-    const {name} = action.payload;
+    const {id, name} = action.payload;
 
     return {
       ...store,
-      [name]: {
+      [id]: {
         name,
         messages: []
       }

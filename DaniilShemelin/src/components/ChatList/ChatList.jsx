@@ -18,12 +18,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ChatList = ({ chats, addChat }) => {
+export const ChatList = ({ chats, createChat }) => {
   const classes = useStyles();
   const [name, setName, setNameState] = useInput('');
   const handleAddChat = (event) => {
     event.preventDefault();
-    addChat(name);
+    createChat(name);
     setNameState('');
   }
 

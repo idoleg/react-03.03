@@ -2,11 +2,12 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import { Header } from './../Header/Header.jsx';
 import ChatContainer from './../../containers/ChatContainer';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { initStore } from '../../store';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { initStore, history } from '../../store';
 import { Provider } from 'react-redux';
 import { initChats } from '../../store/chatActions';
 import ChatListContainer from './../../containers/ChatListContainer';
+import { ConnectedRouter } from 'connected-react-router';
 
 
 const store = initStore();
@@ -18,7 +19,7 @@ export const Layout = (props) => {
     <Provider store={ store }>
       <Header />
       <Container maxWidth="lg" className="container">
-        <BrowserRouter>
+        <ConnectedRouter history={history}>
           <ChatListContainer />
           <Switch>
             <Route path='/' exact>Main page</Route>
@@ -31,7 +32,7 @@ export const Layout = (props) => {
             <Route path='/contacts'>Contacts page</Route>
             <Route path='/'>404 page</Route>
           </Switch>
-        </BrowserRouter>
+        </ConnectedRouter>
 
       </Container>
     </Provider>
