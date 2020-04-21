@@ -33,3 +33,9 @@ h1 {
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.profile-name a {
+	color: #fff;
+	margin-right: 15px;
+	font-weight: 600;
+}
