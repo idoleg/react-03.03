@@ -10,33 +10,21 @@ import {ProfileDialog} from "Components/ProfileDialog/ProfileDialog";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-const useStyles = makeStyles(theme => ({
-    link: {
-        textDecoration: 'none',
-        '&:visited': {
-            color: 'inherit',
-        }
-    },
-}));
-
-export const Settings = ({className="", open=false, config, profileUrl='/profile/',handleConfigUpdate})=> {
-    const classes = useStyles();
+export const Settings = ({className="", open=false, config, handleConfigUpdate, handleClick})=> {
     const [dialogOpened, setDialogOpened] = useState(open);
     const handleOpenDialog = ()=> setDialogOpened(true);
     const handleCloseDialog = ()=> setDialogOpened(false);
     return (
         <>
             <List className={className} component="div">
-                <Link className={classes.link} to={profileUrl} onClick={handleOpenDialog}>
-                    <ListItem button >
-                        <ListItemAvatar>
-                            <Avatar>
-                                <SettingsIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={'PROFILE'} />
-                    </ListItem>
-                </Link>
+                <ListItem button onClick={handleClick}>
+                    <ListItemAvatar>
+                        <Avatar>
+                            <SettingsIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={'PROFILE'} />
+                </ListItem>
             </List>
             <ProfileDialog
                 open={dialogOpened}

@@ -33,6 +33,7 @@ module.exports = {
             Reducers: path.resolve(__dirname, 'src/reducers'),
             Utils: path.resolve(__dirname, 'src/utils'),
             Actions: path.resolve(__dirname, 'src/actions'),
+            Middlewares: path.resolve(__dirname, 'src/middlewares'),
         },
     },
     devServer: {

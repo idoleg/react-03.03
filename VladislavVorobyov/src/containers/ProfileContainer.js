@@ -1,5 +1,6 @@
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux';
+import {push} from 'connected-react-router';
 import {changeUser} from "Actions/usersAction";
 import {Settings} from "Components/Settings";
 
@@ -13,18 +14,22 @@ const mapStateToProps = ({users}, ownProps) => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     changeUser,
+    push,
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const prevUserName = stateProps.config.userName;
-    const changeUserDispatch = dispatchProps.changeUser;
+    const {changeUser, push} = dispatchProps;
     const handleConfigUpdate = ({userName = prevUserName}) => {
-        changeUserDispatch(userName);
+        changeUser(userName);
     };
+    const handleClick = () => push('/profile/');
+
     return {
         ...ownProps,
         ...stateProps,
         handleConfigUpdate,
+        handleClick,
     }
 };
 
