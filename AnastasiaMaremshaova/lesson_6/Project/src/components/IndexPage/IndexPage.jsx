@@ -18,7 +18,7 @@ export const IndexPage =() => {
                 <p className="main-text">Здесь Вы обязательно обретете себе нового пушистого друга!</p>
                 <button onClick={()=>{setOpenChatList('none')}} className="atuin-btn">
                     
-                <ul>
+                <ul className="btn-chatlist">
                         <Link to="/chatlist/">
                      Перейти к чатам 
                     </Link>

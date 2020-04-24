@@ -62,12 +62,19 @@ export default store => next => action => {
         store.dispatch(savePrevId(action.payload.id));
 
     } else if (action.type === deleteChat.toString()) { 
+
+        if( store
+            .getState()
+            .router
+            .location
+            .pathname !== '/chatlist/') { 
+
             const id = action.payload.id; 
-            console.log(id); 
+
             store.dispatch(push('/chats/'));
             if (id === store.getState().chats.prevId){
                 store.dispatch(savePrevId(null));
             }
-
+        }
     }
 }

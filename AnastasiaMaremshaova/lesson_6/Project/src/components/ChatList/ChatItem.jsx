@@ -193,7 +193,7 @@ export const ChatItem = ({id, chats, openedEditNameChat,  OnDeleteChat, OnSaveNa
                                             }
                                         }>Удалить чат</MenuItem>
                                         <MenuItem  
-                                        ListItemClasses={{disabled: !openedEditNameChat}}
+                                        
                                             onClick={() => {
                                                 setBtnShowMenu('none'); 
                                                 OnOpenEditNameChat(); 
