@@ -5,17 +5,24 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {bindActionCreators} from 'redux'
 import {saveChangesProfileData} from '../../store/chatActions'
-import {SVGEdit} from '../FormCreateChat/useStyles';
-import {useState} from "react";
+import {useState, useEffect, useRef} from "react";
 import {useStyles, useStylesTextField, useStylesBtnBack} from './useStyles'
 
 export const Profile = ({name, classOpenProfile, exitProfile, onSaveChangesProfileData}) => {
 
+
     const [flagShowBtnEdit, setFlagShowBtnEdit] = useState('');
     const [flagShowBtnSave, setFlagShowBtnSave] = useState('none');
     const [classEdit, setClassEdit] = useState('readonly');
-    const [nameNew, setName] = useState(name);
+    const [nameSave, setName] = useState('');
+ 
     const [flagEdit, setFlagEdit] = useState('none');
+    const textInput = useRef(); 
+
+    useEffect(() => {
+        setName(name);
+       
+    }, [name])
 
     const propsBtn = {
         flagShowBtnSave: flagShowBtnSave,
@@ -28,12 +35,12 @@ export const Profile = ({name, classOpenProfile, exitProfile, onSaveChangesProfi
 
     const classesBtnBack = useStylesBtnBack(); 
     const classes = useStyles(propsBtn);
-    const classesTextField = useStylesTextField(propsEdit);
-
+    const classesTextField = useStylesTextField(propsEdit); 
     return (
         <div className={'Profile ' + classOpenProfile}>
             <div className="consoleProfile">
                 <Button
+                data-title="ChatList"
                 classes={{root: classesBtnBack.root}}
                     variant="contained"
                     onClick={() => {
@@ -60,24 +67,24 @@ export const Profile = ({name, classOpenProfile, exitProfile, onSaveChangesProfi
                     <div className="containerEdit">
                         <form className="formProfile" autoComplete="off">
                             <TextField
+                                inputRef = {textInput}
                                 id="standard-basic"
                                 label="Ваше имя"
                                 name="name"
-                                value={nameNew}
+                                value={nameSave}
                                 onChange={(event) => {
                                     setName(event.target.value)
                                 }}
                                 classes={{
                                     root: classesTextField.root
                                 }}
-                                inputProps={{
-                                    readOnly: classEdit
-                                }}/>
+                                />
 
                             <Button
                                 className="btn-edit"
                                 data-title="Edit"
                                 onClick={() => {
+                                    textInput.current.focus(); 
                                     setClassEdit('')
                                     setFlagEdit('solid');
                                     setFlagShowBtnEdit('none')
@@ -99,9 +106,11 @@ export const Profile = ({name, classOpenProfile, exitProfile, onSaveChangesProfi
                                     setFlagEdit('none');
                                     setFlagShowBtnEdit('')
                                     setFlagShowBtnSave('none');
-                                    onSaveChangesProfileData();
+                                    onSaveChangesProfileData(
+                                        nameSave
+                                    );
                                 }}>
-                                 <img src="src/img/save.svg" alt="save" className="img-save"/>
+                                 <img src="src/img/save.svg" alt="save" className="img-save-pr"/>
                             </Button>
                         </form>
                     </div>
@@ -112,8 +121,8 @@ export const Profile = ({name, classOpenProfile, exitProfile, onSaveChangesProfi
 };
 
 const mapStateToProps = (store, props) => {
-    const name = store.chats.state.profileData.name;
-    console.log(props);
+    const nameProfile = store.chats.profileData;
+    const name= (nameProfile!=undefined) ? nameProfile.name : ''
     return {name}
 }
 
@@ -122,14 +131,17 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch)
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    let nameSave = stateProps.name;
 
-    const onSaveChangesProfileData = () => {
+    const onSaveChangesProfileData = (nameSave) => {
+        console.log(nameSave)
         dispatchProps.saveChangesProfileData(nameSave);
     }
 
-    return {name: stateProps.name, classOpenProfile: ownProps.classOpenProfile, exitProfile: ownProps.onSetClassOpenProfile, onSaveChangesProfileData}
+
+   
+    return {name: stateProps.name,
+         classOpenProfile: ownProps.classOpenProfile,
+          exitProfile: ownProps.onSetClassOpenProfile,
+           onSaveChangesProfileData}
 }
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-    Profile
-);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Profile);

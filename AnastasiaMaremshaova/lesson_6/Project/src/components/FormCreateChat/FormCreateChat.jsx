@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './FormCreateChat.css';
@@ -19,14 +19,19 @@ export const FormCreateChat = ({id, classOpenFormCreateChat, onSetClassOpenFormC
     };
 
     const onCreateChat =() => {
+
         createChat(id, name); 
     };
 
-
+    const textInput = useRef(); 
+    useEffect(()=>{
+            textInput.current.focus(); 
+    })
 
     return (
         <form className={"formCreateChat " + classOpenFormCreateChat} autoComplete="off">
             <TextField
+                inputRef={textInput}
                 classes={{root: classesTextField.root}}
                 id="standard-basic"
                 label="Новое название чата"
@@ -37,7 +42,7 @@ export const FormCreateChat = ({id, classOpenFormCreateChat, onSetClassOpenFormC
                     if (event.key === 'Enter'){
                         event.preventDefault ? event.preventDefault() : event.returnValue = false;
                         if (name!= ''){
-                            this.onCreateChat.bind(this)
+                            onCreateChat()
                         clearValue(); 
                         onSetClassOpenFormCreateChat();
                     }
@@ -50,11 +55,9 @@ export const FormCreateChat = ({id, classOpenFormCreateChat, onSetClassOpenFormC
                 className = 'btn-save'
                 data-title="Save"
                 onClick={(event)=>{
-                    this.onCreateChat.bind(this)
-                   
+                    onCreateChat()
                     clearValue(); 
                     onSetClassOpenFormCreateChat();
-                
                 }}>
                    <img src="src/img/save.svg" alt="img-save" className="img-save"/>
                    </Button>
@@ -73,10 +76,10 @@ export const FormCreateChat = ({id, classOpenFormCreateChat, onSetClassOpenFormC
 }
 
 const mapStateToProps = (store, props) => {
-    console.log(props)
+
     const classOpenFormCreateChat = props.classOpenFormCreateChat;
     const onSetClassOpenFormCreateChat = props.onSetClassOpenFormCreateChat
-    const id = Number(store.chats.state.countChats) + 1; 
+    const id = Number(store.chats.countChats) + 1; 
     return {id, classOpenFormCreateChat,  onSetClassOpenFormCreateChat }
 }
 

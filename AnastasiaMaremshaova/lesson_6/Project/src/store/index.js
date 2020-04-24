@@ -5,7 +5,8 @@ import botMiddleware from './botMiddleware';
 import chatMiddleware from './chatMiddleware';
 import {createBrowserHistory} from 'history';
 import {routerMiddleware, connectRouter} from 'connected-react-router';
-
+import ReduxThunk from 'redux-thunk'
+import { apiMiddleware } from 'redux-api-middleware';
 
 export const history = createBrowserHistory();
 
@@ -21,6 +22,8 @@ export function initStore (preloadedState = undefined) {
         reducer, 
         preloadedState, 
         composeEnhancers(applyMiddleware(
+            ReduxThunk,
+            apiMiddleware,
             routerMiddleware(history), 
             chatMiddleware,
             botMiddleware, 

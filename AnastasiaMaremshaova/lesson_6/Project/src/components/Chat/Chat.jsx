@@ -4,15 +4,28 @@ import {Message} from '../Message/Message';
 import {MessageList} from '../MessageList/MessageList';
 import {ChatForm} from '../ChatForm/ChatForm';
 import {HeaderChat} from '../HeaderChat/HeaderChat'
-
+import {Loader} from '../Loader/Loader'
 import './Chat.css'
 
-export const Chat = ({nameChat, messages, onSendMessage}) => {
-    return (<div className='Chat'>
-        <HeaderChat nameChat={nameChat}/>
-        <MessageList messages={messages}/>
+export const Chat = ({isLoading, error, nameChat, messages, onSendMessage}) => {
+
+    const [classShowChatList, setClassShowChatList] = React.useState(''); 
+    let res; 
+    if(isLoading) {
+        res = <div className ='Loading'><Loader/></div>}
+    else
+        res =  <MessageList messages={messages} />
+        
+    if(error) {
+        res= <div className="error">Ошибка подключения</div>
+    }
+
+    if(messages){
+    return (<div className={'Chat '+ classShowChatList}>
+        <HeaderChat nameChat={nameChat} setClassShowChatList={setClassShowChatList}/>
+        {res}
         <ChatForm onSendMessage={onSendMessage}/>
-    </div>);
+    </div>);}
 }
 
 Chat.propTypes = {

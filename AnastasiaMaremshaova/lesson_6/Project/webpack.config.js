@@ -4,7 +4,7 @@ const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 
 
 module.exports = {
-    entry: path.resolve(__dirname, "src", "index.js"),
+    entry: ["@babel/polyfill", path.resolve(__dirname, "src", "index.js")],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "index.js"
@@ -17,10 +17,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 include: path.resolve(__dirname, "src"),
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/env', '@babel/react'],
-                    plugins: ['@babel/plugin-proposal-class-properties']
-                }
+                // options: {
+                //     presets: ['@babel/env', '@babel/react'],
+                //     plugins: ['@babel/plugin-proposal-class-properties']
+                // }
 
             },
             {
@@ -56,6 +56,14 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
+        proxy: {
+            '/bot/': {
+            target: 'https://aiproject.ru/api/',
+            pathRewrite: { '/bot/': '' },
+            secure: false,
+            changeOrigin: true,
+            }
+        }
     },
     devtool: 'inline-source-map'
 

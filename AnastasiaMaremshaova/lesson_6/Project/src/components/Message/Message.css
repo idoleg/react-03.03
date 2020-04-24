@@ -4,6 +4,14 @@
     list-style: none;
     border-radius: 5px;
     align-self: flex-end;
+    position: relative;
+    display: flex;
+    max-width: 50%; 
+    box-sizing: border-box;
+    height:auto;
+    flex-wrap: wrap;
+    
+
 }
 
 .Message--robot {
@@ -14,4 +22,33 @@
 
 .Message:not(:last-child) {
     margin-bottom: 20px;
+}
+
+.menu-message{
+    margin-top: 5px; 
+    height: 30px; 
+    width: 20px;  
+    position: absolute;
+    top: 0; 
+    left: 0px;
+    margin-right: 5px;   
+ 
+}
+
+
+.nameMessage{
+   
+    width: 100%; 
+    margin: 0; 
+    margin-left: 10px;
+    padding: 0; 
+    font-weight: 600;
+}
+
+.contentMessage{
+    
+    display: block;
+    margin: 0; 
+    margin-left: 10px;
+    padding: 0; 
 }

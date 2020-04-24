@@ -4,19 +4,19 @@ import {Header} from './components/Header/Header'
 import { BrowserRouter, Switch, Route, Link} from 'react-router-dom'
 import {initStore,  history} from './store/index'
 import {Provider} from 'react-redux'
-import {initChats} from './store/chatActions'
+import {fetchChats} from './store/chatOperations'
 import {IndexPage} from './components/IndexPage/IndexPage'
 import {ConnectedRouter} from 'connected-react-router';
-import {Navigation} from './components/Navigation/Navigation'
+import Navigation from './components/Navigation/Navigation'
 import './App.css'
 
+
 const store = initStore();
-store.dispatch(initChats()); 
+store.dispatch(fetchChats());
 
 
 export const ROBOT = 'Robot';
-export class App extends Component {
-   render(){
+export const App = () => {
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
@@ -25,6 +25,8 @@ export class App extends Component {
                             <Navigation/>
 
                            <Switch>
+                           <Route path="/chatlist/" exact component={Navigation}></Route>
+                            <Route path="/chats/" exact component={IndexPage}></Route>
                             <Route path= "/" exact component={IndexPage}></Route>
                             <Route path= "/chats/:id" exact component={ChatContainer}></Route>
                             </Switch>                 
@@ -32,5 +34,4 @@ export class App extends Component {
                 </ConnectedRouter>
             </Provider>
         );
-   }
 }

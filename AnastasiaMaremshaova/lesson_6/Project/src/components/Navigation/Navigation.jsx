@@ -3,10 +3,13 @@ import Profile from '../Profile/Profile';
 import FormCreateChat from '../FormCreateChat/FormCreateChat';
 import {ConsoleNavigation} from '../ConsoleNavigation/ConsoleNavigation';
 import ChatListContainer from '../../containers/ChatListContainer';
+import {Loader} from '../Loader/Loader';
 import './Navigation.css'
 import '../Profile/Profile.css'
 
-export const Navigation = () => {
+import {connect} from 'react-redux';
+
+export const Navigation = ({isLoading, error}) => {
 
     const [classOpenProfile, setClassOpenProfile] = useState('showRight');
     const [classOpenFormCreateChat, setClassOpenFormCreateChat] = useState(
@@ -33,8 +36,18 @@ export const Navigation = () => {
         setClassOpenFormCreateChat('showUp');
     }
 
+    let res; 
 
+    if (!isLoading){
+        res =  <ChatListContainer classOpenFormCreateChat={classOpenFormCreateChat}/>
+    }
+    else
+        res = <div className="isLoading"><Loader/></div>
 
+        if(error) {
+            res= <div className="error">Ошибка подключения</div>
+        }
+    
     return (
         <div className="Navigation">
             <div className="containerNavigation">
@@ -43,10 +56,10 @@ export const Navigation = () => {
                     onSetClassOpenFormCreateChat={onSetClassOpenFormCreateChat}
                     showUp={showUp}/>
                 <FormCreateChat
-                    classOpenFormCreateChat={classOpenFormCreateChat}
-                    onSetClassOpenFormCreateChat={onSetClassOpenFormCreateChat}/>
-                <ChatListContainer classOpenFormCreateChat={classOpenFormCreateChat}/>
-
+        classOpenFormCreateChat={classOpenFormCreateChat}
+        onSetClassOpenFormCreateChat={onSetClassOpenFormCreateChat}/>
+                
+                {res}
                 <Profile
                     onSetClassOpenProfile={onSetClassOpenProfile}
                     classOpenProfile={classOpenProfile}/>
@@ -55,3 +68,14 @@ export const Navigation = () => {
         </div>
     )
 }
+
+
+const mapStateToProps = (store, props) => {
+    const isLoading= store.chats.isLoading; 
+    const error = store.chats.error;  
+    console.log(error); 
+    return {isLoading, error}; 
+
+}
+
+export default connect(mapStateToProps)(Navigation);

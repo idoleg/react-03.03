@@ -1,0 +1,40 @@
+{
+        "profileData": {
+            "name": "Заядлая кошатница"
+        },
+        "chats": {
+            "1": {
+                "name": "Chat 1",
+                "botId": "44369b3b771540fe",
+                "messages": [
+                    {
+                        "name": "Robot",
+                        "content": "Hello!"
+                    }, {
+                        "name": "User",
+                        "content": "Hello, Robot"
+                    }, {
+                        "name": "Robot",
+                        "content": "How are you?"
+                    }
+                ]
+            },
+            "2": {
+                "name": "Chat 2",
+                "botId": "6e33f93904304f70",
+                "messages": [
+                    {
+                        "name": "Robot",
+                        "content": "What are you doing?"
+                    }, {
+                        "name": "User",
+                        "content": "Read books"
+                    }, {
+                        "name": "Robot",
+                        "content": "What genre?"
+                    }
+                ]
+            }
+        },
+        "countChats": 2
+}

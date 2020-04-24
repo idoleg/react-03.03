@@ -26,9 +26,10 @@ export const ChatForm = ({onSendMessage}) => {
     }  
 
 
-    return (<form  > 
+    return (<form  className="form-message"> 
             <TextField 
-            classes={{root: classesTextField.root}}
+            classes={{root: classesTextField.root_name}}
+                className="text-name"
                 id="filled-basic"
                 variant="filled"
                 label="Имя"
@@ -37,15 +38,15 @@ export const ChatForm = ({onSendMessage}) => {
                 multiline
                 onChange={(event) => {setName(event.target.value)}}/>
             <TextField
-            classes={{root: classesTextField.root}}
+            classes={{root: classesTextField.root_message}}
             id="filled-basic"
             variant="filled"
             className="input-message"
-                label="Сообщение"
                 required
                 name="content" 
-                placeholder="Введите наше сообщение..." 
+                placeholder="Введите сообщение..." 
                 multiline
+               
                 value={content} 
                 onChange={(event)=>{setContent(event.target.value)}}
                 onKeyPress={(event) => {

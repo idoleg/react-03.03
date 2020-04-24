@@ -7,7 +7,36 @@
 }
 
 .containerNavigation {
+    background-color: #d690cd;
     width: 30%;
     height: 100%;
     position: absolute;
 }
+
+
+.isLoading{
+    background-color: #d690cd;
+    margin: 25% auto; 
+
+
+}
+
+@media screen and (max-width: 767px) { 
+    .Navigation {z-index: 50; position: absolute; width: 100% }
+    .containerNavigation{width: 100%}
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1024px){ 
+    .Navigation {width: 40%;}
+    .containerNavigation{width: 40%}
+   
+  }
+
+  @media screen and (min-width: 1025px) { 
+    .Navigation {width: 30%;}
+    .containerNavigation{width: 30%}
+   
+  }
+
+
+

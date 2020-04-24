@@ -2,10 +2,33 @@
     width: 70%;
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
     background-color: rgb(174, 135, 206);
 
 }
+
+
+@media screen and (min-width: 768px){
+    .atuin-btn {display: none;}
+   
+}
+
+@media screen and (max-width: 767px) { 
+    .container-index {width: 100%; position: absolute; z-index: 60}
+   
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) { 
+    .container-index {width: 60%;}
+   
+  }
+
+
+
+
+
+
 
 .img-index {
     width: 100%;
@@ -17,20 +40,68 @@
 }
 
 .div-img-index {
-    margin: 20px 50px 0;
-    width: 1000px;
-    height: 300px;
-    background-image: url("https://avatars.mds.yandex.net/get-pdb/228049/8e87e594-1102-468d-aaf4-487bfa9df56b/s1200");
+    margin: 7%;
+    height: 40%;
+    background-image: url('../../img/index-img.png');
     background-position-x: center;
-    background-position-y: -70px;
     background-size: cover;
     border-radius: 70%;
 }
 
 .title {
-    font-size: 20px;
-    margin: 20px;
+    padding: 0; 
+    text-align: center;
+    font-size: 3vh;
+    margin: 3%; 
     font-weight: 1000;
-    color: rgb(109, 71, 139);
+    color: white; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 
 }
+
+.text{
+    text-align: center;
+    font-size: 2vh;
+    margin: 3%; 
+    height: 32%; 
+        color: white; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+
+.atuin-btn {
+    width: 65%; 
+    padding: 0 10%; 
+    height: 20%; 
+    margin: 5% auto; 
+    text-decoration: none;
+    font-size: 2vh;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase; 
+    font-family: 'Roboto Condensed', Тahoma, sans-serif;
+    background: rgb(68, 7, 77);
+    cursor: pointer;
+    border: 2px solid rgb(255, 255, 255);
+    outline: 1px solid;
+    outline-color: rgb(255, 255, 255);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);  
+}
+.atuin-btn:hover,
+.atuin-btn:active,
+.atuin-btn:focus {
+    box-shadow: inset 0 0 20px #BFE2FF;
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    color: #FFF;
+}
+
+@media screen and (min-width: 1025px) { 
+    .container-index {width: 70%; padding-top: 3%}
+    .div-img-index{height: 500px; width: 500px;margin: auto}
+    
+  }

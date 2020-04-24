@@ -1,0 +1,25 @@
+
+   
+.push__image{
+    margin: 1% 0 0 5%; 
+    width: 7%;
+    height: 80%
+
+}
+.push{
+    width: 30% 
+}
+
+@media screen and (max-width: 765px){
+    .push__image{
+        width: 20%;
+    
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .push__image{
+        width: 15%
+    
+    }
+}

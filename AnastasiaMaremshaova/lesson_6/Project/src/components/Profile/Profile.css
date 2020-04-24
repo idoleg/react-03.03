@@ -45,13 +45,33 @@
 }
 
 .img-back {
-    width: 40px;
-    height: 40px;
+    width: 80%;
+    height: 80%;
 }
 .btn-back {
-    width: 60px;
-    height: 60px;
+    width: 14%;
+    
 }
+
+.h1-profile {
+    font-size: 3vh;
+    margin-top: 5%;
+    margin-left: 5%;
+    color: white;
+    font-weight: 400;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px)
+{
+    .btn-back{ width: 20%; height: 56%}
+    .h1-profile{ margin-top: 10%;}
+}
+
+@media screen and (min-width: 1025px){
+    .h1-profile{ margin-top: 6%;     margin-left: 1%;}
+}
+
 .btn-back:hover {
     cursor: pointer;
 }
@@ -91,10 +111,7 @@
     width: 100%;
     display: flex;
 }
-
-.btn-cancel:hover::after,
-.btn-edit:hover::after,
-.btn-save:hover::after {
+.btn-back:hover:after{
     content: attr(data-title);
     position: absolute;
     left: 50%;
@@ -107,17 +124,33 @@
     border-radius: 50%;
 }
 
-.h1-profile {
-    font-size: 20px;
-    margin-top: 6%;
-    margin-left: 10%;
-    color: white;
-    font-weight: 400;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.btn-cancel:hover::after,
+.btn-save:hover::after,
+.btn-edit:hover::after
+ {
+    content: attr(data-title);
+    position: absolute;
+    left: -10%;
+    top: 100%;
+    z-index: 1;
+    background: rgba(184, 121, 184, 0.4);
+    font-size: 8px;
+    padding: 5% 10%;
+    border: 1px solid rgb(58, 4, 55);
+    border-radius: 50%;
 }
 
 
+
+
 .img-edit{
+ 
     width: 80%; 
     height: 25%; 
+}
+
+.img-save-pr{
+
+    width: 70%; 
+    height: 65%; 
 }

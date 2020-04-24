@@ -1,0 +1,20 @@
+.fire{
+    margin-right: 50px; 
+    margin-top: 18px; 
+    fill: hsl(293, 69%, 23%);
+    animation-name: glow-blue;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+
+@keyframes glow-blue {
+    0% { fill: hsl(290, 80%, 23%); }
+    100% { fill: hsl(298, 27%, 53%); }
+}
+
+.closeFire{
+    display: 'none'
+}
+

@@ -9,6 +9,7 @@ export default class Message extends React.Component {
    };
 
    render() {
-   return <div ><strong>{this.props.name}</strong> :  {this.props.content }</div>
+   return <div className="message"><img className="menu-message"  src="src/img/menuMessage.svg" alt ="menu"/>
+   <strong>{this.props.name}</strong> :  {this.props.content }</div>
    }
 }

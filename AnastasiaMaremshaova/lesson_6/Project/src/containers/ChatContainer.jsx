@@ -3,20 +3,25 @@ import { Chat } from '../components/Chat/Chat';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {sendMessage} from '../store/chatActions'
-
+import { useEffect } from 'react';
+import {push, LOCATION_CHANGE} from 'connected-react-router';
 
 export const ROBOT = 'Robot';
 
 
 const mapStateToProps = (store, props) => {
-    const {id} = props.match.params;
-    console.log(store.chats.state.chats[id].name)
-    const name = store.chats.state.chats[id].name; 
-    const chats = id && store.chats.state.chats ? store.chats.state.chats : {}
+
+    const id = store.router.location.pathname.split('/')[2];
+    const name = (id !== ''  && id !== undefined) ? store.chats.chats[id].name : ''; 
+    const chats = id && store.chats.chats ? store.chats.chats : {}  
+
+
 
     console.log(id); 
-    console.log(chats); 
+
     return {
+        isLoading: store.isLoading,
+        error: store.error,
         name,
         id,
         messages: chats && chats[id] ? chats[id].messages : undefined,
@@ -29,18 +34,16 @@ const mapStateToProps = (store, props) => {
     }, dispatch)
 
     const mergeProps = (stateProps, dispatchProps, ownProps) => {
-        const {id} = ownProps.match.params;
-        const nameChat = stateProps.name; 
-
-        console.log(nameChat); 
 
     const onSendMessage = ({name, content}) => {
-        dispatchProps.sendMessage(id, name, content);
+        dispatchProps.sendMessage(stateProps.id, name, content);
 
     }
    
     return {
-        nameChat: nameChat,
+        isLoading: stateProps.isLoading,
+        error: stateProps.error,
+        nameChat: stateProps.name,
         messages: stateProps.messages,
         onSendMessage
     }

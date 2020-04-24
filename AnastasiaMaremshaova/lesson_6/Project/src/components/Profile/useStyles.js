@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStylesTextField = makeStyles({
     root: props => ({
+        width: '80%',
 
         '& .MuiFormLabel-root.Mui-focused': {
             color: ' rgb(108, 79, 136)'
@@ -20,7 +21,7 @@ export const useStylesTextField = makeStyles({
             color: ' rgb(108, 79, 136)'
         },
         '& .MuiInputBase-root': {
-            width: '300px',
+            width: '100%',
             color: 'black'
         }
     })
@@ -28,10 +29,13 @@ export const useStylesTextField = makeStyles({
 
 export const useStylesBtnBack = makeStyles({
     root: {
+        margin: 'auto 5%',
         backgroundColor: 'rgb(91, 33, 145)',
         borderRadius: '50%',
-        marginTop: 10,
-        marginLeft: 30,
+        padding: '2%',
+        boxSizing: 'border-box',
+        minWidth: '14%',
+        
         '&:hover': {
             backgroundColor: '#AA83BB'
         }
@@ -41,20 +45,26 @@ export const useStylesBtnBack = makeStyles({
 
 export const useStyles = makeStyles({
     root: props => (
-        {height: 40,
-            width: 40, 
-            padding: 0,
+        {   
+            
+            marginTop: '3%', 
+             width: '12%',
+            height: '16%',
             borderRadius: '30px',
-            minWidth: '20px',display: props.flagShowBtnEdit}
+            minWidth: '12%',
+            padding: 0,
+            display: props.flagShowBtnEdit}
     ),
 
     rootBtnSave: props => (
         {
-            height: 40,
-            width: 40, 
-            padding: 0,
+            marginTop: '3%', 
+            width: '12%',
+            height: '16%',
             borderRadius: '30px',
-            minWidth: '20px', display: props.flagShowBtnSave}
+            minWidth: '12%',
+            padding: 0,
+            minWidth: '0', display: props.flagShowBtnSave}
     )
 
 })

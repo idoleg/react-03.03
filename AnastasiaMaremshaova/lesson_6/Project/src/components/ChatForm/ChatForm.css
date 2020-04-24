@@ -1,34 +1,49 @@
 .btn-send{
-
-    height: 60px;
-    width: 60px; 
+    width: 44px;
+    height: 36px;
+    margin-top: 2% !important;
     background-color: rgb(91, 33, 145);
+}
+
+
+@media screen and (min-width: 1025px){
+    .btn-send{ width: 58px;
+        height: 50px;
+    margin-top: 0 !important;}
+
+        
 }
 
 .input-name{
     width: 20%; 
-    height: 80%;
 }
 
 .input-message{
     width: 65%; 
-    height: 40%; 
 
 }
 
 .img-send{
-    width: 80%;
-    height: 10%;
-    padding-left: 8px;
+    width: 40%;
+    height: 35%;
+    padding-left: 11%;
 }
 
 
-form{
-    box-sizing: border-box;
-    height: 12%; 
+
+.form-message{ 
+    display: flex; 
+    padding: 3% 3% 4% 3%;
+    max-height: 20%; 
     background-color: rgb(108, 79, 136);
-    flex: 0 0 auto;
+    flex-shrink: 0;
     width: 100%;
     color: rgb(219, 219, 219);
+    box-sizing: border-box;
 
+}
+
+
+@media screen and (height: 568px) and (width: 320px){
+   .form-message{ font-size: 0.8rem;}
 }

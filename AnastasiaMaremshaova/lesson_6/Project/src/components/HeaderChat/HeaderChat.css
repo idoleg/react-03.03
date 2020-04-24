@@ -1,16 +1,20 @@
 .HeaderChat{
     width: 100%; 
-    height: 12%; 
+    height: 8%; 
     background-color: rgb(108, 79, 136);
     display: flex; 
+    flex: 0 0 auto; 
+    justify-content: space-between; 
+}
+
+@media screen and (min-width: 1025px){
+    .HeaderChat{height: 11.5%}
 }
 
 .AvatarChat{
-    margin-left: 2%; 
-    margin-top: 1%;
+    margin: auto 5%;
+    width: 80%; 
     background-color:  rgb(174, 135, 206);
-    width: 60px;
-    height: 60px;
     border-radius: 50%;
 }
 
@@ -21,11 +25,116 @@
     height: 80%; 
 }
 
+.avatarNameChat{
+    width: 30%; 
+    display: flex; 
+}
 
 .nameChat{
+    width: 37%;
+    margin-right: 4%;
     color: white; 
     margin-left: 2%; 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 100;
-    font-size: 20px; 
+    font-size: 2vh; 
+}
+
+.btn-back-chat:hover {
+    cursor: pointer;
+}
+
+.img-back-chat {
+    width: 100%;
+    margin-left: 20%;
+}
+
+.container-btn-back-chat{
+    width: 60%;
+    display: flex; 
+}
+
+
+
+@media screen and (max-height: 737px) and (max-width: 1024px){
+    .btn-back-chat {
+        width: 11%;
+        height: 76%;
+    }
+    .AvatarChat{
+        width: 38%;
+        height: 76%;
+    }
+    .avatarNameChat{
+        width: 30%; 
+        display: flex; 
+    }   
+    .nameChat{
+        width: 38%;
+    }
+}
+
+
+@media screen and (height: 812px){
+    .btn-back-chat {
+        width: 13%;
+        height: 76%;
+    }
+
+    .AvatarChat{
+        width: 36%;
+        height: 76%;
+    }
+
+    .avatarNameChat{
+        width: 35%; 
+    }
+    
+    .nameChat{
+        width: 40%;
+       
+    }
+    
+
+}
+
+@media screen and (height: 823px){
+    .btn-back-chat {
+        width: 13%;
+        height: 76%;
+    }
+    .AvatarChat{
+        width: 36%;
+        height: 76%;
+    }
+    .nameChat{
+        width: 37%;
+        
+    }
+    .avatarNameChat{width: 35%}
+}
+
+
+@media screen and (min-width: 768px){
+    .nameChat{ width: 46%; font-size: 2.5vh;}
+    .AvatarChat{ width: 22%}
+    .btn-back-chat {
+        display: none !important
+    }
+}
+
+@media screen and (min-width: 768px) and (min-height: 823px){
+    .btn-back-chat {
+        width: 13%;
+        height: 76%;
+    }
+    .AvatarChat{
+        width: 36%;
+        height: 76%;
+    }
+
+    
+    
+    .nameChat{height: 42%;}
+    .avatarNameChat{width: 39%}
 }

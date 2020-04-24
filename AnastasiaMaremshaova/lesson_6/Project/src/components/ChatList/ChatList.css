@@ -9,6 +9,11 @@
 }
 
 
+
+
+ul{
+    height: 95%; 
+}
 .ChatList-container::-webkit-scrollbar {width: 8px; }
 
 
@@ -25,12 +30,12 @@
     border-radius: 5px;
 }
 
-  
 
 .ChatList-container{
     width: 100%; 
-    height: 70%;
-    overflow-y: auto
+    height: 90%;
+    overflow-y: auto;
+    overflow-x:  hidden;
 }
 
 .avatar{
@@ -47,6 +52,10 @@
     width: 500px; 
 }
 
+
+.chat{
+    position: relative;
+}
 .chat:hover{
     background-color: rgb(196, 132, 196);
     transition: 0.5s;
@@ -85,4 +94,84 @@
 .showDownChatList{
     transform: translateY(0%);
     transition: transform 1s ease-in-out;    
+}
+
+@media screen and (min-width: 1025px){
+    .form-position{
+        left: 20%
+    }
+}
+@media screen and (width: 1024px){
+    .form-position { 
+        left: 23%;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 1023px){
+    .form-position { 
+        left: 30%;
+    }
+}
+
+@media screen and (min-width: 400px) and (max-width: 450px){
+    .form-position { 
+        left: 22%;
+    }
+}
+
+@media screen and (min-width: 375px) and (max-width: 399px){
+    .form-position { 
+        left: 24%;
+    }
+}
+@media screen and (min-width: 300px) and (max-width: 359px){
+    .form-position { 
+        left: 28%;
+    }
+}
+
+@media screen and (width: 360px) and (max-width: 374px){
+    .form-position { 
+        left: 25%;
+    }
+}
+
+
+.form-position{
+    position: absolute; 
+    top: 9%; 
+    box-sizing: content-box;
+}
+.form-background{
+
+    background-color:  transparent;
+    display: flex; 
+}
+
+.btn-save{
+    width: 70px; 
+    height: 70px;
+    border-radius: 50%;  
+}
+.chat{
+    height: 90px; 
+}
+
+
+.btn-cancel:hover::after,
+.btn-save:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    left: -10%;
+    top: 100%;
+    z-index: 1;
+    background: rgba(184, 121, 184, 0.4);
+    font-size: 8px;
+    padding: 5% 10%;
+    border: 1px solid rgb(58, 4, 55);
+    border-radius: 50%;
+}
+
+.checkFill{
+    background-color:rgb(174, 135, 206);
 }

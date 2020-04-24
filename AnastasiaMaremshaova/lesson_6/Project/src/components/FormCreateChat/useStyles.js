@@ -4,7 +4,8 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStylesTextField = makeStyles({
     root: props => ({
 
-        marginLeft: '10%',
+        marginLeft: '5%',
+        width: '65%',
         '& .MuiFormLabel-root.Mui-focused':{
             color: '#d690cd'
         },
@@ -25,7 +26,7 @@ export const useStylesTextField = makeStyles({
             borderBottom: '2px solid #d690cd'
         },
         '& .MuiInputBase-input': {
-            width: '300px',
+            width: '100%',
             color: 'white',
             
         }
@@ -37,7 +38,7 @@ export const useStylesBtn = makeStyles({
     root: {
         boxSizing: 'border-box',
         marginTop: '3%',
-        marginLeft: 10,
+        marginLeft: '1%',
         height: 40,
         width: 40, 
         padding: 0,

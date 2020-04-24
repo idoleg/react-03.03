@@ -48,7 +48,7 @@ const mapStateToProps = (store, props) => {
         console.log(dispatchProps); 
 
     const onSendMessage = ({name, content}) => {
-        dispatchProps.sendMessage(id, name, content);
+        dispatchProps.sendMessage(id, name, content);0
 
     }
    

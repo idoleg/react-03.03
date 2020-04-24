@@ -10,8 +10,9 @@ export const Message = ({name, content}) => {
     });
     if (content != '') {
         return <li className={className}>
-            <strong>{name}:</strong>
-            {content}</li>
+            <p className="nameMessage">{name}:</p>
+            <p className="contentMessage"> {content} </p>
+            </li>
     } else {
         return '';
     }
