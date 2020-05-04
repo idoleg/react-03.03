@@ -44,3 +44,4 @@ input[type:radio]:checked ~ label {
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
+

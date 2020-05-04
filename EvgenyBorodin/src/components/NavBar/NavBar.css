@@ -1,7 +1,17 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    width: 150px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
 .selectedPath {
-    display: inline-block;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 0.8em;
     padding: 5px 20px;
     text-align: center;
     background-color: #fff;
@@ -10,21 +20,30 @@
 }
 
 nav > a {
-    display: inline-block;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 0.8em;
     padding: 5px 20px;
     text-align: center;
     background-color: #ccc;
     text-decoration: none;
     border: 1px inset #000;
     border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 nav > a:active {
     background-color: #aaa;
 }
 
-nav {
-    margin-bottom: 5px;
+
+@media screen and (min-width: 650px) {
+    nav {
+        width: 100%;
+        flex-direction: row;
+    }
+
+    nav > a {
+        
+    }
 }

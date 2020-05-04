@@ -12,7 +12,6 @@ const NavBar = ({selectedPath}) => {
         <NavBarItem selectedPath={selectedPath} itemPath="/chats" itemText="Messenger" />
         <NavBarItem selectedPath={selectedPath} itemPath="/profile" itemText="Profile" />
         <NavBarItem selectedPath={selectedPath} itemPath="/about" itemText="About..." />
-
     </nav>)
     // return (<nav>
     //     { selectedPath === '/' ? <span className="selectedPath">Main</span> : <Link to="/">Main</Link> }

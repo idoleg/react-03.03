@@ -6,9 +6,6 @@
     border: 1px solid gray;
     border-radius: 5px;
     margin-right: 5px;
-    width: 25%;
-    max-width: 150px;
-    min-width: 100px;
 }
 
 .chatlist__btn {
@@ -52,4 +49,71 @@
 .chatlist__item:hover > .chatlist__item__edit,
 .chatlist__item:hover > .chatlist__item__delete {
     visibility: visible;
+}
+
+.chat-is-selected {
+    display: none;
+}
+
+@media screen and (min-width: 650px) {
+    .chat-is-selected,
+    .chatlist__form {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: start;
+        padding: 20px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        margin-right: 5px;
+        width: 25%;
+        box-sizing: border-box;
+        max-width: 250px;
+        min-width: 200px;
+        height: 500px;
+    }
+
+    .chatlist__btn {
+        padding: 0 10px;
+        cursor: pointer;
+        border: 1px solid black;
+        text-align: center;
+        padding: 5px 20px;
+        background-color: #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .chatlist__btn:active {
+        background-color: #aaa;
+    }
+
+    .chatlist__item {
+        position: relative;
+    }
+
+    .chatlist__item__edit,
+    .chatlist__item__delete {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #ccc;
+        background-color: #ccc;
+        visibility: hidden;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .chatlist__item__edit {
+        right: 20px;
+    }
+
+    .chatlist__item:hover > .chatlist__item__edit,
+    .chatlist__item:hover > .chatlist__item__delete {
+        visibility: visible;
+    }
+
 }

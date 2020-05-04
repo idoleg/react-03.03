@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>React messenger project</title>
-    <base href="/">
-</head>
-<body>
+    <base href="/" />
+    <link rel="manifest" href="manifest/manifest.json" />
+  </head>
+  <body>
     <div id="root"></div>
-</body>
+    <script>
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+              navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+                  // Registration was successful
+                  console.log('ServiceWorker was successfully registered in the environment: ', registration.scope);
+              }, function (err) {
+                  // Registration failed
+                  console.log('ServiceWorker was not registered: ', err);
+              }).catch(function (err) {
+                  console.log(err);
+              })
+          });
+          window.addEventListener('appinstalled', (evt) => {
+              fetch("/api/copies.json", {
+                  method: 'GET',
+                  credentials: 'include',
+              });
+          });
+      } else {
+          console.log('ServiceWorker is not supported.');
+      }
+    </script>
+    <script src="./notifications.js" defer></script>
+  </body>
 </html>

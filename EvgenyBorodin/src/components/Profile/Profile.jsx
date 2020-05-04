@@ -14,7 +14,7 @@ const Profile = ({profile, updateProfile}) => {
         updateProfile({defaultUser: name})
     }
 
-    return (<div>
+    return (<div className="content">
         <h1>Profile</h1>
         <form className="profile__form">
             <label>Name:&nbsp;

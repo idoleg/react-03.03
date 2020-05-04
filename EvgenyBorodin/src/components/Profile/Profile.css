@@ -1,6 +1,14 @@
 .profile__form {
-    justify-content: flex-start;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
     align-items: center;
+}
+
+.profile__form > label {
+    padding: 0;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .profile__btn {
@@ -10,8 +18,15 @@
     padding: 5px 20px;
     background-color: #ccc;
     border-radius: 5px;
+    margin: 0 auto;
 }
 
 .profile__btn:active {
     background-color: #aaa;
+}
+
+@media screen and (min-width: 650px) {
+    .profile__form {
+        
+    }
 }

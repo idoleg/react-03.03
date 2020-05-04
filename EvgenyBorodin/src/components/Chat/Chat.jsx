@@ -14,7 +14,7 @@ export const Chat = ({messages, defaultUser, onSendMessage}) => {
         </div>);
     } else {
         return (<div className="chat">
-            <h2>Choose chat in the chat list.</h2>
+            <span>Choose chat in the chat list.</span>
         </div>)
     }
 }

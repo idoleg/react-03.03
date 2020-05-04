@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classname from 'classname';
 
 import { ChatListItem } from '../ChatListItem/ChatListItem.jsx';
 import useInput from '../../hooks/useInput.js'
@@ -34,7 +35,11 @@ export const ChatList = ({isLoading, error, chats, addChat, renameChat, deleteCh
         return <strong>Something went wrong...</strong>
     }
 
-    return <form className="chatlist__form">
+    const find = chats.find(elem => elem.selected)
+
+    const className = classname("chatlist__form", { "chat-is-selected" : find !== undefined });
+
+    return <form className={className}>
         {chats.map(({id, name, fire, selected}) => (
             <span className="chatlist__item" key={id}>
                 <ChatListItem item={name} index={id} fire={fire} selected={selected} key={id}/>

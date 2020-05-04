@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { loadingChats, failedLoadedChats, initChats, sendMessage, addChat, renameChat, updateProfile, selectChat, fireChat, unfireChat, deleteChat } from './chatActions.js';
+import { loadingChats, failedLoadedChats, initChats, sendMessage, addChat, renameChat, updateProfile, selectChat, deselectChat, fireChat, unfireChat, deleteChat } from './chatActions.js';
 
 const initialState = {
     chats: {},
@@ -111,6 +111,19 @@ export default handleActions({
                 }
             }
         }
+    },
+    [deselectChat]: (store, action) => {
+        const find = Object.keys(store.chats).find(elem => store.chats[elem].selected)
+        return {
+            ...store,
+            chats: {
+                ...store.chats,
+                [find]: {
+                    ...store.chats[find],
+                    selected: false,
+                }        
+            }
+        };
     },
     [fireChat]: (store, action) => {
         const {id} = action.payload;

@@ -1,6 +1,6 @@
 import { push, LOCATION_CHANGE } from 'connected-react-router';
 
-import { addChat, sendMessage, selectChat, fireChat, unfireChat } from './chatActions';
+import { addChat, sendMessage, selectChat, deselectChat, fireChat, unfireChat } from './chatActions';
 
 export default store => next => action => {
     next(action);
@@ -18,6 +18,8 @@ export default store => next => action => {
         if (currentChatId) {
             store.dispatch(selectChat(currentChatId))
             store.dispatch(unfireChat(currentChatId))
+        } else {
+            store.dispatch(deselectChat())
         }
     }
     

@@ -5,5 +5,12 @@ ul {
     border-radius: 5px;
     padding: 20px;
     background-color: slategrey;
-    margin: 0 0 5px 0;
+    margin: 0 0 10px 0;
+}
+
+@media screen and (min-width: 650px) {
+    ul {
+        height: 434px;
+        box-sizing: border-box;
+    }
 }

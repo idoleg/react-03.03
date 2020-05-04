@@ -1,77 +1,112 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sendMessage, addChat } from '../store/chatActions.js';
+import { sendMessage, addChat } from "../store/chatActions.js";
 
-import { Header } from '../components/Header/Header.jsx';
-import { Chat } from '../components/Chat/Chat.jsx';
-// import { ChatList } from '../components/ChatList/ChatList.jsx'
-import ChatListContainer from './ChatListContainer.jsx';
-// import { ChatLayout } from '../components/ChatLayout/ChatLayout.jsx'
+import PushToggle from "../components/PushToggle/PushToggle.jsx";
+import { Header } from "../components/Header/Header.jsx";
+import { Chat } from "../components/Chat/Chat.jsx";
+// import { ChatList } from '../components/ChatList/ChatList.jsx';
+import ChatListContainer from "./ChatListContainer.jsx";
+// import { ChatLayout } from '../components/ChatLayout/ChatLayout.jsx';
+import InstallPopup from "../components/InstallPopup/InstallPopup.jsx";
 
-import './ChatContainer.css'
+import "./ChatContainer.css";
 
-export const ROBOT = 'Robot'
+export const ROBOT = "Robot";
 
-const ChatLayout = ({isLoading, error, id, chats, defaultUser, onSendMessage}) => {
-    const messages = id && chats[id] ? chats[id].messages : undefined ;
-    let text = defaultUser !== '' ? `Welcome, ${defaultUser}! ` : 'Welcome! '
-    text += id && chats[id] ? ` Chat ${chats[id].name}` : `Choose chat from the list`
+const ChatLayout = ({
+  isLoading,
+  error,
+  id,
+  chats,
+  defaultUser,
+  onSendMessage,
+}) => {
+  const messages = id && chats[id] ? chats[id].messages : undefined;
+  let text = defaultUser !== "" ? `Welcome, ${defaultUser}! ` : "Welcome! ";
+  text +=
+    id && chats[id] ? ` Chat ${chats[id].name}` : `Choose chat from the list`;
 
-    if (isLoading) {
-        return <strong>Chats are loading...</strong>
-    }
+  if (isLoading) {
+    return <strong>Chats are loading...</strong>;
+  }
 
-    if (error) {
-        return <strong>Something is not good at all...</strong>
-    }
+  if (error) {
+    return <strong>Something is not good at all...</strong>;
+  }
 
-    return (<div className="chatcontainer">
-        <Header headerText={text}/>
-        <ChatListContainer />
-        <Chat messages={messages} defaultUser={defaultUser} onSendMessage={onSendMessage} />
-    </div>)
-}
+  // if (id) {
+  //     return (<div className="chatcontainer">
+  //         <Header headerText={text}/>
+  //         <Chat messages={messages} defaultUser={defaultUser} onSendMessage={onSendMessage} />
+  //     </div>)
+  // }
+
+  return (
+    <div className="chatcontainer">
+      <PushToggle />
+      <Header headerText={text} />
+      <ChatListContainer />
+      <Chat
+        messages={messages}
+        defaultUser={defaultUser}
+        onSendMessage={onSendMessage}
+      />
+      <InstallPopup />
+    </div>
+  );
+};
 
 const mapStateToProps = (store, props) => {
-    const {id} = props.match.params;
-    const isLoading = store.app.isLoading;
-    const error = store.app.error;
-    const chats = store.app.chats ? store.app.chats  : undefined
-    const defaultUser = store.app.profile.defaultUser ? store.app.profile.defaultUser : ''
+  const { id } = props.match.params;
+  const isLoading = store.app.isLoading;
+  const error = store.app.error;
+  const chats = store.app.chats ? store.app.chats : undefined;
+  const defaultUser = store.app.profile.defaultUser
+    ? store.app.profile.defaultUser
+    : "";
 
-    return {
-        isLoading,
-        error,
-        chats,
-        selectedId: id,
-        defaultUser
-    }
-}
+  return {
+    isLoading,
+    error,
+    chats,
+    selectedId: id,
+    defaultUser,
+  };
+};
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    sendMessage
-}, dispatch)
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      sendMessage,
+    },
+    dispatch
+  );
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {id} = ownProps.match.params;
-    // console.log('state', stateProps, 'own', ownProps)
+  const { id } = ownProps.match.params;
+  // console.log('state', stateProps, 'own', ownProps)
 
-    const onSendMessage = ({user, text}) => {
-        dispatchProps.sendMessage(id, user, text)
-    }
+  const onSendMessage = ({ user, text }) => {
+    dispatchProps.sendMessage(id, user, text);
+  };
 
-    return {
-        isLoading: stateProps.isLoading,
-        error: stateProps.error,
-        id,
-        chats: stateProps.chats,
-        defaultUser: stateProps.defaultUser,
-        onSendMessage
-    }
-}
+  return {
+    isLoading: stateProps.isLoading,
+    error: stateProps.error,
+    id,
+    chats: stateProps.chats,
+    defaultUser: stateProps.defaultUser,
+    onSendMessage,
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatLayout)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(ChatLayout);
 
 // export class ChatContainer extends Component {
 //     state = {
@@ -107,11 +142,11 @@ export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatLayo
 
 //     handleRobotAnswer = () => {
 //         const {id} = this.props.match.params;
-        
+
 //         if(id && this.state.chats[id]) {
 //             const currentMessages = this.state.chats[id].messages;
 //             const lastMessage = currentMessages[currentMessages.length - 1];
-            
+
 //             if(lastMessage && lastMessage.user != ROBOT) {
 //                 clearTimeout(this.timeoutId);
 //                 this.timeoutId = setTimeout(() => this.handleSendMessage(id)({
@@ -135,7 +170,7 @@ export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatLayo
 //     }
 
 //     handleNewChat = () => {
-        
+
 //         const name = prompt('Enter chat name')
 //         const newId = Object.keys(this.state.chats).length + 1
 //         this.setState((state) => ({

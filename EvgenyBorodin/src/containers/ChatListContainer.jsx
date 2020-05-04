@@ -8,7 +8,6 @@ const mapStateToProps = (store) => {
     const chats = Object.entries(store.app.chats)
                         .map(([id, {name, fire, selected}]) => ({id, name, fire, selected}))
     // console.log(chats)
-
     return {
         isLoading: store.app.isLoading,
         error: store.app.error,
