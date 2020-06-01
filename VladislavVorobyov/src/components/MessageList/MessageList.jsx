@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 export const MessageList = ({messages}) => {
     const classes = useStyles();
+
     return (
         <ul className={classes.messageList}>
             {

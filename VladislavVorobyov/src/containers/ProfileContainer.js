@@ -5,10 +5,11 @@ import {changeUser} from "Actions/usersAction";
 import {Settings} from "Components/Settings";
 
 const mapStateToProps = ({users}, ownProps) => {
+    const user = users.find(user => user.id === 1);
     const path = ownProps.match && ownProps.match.path? ownProps.match.path: undefined;
     return {
         open: path === '/profile/',
-        config: {userName: users[1].name},
+        config: {userName: user? user.name : undefined},
     }
 };
 

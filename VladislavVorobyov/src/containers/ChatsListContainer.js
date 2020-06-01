@@ -6,8 +6,11 @@ import {removeChat} from "Actions/chatActions";
 import {ChatsList} from "Components/ChatsList/ChatsList";
 
 
-const mapStateToProps = ({chats}, ownProps) => ({
-    chats: chats
+const mapStateToProps = ({chats:{loading, data, hasError, errorMessage}}, ownProps) => ({
+    chats: data,
+    loading,
+    hasError,
+    errorMessage,
 });
 
 
@@ -19,19 +22,20 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     const {handleAddNewChat, push, removeChat} = dispatchProps;
-
+    const {path} = ownProps;
+    const props = {...ownProps};
+    delete props['path'];
     return {
         ...ownProps,
+        ...stateProps,
         handleAddNewChat,
-        chats: Object.entries(stateProps.chats).map(([id, chat]) => ({
-            id: id,
-            title: chat.title,
-            fire: chat.fire,
-            handleClick: () => push(`/chats/${id}`),
-            handleRemove: ()=> removeChat(id),
+        chats: stateProps.chats.map((chat) => ({
+            ...chat,
+            handleClick: () => push(`${path}/${chat.id}`),
+            handleRemove: () => removeChat(chat.id),
         }))
     }
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatsList)

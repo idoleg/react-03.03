@@ -1,20 +1,37 @@
 import {handleActions} from 'redux-actions';
-import {initMessages, sendMessage} from "Actions/messageActions";
+import {loadingMessages, failedLoadedMessages, initMessages, sendMessage} from "Actions/messageActions";
 
 
-const initialStore = {};
+const initialStore = {
+    loading: false,
+    data:[],
+    errorMessage: '',
+};
 
 export default handleActions({
+    [loadingMessages]: (store, action) => ({
+        ...store,
+        loading: true,
+    }),
+    [failedLoadedMessages]: (store, action) => ({
+        ...store,
+        loading: false,
+        errorMessage: action.payload.message,
+    }),
     [initMessages]: (store, action) => ({
-        1: {chatId: 1, senderId: 1, content: "Hello, world"},
-        2: {chatId: 1, senderId: 2, content: "Hello, Vladislav"},
+        ...store,
+        loading: false,
+        data:action.payload,
     }),
     [sendMessage]: (store, action) => {
         const messageId = Object.keys(store).length + 1;
         const {chatId, senderId, content} = action.payload;
         return {
             ...store,
-            [messageId]: {...action.payload},
-        };
-    }
+            data: [
+                ...store.data,
+                {...action.payload, id: messageId},
+            ],
+        }
+    },
 }, initialStore);

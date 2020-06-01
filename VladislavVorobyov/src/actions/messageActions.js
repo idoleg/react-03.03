@@ -1,9 +1,11 @@
 import {createActions} from 'redux-actions';
 
 
-export const {messages: {initMessages, sendMessage}} = createActions({
-    MESSAGES: {
-        INIT_MESSAGES: () => ({}),
+const actions = createActions({
+    '@@messages': {
+        LOADING_MESSAGES: () => ({}),
+        FAILED_LOADED_MESSAGES: () =>({}),
+        INIT_MESSAGES: () =>({}),
         SEND_MESSAGE: (chatId, senderId, content) => ({
             chatId,
             senderId,
@@ -11,3 +13,9 @@ export const {messages: {initMessages, sendMessage}} = createActions({
         })
     }
 });
+export const {
+    loadingMessages,
+    failedLoadedMessages,
+    initMessages,
+    sendMessage,
+} = actions.messages;

@@ -6,6 +6,7 @@ import {MessageInput} from 'Components/MessageInput/MessageInput';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import List from "@material-ui/core/List";
 
 
 const useStyles = makeStyles(theme => ({
@@ -19,11 +20,29 @@ const useStyles = makeStyles(theme => ({
         position: 'static',
         boxShadow: "none",
     },
+    loadingImg: {
+        width: "40px",
+        height: "40px"
+    }
 }));
 
 
-export const Chat = ({className="", messages, chatTitle, handleNewMessage}) => {
+export const Chat = ({messages, chatTitle, handleNewMessage, className="", loading=false, errorMessage=''}) => {
     const classes = useStyles();
+    if (loading) {
+        return (
+            <div className={`${classes.root} ${className}`}>
+                <img className={classes.loadingImg} src="/img/loading.gif" />
+            </div>
+        )
+    }
+    if (errorMessage){
+        return (
+            <div className={`${classes.root} ${className}`}>
+                {errorMessage}
+            </div>
+        )
+    }
     if (!chatTitle) {
         return <div className={className}>
             <h3>Запрашиваемый чат не существует</h3>

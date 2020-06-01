@@ -4,6 +4,8 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from "connected-react-router";
 import {PersistGate} from 'redux-persist/integration/react';
 import initStore, { history } from "Utils/store";
+import {fetchChats} from "Operations/chatListOperations";
+import {fetchMessages} from "Operations/messagesOperations";
 import {initChats} from "Actions/chatActions";
 import {initUsers} from "Actions/usersAction";
 import {initMessages} from "Actions/messageActions";
@@ -11,16 +13,17 @@ import {Messenger} from "Components/Messenger/Messenger";
 import ProfileContainer from "Containers/ProfileContainer";
 
 
-const {store, persistor} = initStore();
-store.dispatch(initChats());
+// const {store, persistor} = initStore();
+const store = initStore();
+store.dispatch(fetchChats());
+store.dispatch(fetchMessages());
 store.dispatch(initUsers());
-store.dispatch(initMessages());
 
 
 export const App = (props) => {
     return (
         <Provider store={store} >
-            <PersistGate loading={null} persistor={persistor} >
+            {/*<PersistGate loading={null} persistor={persistor} >*/}
                 <ConnectedRouter history={history}>
                     <Switch>
                         <Route path="/" exact >
@@ -30,7 +33,7 @@ export const App = (props) => {
                         <Route path="/profile/" exact component={ProfileContainer}/>
                     </Switch>
                 </ConnectedRouter>
-            </PersistGate>
+            {/*</PersistGate>*/}
         </Provider>
     )
 };
