@@ -1,13 +1,15 @@
-import React, {useState} from "react"
+import React, {useEffect} from "react"
 import {Provider as ReduxProvider} from "react-redux";
-import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
+import {Link, Redirect, Route, Switch} from "react-router-dom";
 import Messenger from "./containers/MessengerContainer";
 import AppToolbar from "./containers/ToolbarContainer";
 import LoginForm from "./containers/LoginFormContainer";
 import {initStore} from "./store/Store";
-import {initChats} from "./store/actions/ChatActions";
-import {initUser} from "./store/actions/UserActions";
-import {AUTH_PATH, CHATS, CHATS_PATH} from "./utils/Constants";
+import {initUser} from "./store/operations/UserOperations";
+import {initChats} from "./store/operations/ChatOperations";
+import {AUTH_PATH, CHATS_PATH} from "./utils/Constants";
+import {ConnectedRouter} from "connected-react-router"
+import {history} from "./store/middlewares/Middlewares";
 
 import "./main.css";
 
@@ -19,7 +21,7 @@ store.dispatch(initUser());
 export const App = () => {
    return (
       <ReduxProvider store={store}>
-         <BrowserRouter>
+         <ConnectedRouter history={history}>
             <AppToolbar/>
             <Switch>
                <Route path="/" exact><Redirect to={CHATS_PATH}/></Route>
@@ -30,7 +32,7 @@ export const App = () => {
                   Hmm, something went wrong. Try clicking your username above or go <Link to={CHATS_PATH}>here</Link>
                </Route>
             </Switch>
-         </BrowserRouter>
+         </ConnectedRouter>
       </ReduxProvider>
    );
 };

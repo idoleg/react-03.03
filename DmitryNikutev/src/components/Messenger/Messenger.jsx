@@ -5,12 +5,13 @@ import ChatView from "../../containers/ChatViewContainer";
 import "./Messenger.css"
 
 
-export const Messenger = ({selectedChat}) => {
-
+export const Messenger = ({selectedChat, chatsReady}) => {
    return (
       <div className="Messenger">
          <ChatList selectedChat={selectedChat}/>
-         {selectedChat ? <ChatView selectedChat={selectedChat}/> : "Choose a chat from list"}
+         {chatsReady
+            ? (selectedChat ? <ChatView selectedChat={selectedChat}/> : "Choose a chat from list")
+            : <></>}
       </div>
    );
 };

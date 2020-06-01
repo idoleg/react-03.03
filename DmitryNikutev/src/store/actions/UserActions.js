@@ -1,6 +1,5 @@
 import {createActions} from 'redux-actions';
 
-export const {initUser, setUser} = createActions({
-   INIT_USER: () => ({}),
+export const {setUser} = createActions({
    SET_USER: (username) => ({username}),
 });
