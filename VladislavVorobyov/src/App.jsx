@@ -11,7 +11,8 @@ import {initUsers} from "Actions/usersAction";
 import {initMessages} from "Actions/messageActions";
 import {Messenger} from "Components/Messenger/Messenger";
 import ProfileContainer from "Containers/ProfileContainer";
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {InstallPopup} from "Components/InstallPopups";
 
 // const {store, persistor} = initStore();
 const store = initStore();
@@ -22,18 +23,21 @@ store.dispatch(initUsers());
 
 export const App = (props) => {
     return (
-        <Provider store={store} >
-            {/*<PersistGate loading={null} persistor={persistor} >*/}
-                <ConnectedRouter history={history}>
-                    <Switch>
-                        <Route path="/" exact >
-                            <Link to="/chats">Перейти к чатам</Link>
-                        </Route>
-                        <Route path="/chats" component={Messenger} />
-                        <Route path="/profile/" exact component={ProfileContainer}/>
-                    </Switch>
-                </ConnectedRouter>
-            {/*</PersistGate>*/}
-        </Provider>
+        <MuiThemeProvider>
+            <Provider store={store} >
+                {/*<PersistGate loading={null} persistor={persistor} >*/}
+                    <ConnectedRouter history={history}>
+                        <Switch>
+                            <Route path="/" exact >
+                                <Link to="/chats">Перейти к чатам</Link>
+                            </Route>
+                            <Route path="/chats" component={Messenger} />
+                            <Route path="/profile/" exact component={ProfileContainer}/>
+                        </Switch>
+                    </ConnectedRouter>
+                {/*</PersistGate>*/}
+            </Provider>
+            <InstallPopup/>
+        </MuiThemeProvider>
     )
 };

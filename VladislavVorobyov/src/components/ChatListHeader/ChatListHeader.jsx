@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import {ChatNameDialog} from "Components/ChatNameDialog/ChatNameDialog";
-
+import {PushToogle} from "Components/PushToogle";
 
 export const ChatListHeader = ({className='', handleAddNewChat}) => {
     const [showAddDialog, setShowAddDialog] = useState(false);
@@ -20,6 +20,7 @@ export const ChatListHeader = ({className='', handleAddNewChat}) => {
         <>
             <AppBar className={className}>
                 <Toolbar>
+                    <PushToogle />
                     <Typography variant="h6" noWrap style={{flexGrow: 1}}>
                         Чаты
                     </Typography>
