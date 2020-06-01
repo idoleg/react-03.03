@@ -4,8 +4,29 @@
     <meta charset="UTF-8">
     <title>React</title>
     <base href="/">
+    <link rel="icon" type="image/png" sizes="32x32" href="manifest/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="manifest/icon-64x64.png">
+    <link rel= "manifest" href= "manifest/manifest.json">
 </head>
 <body>
     <div id="root"></div>
+
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function () {
+				navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+					// Registration was successful
+					console.log('ServiceWorker успешно зарегистрирован со сферой действия: ' , registration. scope);
+				}, function (err) {
+					// registration failed :(
+					console.log('ServiceWorker не удалось зарегистрировать: ', err);
+				}).catch(function (err) {
+					console.log(err)
+				});
+			});
+		} else {
+			console.log('ServiceWorker не поддерживается');
+		}
+	</script>
 </body>
 </html>

@@ -10,7 +10,7 @@ export default (store) => (next) => (action) => {
 	}
 
     else if(action.type === sendMessage.toString()){
-        const currentChat = store.getState().router.location.pathname.split('/')[2]
+        const currentChat = +store.getState().router.location.pathname.split('/')[2]
         if(currentChat !== action.payload.id) {
             store.dispatch(fire(action.payload.id))
         }
