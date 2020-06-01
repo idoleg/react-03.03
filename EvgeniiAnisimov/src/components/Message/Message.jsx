@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classname from 'classname';
-import './Message.css';
+// import './Message.css';
 
 // export class Message extends Component {
 //   render() {
@@ -10,7 +10,7 @@ import './Message.css';
 // }
 
 export const Message = ({name, content}) => {
-  const className = classname("Message", {'Message--robot': name == 'Robot'});
+  const className = classname("Message", {'Message--robot': name == 'Bot'});
 
   return <li className={className}><strong>{name}: </strong>{content}</li>
 }
