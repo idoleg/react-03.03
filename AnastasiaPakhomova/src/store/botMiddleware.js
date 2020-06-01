@@ -1,4 +1,5 @@
 import {sendMessage, addChat} from './chatActions'
+import {sendMessageToBot} from './chatOperations'
 
 const BOT_NAME = "Bot"
 const timeoutID = {}
@@ -6,14 +7,16 @@ export default (store) => (next) => (action) => {
 	next(action)
 
 	if (action.type === sendMessage.toString()) {
-		const {name, id} = action.payload
+		const {name, id, text} = action.payload
 		if (name !== BOT_NAME) {
-			clearTimeout(timeoutID[id])
-			timeoutID[id] = setTimeout(generateBotAnswer, 2000, store, id, name)
+			store.dispatch(sendMessageToBot(BOT_NAME, id, text))
+//			clearTimeout(timeoutID[id])
+//			timeoutID[id] = setTimeout(generateBotAnswer, 2000, store, id, name)
 		}
 	}
 	else if (action.type === addChat.toString()) {
-		generateBotAnswerForNewChat(store, action.payload.id)
+		store.dispatch(sendMessageToBot(BOT_NAME, action.payload.id, "Hello"))
+		//generateBotAnswerForNewChat(store, action.payload.id)
 	}
 
 }

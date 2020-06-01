@@ -4,17 +4,17 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Fab from '@material-ui/core/Fab'
 import './ChatForm.css'
+import {useInput} from '../../hooks/useInput'
 
-
-function useInput(initialState) {
-	const [state, setState] = useState(initialState)
-
-	const setInput = (event) => {
-        setState(event.currentTarget.value)
-    }
-
-    return [state, setInput]
-}
+//function useInput(initialState) {
+//	const [state, setState] = useState(initialState)
+//
+//	const setInput = (event) => {
+//        setState(event.currentTarget.value)
+//    }
+//
+//    return [state, setInput]
+//}
 
 
 export const ChatForm = ({onSendMessage}) => {

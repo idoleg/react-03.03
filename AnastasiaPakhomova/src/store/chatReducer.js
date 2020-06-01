@@ -1,71 +1,93 @@
 import {handleActions} from 'redux-actions'
-import {initChats, sendMessage, addChat} from './chatActions'
+import { loadingChats, failedLoadedChats, initChats, sendMessage, addChat, fire, unfire } from './chatActions'
 import update from 'react-addons-update'
 
 
 const initialState = {
-	chats: {}
+    chats: {},
+    isLoading: false,
+    error: null,
 }
 
 export default handleActions({
+	[loadingChats]: (store, action) => {
+        return {
+			...store,
+			isLoading: true,
+		}
+    },
+
+	[failedLoadedChats]: (store, action) => {
+        return {
+            ...store,
+            isLoading: false,
+            error: action.payload.error,
+        }
+    },
+
     [initChats]: (store, action) => {
         return {
-            chats: {
-                1: {
-                    name: 'Chat 1',
-                    messages: [
-                        {name: "Ivan", text: "Hello in chat 1!"},
-                        {name: "Petr", text: "Helo, how are you?"},
-                        {name: "Ivan", text: "I'm well."}
-                    ]
-                },
-                2: {
-                    name: 'Chat 2',
-                    messages: [
-                        {name: "Fedor", text: "Hi, it's chat 2!"},
-                        {name: "NiKola", text: "Hi! How are you?!"},
-                        {name: "Fedor", text: "I'm ok."}
-                    ]
-                },
-                3: {
-                    name: 'Chat 3',
-                    messages: [
-                        {name: "Alex", text: "Hello in chat 3!"},
-                        {name: "Moisha", text: "Helo, how are you?"},
-                        {name: "Alex", text: "I'm well"}
-                    ]
-                },
-
-            },
-        }
+			...store,
+            isLoading: false,
+			chats: action.payload
+		}
     },
 
     [sendMessage]: (store, action) => {
         const {id, name, text} = action.payload
 		const chatName = store.chats[id].name
         return {
+			...store,
             chats: {
                 ...store.chats,
-                [id]: {name: chatName,
+                [id]: { ...store.chats[id],
+						name: chatName,
                     messages: [...store.chats[id].messages, {name, text}]
                 }
             }
         }
     },
+
 	[addChat]: (store, action) => {
-		const {id, name} = action.payload
+		const {id, name, botId} = action.payload
 
 		 return {
+			...store,
             chats: {
                 ...store.chats,
-                [id]: {name, messages: []}
+                [id]: {name, botId, fire: false, messages: []}
             }
         }
-	}
+	},
+
+	 [fire]: (store, action) => {
+        const {id} = action.payload
+        return {
+            ...store,
+            chats: {
+                ...store.chats,
+                [id]: {
+                    ...store.chats[id],
+                    fire: true,
+                }
+            }
+        }
+    },
+
+    [unfire]: (store, action) => {
+        const {id} = action.payload
+        return {
+            ...store,
+            chats: {
+                ...store.chats,
+                [id]: {
+                    ...store.chats[id],
+                    fire: false,
+                }
+            }
+        }
+    }
 
 }, initialState)
-
-
-
 
 

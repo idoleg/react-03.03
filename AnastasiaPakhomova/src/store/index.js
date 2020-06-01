@@ -10,7 +10,7 @@ import ReduxThunk from 'redux-thunk'
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
-
+import { apiMiddleware } from 'redux-api-middleware'
 
 const persistConfig = {
    key: 'geekmessanger',
@@ -36,6 +36,7 @@ export function initStore (preloadedState = {}) {
 		composeEnhancers(
         	applyMiddleware(
 				ReduxThunk,
+				apiMiddleware,
 				routerMiddleware(history),
 				chatMiddleware,
 				botMiddleware
